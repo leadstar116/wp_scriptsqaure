@@ -1,0 +1,9 @@
+2020-05-04T15:21:26+00:00 CRITICAL Uncaught Error: Cannot use object of type stdClass as array in /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-content/plugins/scriptsquareplugin/includes/core-functions.php:54
+Stack trace:
+#0 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-content/plugins/scriptsquareplugin/includes/core-functions.php(123): scriptsquareplugin_get_drug_by_name('test')
+#1 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-includes/class-wp-hook.php(287): scriptsquare_pre_get_posts_listings(Object(WP_Query))
+#2 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(Object(WP_Query), Array)
+#3 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-includes/plugin.php(544): WP_Hook->do_action(Array)
+#4 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-includes/class-wp-query.php(1772): do_action_ref_array('pre_get_posts', Array)
+#5 /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-includes/cl in /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-content/plugins/scriptsquareplugin/includes/core-functions.php on line 54
+
