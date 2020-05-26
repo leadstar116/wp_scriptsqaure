@@ -6,7 +6,7 @@ $field = $data->field;
 $key = $data->key;
 
 
-if(isset($field['description'])){
+if(isset($field['description']) && !empty($field['description'])){
 	echo '<div class="notification closeable notice"><p class="description" id="'.$key.'-description">'.$field['description'].'</p></div>';
 }
 

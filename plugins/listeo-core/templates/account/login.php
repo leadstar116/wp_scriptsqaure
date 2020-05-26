@@ -177,10 +177,10 @@ if ( isset( $_REQUEST['register-errors'] ) ) {
 			        <p class="form-row">
 			            <?php esc_html_e( 'Note: Your password will be generated automatically and sent to your email address.', 'listeo_core' ); ?>
 			        </p>
-					<?php $recaptcha_status = listeo_core_get_option('listeo_recaptcha');
+					<?php $recaptcha_status =  get_option('listeo_recaptcha');
 	            	if($recaptcha_status) { ?>
 				        <p class="form-row captcha_wrapper">
-							<div class="g-recaptcha" data-sitekey="<?php echo listeo_core_get_option('listeo_recaptcha_sitekey'); ?>"></div>
+							<div class="g-recaptcha" data-sitekey="<?php echo  get_option('listeo_recaptcha_sitekey'); ?>"></div>
 						</p>
 			 		<?php } ?>
 			        <p class="signup-submit">

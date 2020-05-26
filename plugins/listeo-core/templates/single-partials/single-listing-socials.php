@@ -61,8 +61,10 @@ if($socials || $contacts) :
 			</ul>
 			<div class="clearfix"></div>
 			<?php 
-		} else { ?>
-			<p><?php printf( esc_html__( 'Please %s sign %s in to see contact details.', 'listeo' ), '<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">', '</a>' ) ?></p>
+		} else {
+		if($visibility_setting != 'hide_all') {?>
+			<p><?php printf( esc_html__( 'Please %s sign %s in to see contact details.', 'listeo_core' ), '<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">', '</a>' ) ?></p>
+		<?php } ?>
 		<?php }
 	endif; ?>
 

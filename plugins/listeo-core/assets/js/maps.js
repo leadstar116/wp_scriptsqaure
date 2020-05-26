@@ -443,7 +443,7 @@
     };
 
       // Geo location button
-      $(".geoLocation,.location a").on("click", function (e) {
+        $(".geoLocation,.main-search-input-item.location a,.form-field-_address-container a").on("click", function (e) {
           e.preventDefault();
           geolocate();
       });
@@ -479,7 +479,7 @@
       }
 
 if(listeo_core.maps_autolocate){
-  $(".geoLocation,.location a").trigger('click')
+  $(".geoLocation,.location:not(.add-listing-section) a,form-field-_address-container a").trigger('click')
 }
 
     // Map Init

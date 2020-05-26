@@ -7,7 +7,6 @@
  * @package listeo
  */
 
-
 if ( ! function_exists( 'listeo_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.

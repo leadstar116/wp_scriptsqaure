@@ -97,7 +97,7 @@ class Listeo_Core_Users {
 		$popup_login = get_option( 'listeo_popup_login','ajax' ); 
 		
 		
-			add_filter( 'authenticate', array( $this, 'maybe_redirect_at_authenticate' ), 101, 3 );	
+		add_filter( 'authenticate', array( $this, 'maybe_redirect_at_authenticate' ), 101, 3 );	
 		
 		
 		add_filter('get_avatar', array( $this, 'listeo_core_gravatar_filter' ), 10, 6);
@@ -411,7 +411,7 @@ class Listeo_Core_Users {
 
 	    if ( get_option('listeo_registration_hide_username') ) {
   			$email_arr = explode('@', $email);
-            $user_login = sanitize_user(trim($email_arr[0]), true);
+            $user_login = sanitize_user(trim($email), true);
         } else {
         	
  			$user_login = sanitize_user(trim($_POST['username']));
@@ -468,7 +468,7 @@ class Listeo_Core_Users {
 		endif; 	
 
     	$role = sanitize_text_field( $_POST['role'] );
-    	if(empty($role)){
+    	if (!in_array($role, array('owner', 'guest'))) {
     		$role = get_option('default_role');
     	}
 		$recaptcha_status = get_option('listeo_recaptcha');
@@ -1399,6 +1399,7 @@ class Listeo_Core_Users {
 	 * when accessed through the registration action.
 	 */
 	public function do_register_user() {
+
 	    if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 	        $redirect_url = get_permalink(get_option( 'listeo_profile_page' )).'#tab2';
 	 
@@ -1420,6 +1421,10 @@ class Listeo_Core_Users {
 		        
 
 	            $role =  (isset($_POST['user_role'])) ? sanitize_text_field( $_POST['user_role'] ) : get_option('default_role');
+		        //$role = sanitize_text_field($_POST['role']);
+		        if (!in_array($role, array('owner', 'guest'))) {
+					$role = get_option('default_role');
+				}
 
 	            $password = (!empty($_POST['password'])) ? sanitize_text_field( $_POST['password'] ) : false ;
 	            

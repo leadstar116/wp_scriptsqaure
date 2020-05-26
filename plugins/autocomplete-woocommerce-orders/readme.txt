@@ -1,7 +1,7 @@
 === Autocomplete WooCommerce Orders ===
 Contributors: LiamMcArthur
 Tags: WooCommerce, order, complete, virtual, autocomplete, sagepay, paypal, stripe
-Tested up to: 5.1.1
+Tested up to: 5.4.0
 Stable tag: 3.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -10,11 +10,11 @@ Autocomplete your WooCommerce v2+/v3+ orders with ease.
 
 == Description ==
 Install this plugin and automatically complete your WooCommerce orders automatically. This plugin is compatible with WooCommerce 2 and 3+ and works with all major payment providers including PayPal, SagePay and Stripe.
-   
-* Paid orders of virtual products only: orders containing "Virtual" products only will be completed upon successful payment.  
-* All paid orders of any product: orders of any product (even physical) will be turned to "Completed" upon successful payment.  
+
+* Paid orders of virtual products only: orders containing "Virtual" products only will be completed upon successful payment.
+* All paid orders of any product: orders of any product (even physical) will be turned to "Completed" upon successful payment.
 * All orders: each and every order will turn to "Completed" irrespective of the payment status.
-      
+
 Please note that enabling this plugin against all orders can allow the user to access the product before it has been paid for.
 
 == Installation ==
@@ -41,6 +41,21 @@ Please test the followings:
 7. Pick the mode that suits you best
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed bug where plugin didn't recognise 'off' mode
+
+= 1.3.0 =
+* Re-worked entire module to make automatically completing orders much more streamlined
+
+= 1.2.2 =
+* Added logic back in for automatically completing Virtual orders
+
+= 1.2.1 =
+* Reverted some core logic. It looks like this isn't working for some other gateways. A fix has also been pushed for Virtual orders
+
+= 1.2.0 =
+* Altered logic to make sure that only paid (processing/completed) orders are marked
 
 = 1.1.0 =
 * Minor information updates and compatibility checks

@@ -3,10 +3,15 @@
         
  
         <?php if(in_array( $field['name'], array('keyword_search'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="text">
+        
         <?php } else if(in_array($field['name'], array('location','location_search'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="location">
+        
         <?php } else if(substr($field['name'], 0, 3) == 'tax') { ?>
+        
             <p class="type-container">
                 <label for="label">Type</label>
         
@@ -16,19 +21,29 @@
                     <option <?php selected($field['type'], 'select-taxonomy'); ?> value="select-taxonomy">Select Taxonomy</option>
                 </select>
             </p>
+        
         <?php } else if(in_array($field['name'], array('radius','search_radius'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="radius">
+        
         <?php } else if(in_array($field['name'], array('_price'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="slider">
 
         <?php } else if(in_array($field['name'], array('submit'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="submit">
+        
         <?php } else if(in_array($field['name'], array('listing_type'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="select"> 
+        
         <?php } else if(in_array($field['type'], array('date-range'))) { ?>
+        
             <input  class="field-type-selector" type="hidden" name="type[<?php echo esc_attr( $index ); ?>]" value="date-range"> 
         
         <?php } else { ?>
+        
             <p class="type-container">
                 <label for="label">Type</label>
         
@@ -97,6 +112,12 @@
             <label for="label">Custom CSS Class</label>
             <input name="css_class[<?php echo $index; ?>]"  type="text" value="<?php if(isset( $field['css_class'])) {  echo esc_attr( $field['css_class'] ); } ?>">
         </p>
+        <?php if(in_array($field['type'], array('text','location','select','hidden'))) {  ?>
+        <p class="css-class-container">
+            <label for="label">Default value</label>
+            <input name="default[<?php echo $index; ?>]"  type="text" value="<?php if(isset( $field['default'])) {  echo esc_attr( $field['default'] ); } ?>">
+        </p>
+        <?php } ?>
         
         <div class="field-options options-container" style="display: none">
             <label for="options">Options <span class="dashicons dashicons-editor-help" title="Choose preset list or create your own list of options" ></span></label>

@@ -69,7 +69,14 @@ class Listeo_Core_Emails {
 			return;
 		}
 
+
 		if(!get_option('listeo_listing_new_email')){
+			return;
+		}
+
+
+		$is_send = get_post_meta( $post->ID, 'new_listing_email_notification', true );
+		if($is_send){
 			return;
 		}
 		
@@ -89,7 +96,7 @@ class Listeo_Core_Emails {
 
 		$body 	 = get_option('listeo_listing_new_email_content');
 		$body 	 = $this->replace_shortcode( $args, $body );
-
+		update_post_meta( $post->ID, 'new_listing_email_notification', 'sent' );
 		self::send( $email, $subject, $body );
 	}
 
@@ -244,7 +251,9 @@ class Listeo_Core_Emails {
 			return;
 		}
 		$email 		=  $args['email'];
+
 		$booking_data = $this->get_booking_data_emails($args['booking']);
+		
 		$booking = $args['booking'];
 		
 		$args = array(
@@ -259,6 +268,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_booking_user_waiting_approval_email_subject');
@@ -284,12 +304,24 @@ class Listeo_Core_Emails {
 			'booking_date' => $booking['created'],
 			'listing_name' => get_the_title($booking['listing_id']),
 			'listing_url'  => get_permalink($booking['listing_id']),
+			'listing_address'  => get_post_meta($booking['listing_id'],'_address',true),
 			'dates' => (isset($booking_data['dates'])) ? $booking_data['dates'] : '',
 			'details' => (isset($booking_data['details'])) ? $booking_data['details'] : '',
 			'service' => (isset($booking_data['service'])) ? $booking_data['service'] : '',
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_instant_booking_user_waiting_approval_email_subject');
@@ -321,6 +353,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_booking_instant_owner_new_booking_email_subject');
@@ -350,6 +393,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_booking_owner_new_booking_email_subject');
@@ -379,6 +433,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_booking_user_cancellation_email_subject');
@@ -409,6 +474,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_free_booking_confirmation_email_subject');
@@ -425,6 +501,7 @@ class Listeo_Core_Emails {
 		}
 		$email 		=  $args['email'];
 		$booking_data = $this->get_booking_data_emails($args['booking']);
+
 		$booking = $args['booking'];
 		$args = array(
 			'user_name' 	=> get_the_author_meta('display_name',$booking['bookings_author']),
@@ -436,10 +513,21 @@ class Listeo_Core_Emails {
 			'details' => (isset($booking_data['details'])) ? $booking_data['details'] : '',
 			'service' => (isset($booking_data['service'])) ? $booking_data['service'] : '',
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
-			'aduts' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
+			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
 			'payment_url'  => $args['payment_url'],
-			'expiration'  => $args['expiration']
+			'expiration'  => $args['expiration'],
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_pay_booking_confirmation_email_subject');
@@ -469,6 +557,17 @@ class Listeo_Core_Emails {
 			'tickets' => (isset($booking_data['tickets'])) ? $booking_data['tickets'] : '',
 			'adults' =>(isset($booking_data['adults'])) ? $booking_data['adults'] : '',
 			'children' => (isset($booking_data['children'])) ? $booking_data['children'] : '',
+			'user_message' => (isset($booking_data['message'])) ? $booking_data['message'] : '',
+			'client_first_name' => (isset($booking_data['client_first_name'])) ? $booking_data['client_first_name'] : '',
+			'client_last_name' => (isset($booking_data['client_last_name'])) ? $booking_data['client_last_name'] : '',
+			'client_email' => (isset($booking_data['client_email'])) ? $booking_data['client_email'] : '',
+			'client_phone' => (isset($booking_data['client_phone'])) ? $booking_data['client_phone'] : '',
+			'billing_address' => (isset($booking_data['billing_address'])) ? $booking_data['billing_address'] : '',
+			'billing_postcode' => (isset($booking_data['billing_postcode'])) ? $booking_data['billing_postcode'] : '',
+			'billing_city' => (isset($booking_data['billing_city'])) ? $booking_data['billing_city'] : '',
+			'billing_country' => (isset($booking_data['billing_country'])) ? $booking_data['billing_country'] : '',
+			'price' => (isset($booking['price'])) ? $booking['price'] : '',
+			'expiring' => (isset($booking['expiring'])) ? $booking['expiring'] : '',
 			);
 
 		$subject 	 = get_option('listeo_paid_booking_confirmation_email_subject');
@@ -607,7 +706,9 @@ class Listeo_Core_Emails {
             array( 'id' => $conversation_id ) 
         );
 
-		self::send( $email, $subject, $body );
+		if($result){
+			self::send( $email, $subject, $body );	
+		}
 
 		//mark this converstaito as sent
 		
@@ -616,6 +717,32 @@ class Listeo_Core_Emails {
 
 	function get_booking_data_emails($args){
 
+// [ID] => 2132
+//             [bookings_author] => 1
+//             [owner_id] => 1
+//             [listing_id] => 81
+//             [date_start] => 2020-05-21 16:00:00
+//             [date_end] => 2020-05-21 19:00:00
+//             [comment] => {
+//             "first_name":"asdsad",
+//             "last_name":"sadsad",
+//             "email":"dupa@lsaddisteo.com",
+//             "phone":"3424234",
+//             "adults":"1",
+//             "message":"message to user",
+//             "service":[
+//             {"service":{"name":"one time fee","description":"Beef, salad, mayonnaise, spicey relish, cheese","price":"5","bookable":"on","bookable_options":"onetime"},"guests":"1","days":1,"countable":"1","price":5},
+//             {"service":{"name":"by guests","description":"Cheddar cheese, lettuce, tomato, onion, dill pickles","price":"5","bookable":"on","bookable_options":"byguest"},"guests":"1","days":1,"countable":"1","price":5},{"service":{"name":"by days","description":"Panko crumbed and fried, grilled peppers and mushroom","price":"4.56","bookable":"on","bookable_options":"bydays"},"guests":"1","days":1,"countable":"1","price":4.56},{"service":{"name":"by guest and days","description":"Cheese, chicken fillet, avocado, bacon, tomatoes, basil","price":"5","bookable":"on","bookable_options":"byguestanddays"},"guests":"1","days":1,"countable":"1","price":5}],
+//             "billing_address_1":"dfdsfdsf",
+//             "billing_postcode":"SW1W 0NY",
+//             "billing_city":"GB",
+//             "billing_country":"GB"}
+//             [order_id] => 
+//             [status] => waiting
+//             [type] => reservation
+//             [created] => 2020-05-08 15:44:51
+//             [expiring] => 
+//             [price] => 34.56
 		$listing_type = get_post_meta($args['listing_id'],'_listing_type',true);
 		$booking_data = array();
 		
@@ -635,6 +762,9 @@ class Listeo_Core_Emails {
 				break;
 		}
 		
+		if( isset($args['expiring']) ) {
+			$booking_data['expiring'] = $args['expiring'];
+		}
 		$booking_details = '';
 		$details = json_decode($args['comment']);
 		if (isset($details->childrens) && $details->childrens > 0) {
@@ -649,9 +779,50 @@ class Listeo_Core_Emails {
 			$booking_data['tickets'] = sprintf( _n( '%d Ticket', '%s Tickets', $details->tickets, 'listeo_core' ), $details->tickets );
 			$booking_details .= $booking_data['tickets'];
 		}
+		
 		if (isset($details->service)) {
 			$booking_data['service'] = listeo_get_extra_services_html($details->service);
 		}
+		
+		//client data
+		if (isset($details->first_name)) {
+			$booking_data['client_first_name'] = $details->first_name;
+		}
+		if (isset($details->last_name)) {
+			$booking_data['client_last_name'] = $details->last_name;
+		}
+		if (isset($details->email)) {
+			$booking_data['client_email'] = $details->email;
+		}
+		if (isset($details->phone)) {
+			$booking_data['client_phone'] = $details->phone;
+		}
+
+
+		if( isset($details->billing_address_1) ) {
+			$booking_data['billing_address'] = $details->billing_address_1;
+		}
+		if( isset($details->billing_postcode) ) {
+			$booking_data['billing_postcode'] = $details->billing_postcode;
+		}
+		if( isset($details->billing_city) ) {
+			$booking_data['billing_city'] = $details->billing_city;
+		}
+		if( isset($details->billing_country) ) {
+			$booking_data['billing_country'] = $details->billing_country;
+		}
+
+		if( isset($details->message) ) {
+			$booking_data['user_message'] = $details->message;
+		}
+
+
+		if( isset($details->price) ) {
+			$booking_data['price'] = $details->price;
+		}
+
+
+
 		$booking_data['details'] = $booking_details;
 
 		return $booking_data;
@@ -669,7 +840,7 @@ class Listeo_Core_Emails {
 		if( empty($emailto) || empty( $subject) || empty($body) ){
 			return ;
 		}
-		$subject = htmlentities(htmlspecialchars_decode($subject));
+		//$subject = htmlentities(htmlspecialchars_decode($subject));
 		$template_loader = new listeo_core_Template_Loader;
 		ob_start();
 
@@ -690,7 +861,7 @@ class Listeo_Core_Emails {
 
 	}
 
-	public  function replace_shortcode( $args, $body ) {
+	public function replace_shortcode( $args, $body ) {
 
 		$tags =  array(
 			'user_mail' 	=> "",
@@ -698,6 +869,7 @@ class Listeo_Core_Emails {
 			'booking_date' => "",
 			'listing_name' => "",
 			'listing_url' => '',
+			'listing_address' => '',
 			'site_name' => '',
 			'site_url'	=> '',
 			'payment_url'	=> '',
@@ -705,7 +877,9 @@ class Listeo_Core_Emails {
 			'dates'	=> '',
 			'children'	=> '',
 			'adults'	=> '',
+			'user_message'	=> '',
 			'tickets'	=> '',
+			'service'	=> '',
 			'details'	=> '',
 			'login'	=> '',
 			'password'	=> '',
@@ -714,32 +888,55 @@ class Listeo_Core_Emails {
 			'login_url'	=> '',
 			'sender'	=> '',
 			'conversation_url'	=> '',
+			'client_first_name' => '',
+			'client_last_name' => '',
+			'client_email' => '',
+			'client_phone' => '',
+			'billing_address' => '',
+			'billing_postcode' => '',
+			'billing_city' => '',
+			'billing_country' => '',
+			'price' => '',
+			'expiring' => '',
 		);
 		$tags = array_merge( $tags, $args );
 
 		extract( $tags );
 
-		$tags 	 = array( '{user_mail}',
-						  '{user_name}',
-						  '{booking_date}',
-						  '{listing_name}',
-						  '{listing_url}',
-						  '{site_name}',
-						  '{site_url}',
-						  '{payment_url}',
-						  '{expiration}',
-						  '{dates}',
-						  '{children}',
-						  '{adults}',
-						  '{tickets}',
-						  '{details}',
-						  '{login}',
-						  '{password}',
-						  '{first_name}',
-						  '{last_name}',
-						  '{login_url}',
-						  '{sender}',
-						  '{conversation_url}',
+		$tags 	= array( '{user_mail}',
+						'{user_name}',
+						'{booking_date}',
+						'{listing_name}',
+						'{listing_url}',
+						'{listing_address}',
+						'{site_name}',
+						'{site_url}',
+						'{payment_url}',
+						'{expiration}',
+						'{dates}',
+						'{children}',
+						'{adults}',
+						'{user_message}',
+						'{tickets}',
+						'{service}',
+						'{details}',
+						'{login}',
+						'{password}',
+						'{first_name}',
+						'{last_name}',
+						'{login_url}',
+						'{sender}',
+						'{conversation_url}',
+						'{client_first_name}',
+						'{client_last_name}',
+						'{client_email}',
+						'{client_phone}',
+						'{billing_address}',
+						'{billing_postcode}',
+						'{billing_city}',
+						'{billing_country}',
+						'{price}',
+						'{expiring}',
 						);
 
 		$values  = array(   $user_mail, 
@@ -747,6 +944,7 @@ class Listeo_Core_Emails {
 							$booking_date,
 							$listing_name,
 							$listing_url,
+							$listing_address,
 							get_bloginfo( 'name' ) ,
 							get_home_url(), 
 							$payment_url,
@@ -754,7 +952,9 @@ class Listeo_Core_Emails {
 							$dates,
 							$children,
 							$adults,
+							$user_message,
 							$tickets,
+							$service,
 							$details,
 							$login,
 							$password,
@@ -763,6 +963,16 @@ class Listeo_Core_Emails {
 							$login_url,
 							$sender,
 							$conversation_url,
+							$client_first_name,
+							$client_last_name,
+							$client_email,
+							$client_phone,
+							$billing_address,
+							$billing_postcode,
+							$billing_city,
+							$billing_country,
+							$price,
+							$expiring,
 		);
 	
 		$message = str_replace($tags, $values, $body);	

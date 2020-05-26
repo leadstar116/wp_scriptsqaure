@@ -66,7 +66,7 @@ $my_account_display = get_option('listeo_my_account_display', true );
 		
 
 			<li>
-				<a href="<?php echo wp_logout_url(get_permalink()); ?>"><i class="sl sl-icon-power"></i> <?php esc_html_e('Logout','listeo_core');?></a>
+				<a href="<?php echo wp_logout_url(home_url()); ?>"><i class="sl sl-icon-power"></i> <?php esc_html_e('Logout','listeo_core');?></a>
 			</li>
 		</ul>
 	</div>

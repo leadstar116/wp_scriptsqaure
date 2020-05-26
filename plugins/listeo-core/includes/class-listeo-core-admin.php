@@ -663,6 +663,11 @@ class Listeo_Core_Admin {
                     'id'            => 'disable_reviews',
                     'label'         => __( 'Disable reviews on listings', 'listeo_core' ),
                     'type'          => 'checkbox',
+                ), 
+                array(
+                    'id'            => 'disable_address',
+                    'label'         => __( 'Hide real address on listings and lists', 'listeo_core' ),
+                    'type'          => 'checkbox',
                 ),
              
             )
@@ -1183,7 +1188,8 @@ Thank you.
                 array(
                     'label'      => __('Booking confirmation notification email subject', 'listeo_core'),
                     'default'      => __('Thank you for your booking - {listing_name}', 'listeo_core'),
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},
+                        ,{dates},{user_message},{service},{details},{client_first_name},{client_last_name},{client_email},{client_phone},{billing_address},{billing_postcode},{billing_city},{billing_country},{price}',
                     'id'        => 'booking_user_waiting_approval_email_subject',
                     'type'      => 'text',
                 ),
@@ -1213,7 +1219,8 @@ Thank you.
                 array(
                     'label'      => __('Instant Booking confirmation notification email subject', 'listeo_core'),
                     'default'      => __('Thank you for your booking - {listing_name}', 'listeo_core'),
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},
+                        {payment_url},{expiration},{dates},{children},{adults},{user_message},{tickets},{service},{details},{client_first_name},{client_last_name},{client_email},{client_phone},{billing_address},{billing_postcode},{billing_city},{billing_country},{price}',
                     'id'        => 'instant_booking_user_waiting_approval_email_subject',
                     'type'      => 'text',
                 ),
@@ -1244,7 +1251,8 @@ Thank you.
                 array(
                     'label'      => __('Booking request notification email subject', 'listeo_core'),
                     'default'      => __('There is a new booking request for {listing_name}', 'listeo_core'),
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},
+                       {dates},{children},{adults},{user_message},{tickets},{service},{details},{client_first_name},{client_last_name},{client_email},{client_phone},{billing_address},{billing_postcode},{billing_city},{billing_country},{price}',
                     'id'        => 'booking_owner_new_booking_email_subject',
                     'type'      => 'text',
                 ),
@@ -1275,7 +1283,8 @@ Thank you.
                 array(
                     'label'      => __('Instant Booking notification email subject', 'listeo_core'),
                     'default'      => __('There is a new instant booking for {listing_name}', 'listeo_core'),
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},
+                        {payment_url},{expiration},{dates},{children},{adults},{user_message},{tickets},{service},{details},{client_first_name},{client_last_name},{client_email},{client_phone},{billing_address},{billing_postcode},{billing_city},{billing_country},{price}',
                     'id'        => 'booking_instant_owner_new_booking_email_subject',
                     'type'      => 'text',
                 ),
@@ -1306,7 +1315,8 @@ Thank you.
                 array(
                     'label'      => __('Booking request notification email subject', 'listeo_core'),
                     'default'      => __('Your booking request was approved {listing_name}', 'listeo_core'),
-                     'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                     'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},
+                        {payment_url},{expiration},{dates},{children},{adults},{user_message},{tickets},{service},{details},{client_first_name},{client_last_name},{client_email},{client_phone},{billing_address},{billing_postcode},{billing_city},{billing_country},{price}',
                     'id'        => 'free_booking_confirmation_email_subject',
                     'type'      => 'text',
                 ),
@@ -1338,7 +1348,7 @@ Thank you.
                 array(
                     'label'      => __('Booking request notification email subject', 'listeo_core'),
                     'default'      => __('Your booking request was approved {listing_name}, please pay', 'listeo_core'),
-                     'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details},{payment_url},{expiration}',
+                     'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},{payment_url},{expiration}',
                     'id'        => 'pay_booking_confirmation_email_subject',
                     'type'      => 'text',
                 ),
@@ -1370,7 +1380,7 @@ Thank you.
                     'label'      => __('Booking paid notification email subject', 'listeo_core'),
                     'default'      => __('Your booking was paid by user - {listing_name}', 'listeo_core'),
                     'id'        => 'paid_booking_confirmation_email_subject',
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details},{payment_url},{expiration}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details},{payment_url},{expiration}',
                     'type'      => 'text',
                 ),
                  array(
@@ -1400,7 +1410,7 @@ Thank you.
                 array(
                     'label'      => __('Booking cancelled notification email subject', 'listeo_core'),
                     'default'      => __('Your booking request for {listing_name} was cancelled', 'listeo_core'),
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{site_name},{site_url},{dates},{details}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{booking_date},{listing_name},{listing_url},{listing_address},{site_name},{site_url},{dates},{details}',
                     'id'        => 'booking_user_cancellation_email_subject',
                     'type'      => 'text',
                 ),
@@ -1463,7 +1473,7 @@ Thank you.
                     'label'      => __('New message notification email subject', 'listeo_core'),
                     'default'      => __('You got new message', 'listeo_core'),
                     'id'        => 'new_message_notification_email_subject',
-                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{listing_name},{listing_url},{sender},{conversation_url},{site_name},{site_url}',
+                    'description' => '<br>'.__('Available tags are:').'{user_mail},{user_name},{listing_name},{listing_url},{listing_address},{sender},{conversation_url},{site_name},{site_url}',
                     'type'      => 'text',
                 ),
                  array(

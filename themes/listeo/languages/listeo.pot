@@ -2,9 +2,9 @@
 # This file is distributed under the ThemeForest.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Listeo 1.3.1\n"
+"Project-Id-Version: Listeo 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/build\n"
-"POT-Creation-Date: 2020-04-05 07:06:58+00:00\n"
+"POT-Creation-Date: 2020-05-15 22:16:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -468,55 +468,55 @@ msgstr ""
 msgid "Book Now"
 msgstr ""
 
-#: functions.php:58
+#: functions.php:57
 msgid "Main Menu"
 msgstr ""
 
-#: functions.php:106
+#: functions.php:105
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:108 functions.php:154
+#: functions.php:107 functions.php:153
 msgid "Add widgets here."
 msgstr ""
 
-#: functions.php:117
+#: functions.php:116
 msgid "Footer 1st Column"
 msgstr ""
 
-#: functions.php:118
+#: functions.php:117
 msgid "1st column for widgets in Footer"
 msgstr ""
 
-#: functions.php:126
+#: functions.php:125
 msgid "Footer 2nd Column"
 msgstr ""
 
-#: functions.php:127
+#: functions.php:126
 msgid "2nd column for widgets in Footer"
 msgstr ""
 
-#: functions.php:135
+#: functions.php:134
 msgid "Footer 3rd Column"
 msgstr ""
 
-#: functions.php:136
+#: functions.php:135
 msgid "3rd column for widgets in Footer"
 msgstr ""
 
-#: functions.php:144
+#: functions.php:143
 msgid "Footer 4th Column"
 msgstr ""
 
-#: functions.php:145
+#: functions.php:144
 msgid "4th column for widgets in Footer"
 msgstr ""
 
-#: functions.php:152 inc/customizer/header.php:26
+#: functions.php:151 inc/customizer/header.php:26
 msgid "Header"
 msgstr ""
 
-#: header-split.php:119 header.php:189
+#: header-split.php:119 header.php:191
 msgid "Sign In"
 msgstr ""
 
@@ -2132,7 +2132,7 @@ msgstr ""
 msgid "Main"
 msgstr ""
 
-#: template-dashboard.php:198 template-dashboard.php:417
+#: template-dashboard.php:198 template-dashboard.php:419
 msgid "Dashboard"
 msgstr ""
 
@@ -2144,7 +2144,7 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: template-dashboard.php:231 template-dashboard.php:403
+#: template-dashboard.php:231 template-dashboard.php:405
 msgid "Bookings"
 msgstr ""
 
@@ -2184,43 +2184,43 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-#: template-dashboard.php:323
+#: template-dashboard.php:325
 msgid "Account"
 msgstr ""
 
-#: template-dashboard.php:325
+#: template-dashboard.php:327
 msgid "My Profile"
 msgstr ""
 
-#: template-dashboard.php:337
+#: template-dashboard.php:339
 msgid "My Orders"
 msgstr ""
 
-#: template-dashboard.php:347
+#: template-dashboard.php:349
 msgid "My Subscriptions"
 msgstr ""
 
-#: template-dashboard.php:352
+#: template-dashboard.php:354
 msgid "Logout"
 msgstr ""
 
-#: template-dashboard.php:382
+#: template-dashboard.php:384
 msgid "Howdy,"
 msgstr ""
 
-#: template-dashboard.php:389
+#: template-dashboard.php:391
 msgid "Approved Bookings"
 msgstr ""
 
-#: template-dashboard.php:393
+#: template-dashboard.php:395
 msgid "Pending Bookings"
 msgstr ""
 
-#: template-dashboard.php:397
+#: template-dashboard.php:399
 msgid "Cancelled Bookings"
 msgstr ""
 
-#: template-dashboard.php:416
+#: template-dashboard.php:418
 msgid "Home"
 msgstr ""
 
@@ -2344,7 +2344,41 @@ msgstr ""
 msgid "Totals"
 msgstr ""
 
-#: woocommerce/checkout/form-pay.php:84
+#: woocommerce/checkout/form-pay.php:68 woocommerce/checkout/form-pay.php:71
+msgid "Dates:"
+msgstr ""
+
+#: woocommerce/checkout/form-pay.php:73 woocommerce/checkout/form-pay.php:82
+msgid "at"
+msgstr ""
+
+#: woocommerce/checkout/form-pay.php:90
+msgid "Extra Services:"
+msgstr ""
+
+#: woocommerce/checkout/form-pay.php:103
+msgid "Booking Details:"
+msgstr ""
+
+#: woocommerce/checkout/form-pay.php:107
+msgid "%d Child"
+msgid_plural "%s Children"
+msgstr[0] ""
+msgstr[1] ""
+
+#: woocommerce/checkout/form-pay.php:110
+msgid "%d Guest"
+msgid_plural "%s Guests"
+msgstr[0] ""
+msgstr[1] ""
+
+#: woocommerce/checkout/form-pay.php:113
+msgid "%d Ticket"
+msgid_plural "%s Tickets"
+msgstr[0] ""
+msgstr[1] ""
+
+#: woocommerce/checkout/form-pay.php:152
 msgid ""
 "Sorry, it seems that there are no available payment methods for your "
 "location. Please contact us if you require assistance or wish to make "

@@ -51,7 +51,75 @@ $totals = $order->get_order_item_totals();
 								wc_display_item_meta( $item );
 
 								do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
-								echo $services;
+								
+							?>
+							<?php 
+							$booking_id = get_post_meta($order->get_id(),'booking_id',true);
+							if($booking_id){
+								$bookings = new Listeo_Core_Bookings_Calendar;
+                   				$booking_data = $bookings->get_booking($booking_id);
+								
+								$listing_id = get_post_meta($order->get_id(),'listing_id',true);
+								
+								//get post type to show proper date
+								$listing_type = get_post_meta($listing_id,'_listing_type', true);
+								echo '<div class="inner-booking-list">';
+								if($listing_type == 'rental') { ?>
+									<h5><?php esc_html_e('Dates:', 'listeo_core'); ?></h5>
+									<?php echo date_i18n(get_option( 'date_format' ), strtotime($booking_data['date_start'])); ?> - <?php echo date_i18n(get_option( 'date_format' ), strtotime($booking_data['date_end'])); ?></li>
+								<?php } else if($listing_type == 'service') { ?>
+										<h5><?php esc_html_e('Dates:', 'listeo_core'); ?></h5>
+										<?php echo date_i18n(get_option( 'date_format' ), strtotime($booking_data['date_start'])); ?> 
+										<?php esc_html_e('at','listeo_core'); ?> <?php echo date_i18n(get_option( 'time_format' ), strtotime($booking_data['date_start'])); ?> <?php if($booking_data['date_start'] != $booking_data['date_end']) echo  '- '.date_i18n(get_option( 'time_format' ), strtotime($booking_data['date_end'])); ?></li>
+								<?php } else { //event?>
+									
+
+										<?php echo date_i18n(get_option( 'date_format' ), strtotime($booking_data['date_start'])); ?> 
+											<?php 
+											$event_start = get_post_meta($listing_id,'_event_date', true); 
+											$event_date = explode(' ', $event_start); 
+											if( isset($event_date[1]) ) { ?>
+											<?php esc_html_e('at','listeo_core'); ?>
+											
+										<?php echo date_i18n(get_option( 'time_format' ), strtotime($event_date[1]));
+									}?> 
+									
+								<?php } ?>
+								</div>
+								<div class="inner-booking-list">
+									<h5><?php esc_html_e('Extra Services:', 'listeo_core'); ?></h5>
+									<?php echo listeo_get_extra_services_html($services); //echo wpautop( $details->service); ?>
+								</div>	
+								<?php
+	                   				$details = json_decode($booking_data['comment']); 
+	                   				if (
+									 	(isset($details->childrens) && $details->childrens > 0)
+									 	||
+									 	(isset($details->adults) && $details->adults > 0)
+									 	||
+									 	(isset($details->tickets) && $details->tickets > 0)
+									) { ?>			
+									<div class="inner-booking-list">
+										<h5><?php esc_html_e('Booking Details:', 'listeo_core'); ?></h5>
+										<ul class="booking-list">
+											<li class="highlighted" id="details">
+											<?php if( isset($details->childrens) && $details->childrens > 0) : ?>
+												<?php printf( _n( '%d Child', '%s Children', $details->childrens, 'listeo_core' ), $details->childrens ) ?>
+											<?php endif; ?>
+											<?php if( isset($details->adults)  && $details->adults > 0) : ?>
+												<?php printf( _n( '%d Guest', '%s Guests', $details->adults, 'listeo_core' ), $details->adults ) ?>
+											<?php endif; ?>
+											<?php if( isset($details->tickets)  && $details->tickets > 0) : ?>
+												<?php printf( _n( '%d Ticket', '%s Tickets', $details->tickets, 'listeo_core' ), $details->tickets ) ?>
+											<?php endif; ?>
+											</li>
+										</ul>
+									</div>	
+									<?php } 
+
+
+
+							}
 							?>
 						</td>
 						<td class="product-quantity"><?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', esc_html( $item->get_quantity() ) ) . '</strong>', $item ); ?></td><?php // @codingStandardsIgnoreLine ?>

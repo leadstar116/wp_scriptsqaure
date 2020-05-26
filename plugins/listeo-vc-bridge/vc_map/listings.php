@@ -33,6 +33,7 @@ function listings_integrateWithVC() {
           'heading' => __( 'Top bar list elements (if applicable)', 'listeo' ),
           'param_name' => 'list_top_buttons',
           'value' => array(
+            __( 'None', 'listeo' ) => 'none',
             __( 'Layout switcher', 'listeo' ) => 'layout',
             __( 'Filters', 'listeo' ) => 'filters',
             __( 'Orderby', 'listeo' ) => 'order',

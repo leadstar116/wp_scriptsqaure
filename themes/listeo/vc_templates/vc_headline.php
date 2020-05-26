@@ -70,4 +70,4 @@ if ( apply_filters( 'vc_custom_heading_template_use_wrapper', false ) ) {
 	$output .= '</' . $font_container_data['values']['tag'] . '>';
 }
 
-echo 'DUPA'.$output;
+echo $output;

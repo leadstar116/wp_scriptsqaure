@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Listeo-Core - Directory Plugin by Purethemes\n"
-"POT-Creation-Date: 2020-04-05 09:06+0200\n"
+"POT-Creation-Date: 2020-05-09 00:07+0200\n"
 "PO-Revision-Date: 2019-01-31 14:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,7 +41,7 @@ msgstr ""
 #: includes/class-listeo-core-activities-log.php:234
 #: includes/class-listeo-core-activities-log.php:239
 #: includes/class-listeo-core-activities-log.php:248
-#: includes/class-listeo-core-bookings-admin.php:212
+#: includes/class-listeo-core-bookings-admin.php:221
 #: includes/class-listeo-core-post-types.php:227
 msgid "Listing"
 msgstr ""
@@ -731,8 +731,8 @@ msgid ""
 msgstr ""
 
 #: includes/class-listeo-core-admin.php:533
-#: includes/class-listeo-core-submit.php:1608
-#: includes/class-listeo-core-submit.php:1642 templates/listing-preview.php:109
+#: includes/class-listeo-core-submit.php:1610
+#: includes/class-listeo-core-submit.php:1644 templates/listing-preview.php:109
 #: templates/listing-preview.php:111
 msgid "Submit Listing"
 msgstr ""
@@ -756,20 +756,22 @@ msgstr ""
 #: includes/class-listeo-core-admin.php:542
 #: includes/class-listeo-core-meta-boxes.php:93
 #: includes/class-listeo-core-post-types.php:590
-#: listeo-core-template-functions.php:75 templates/listing-submit-type.php:38
+#: listeo-core-template-functions.php:75 listeo-core-template-functions.php:363
+#: templates/listing-submit-type.php:38
 msgid "Service"
 msgstr ""
 
 #: includes/class-listeo-core-admin.php:543
 #: includes/class-listeo-core-meta-boxes.php:94
 #: includes/class-listeo-core-post-types.php:593
+#: listeo-core-template-functions.php:364
 msgid "Rental"
 msgstr ""
 
 #: includes/class-listeo-core-admin.php:544
 #: includes/class-listeo-core-meta-boxes.php:95
 #: includes/class-listeo-core-post-types.php:596
-#: templates/listing-submit-type.php:50
+#: listeo-core-template-functions.php:365 templates/listing-submit-type.php:50
 msgid "Event"
 msgstr ""
 
@@ -856,10 +858,10 @@ msgid "Default Gallery Type"
 msgstr ""
 
 #: includes/class-listeo-core-admin.php:633
-#: includes/class-listeo-core-admin.php:716
-#: includes/class-listeo-core-admin.php:773
-#: includes/class-listeo-core-admin.php:784
-#: includes/class-listeo-core-admin.php:790
+#: includes/class-listeo-core-admin.php:721
+#: includes/class-listeo-core-admin.php:778
+#: includes/class-listeo-core-admin.php:789
+#: includes/class-listeo-core-admin.php:795
 msgid "."
 msgstr ""
 
@@ -897,120 +899,124 @@ msgstr ""
 msgid "Disable reviews on listings"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:672
+#: includes/class-listeo-core-admin.php:669
+msgid "Hide real address on listings and lists"
+msgstr ""
+
+#: includes/class-listeo-core-admin.php:677
 #: includes/class-listeo-core-bookings-admin.php:15
 #: includes/class-listeo-core-submit.php:836
 #: includes/class-listeo-core-widgets.php:645
 msgid "Booking"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:673
+#: includes/class-listeo-core-admin.php:678
 msgid "Settings related to booking."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:678
+#: includes/class-listeo-core-admin.php:683
 msgid "Remove Guests options from all booking widgets"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:679
+#: includes/class-listeo-core-admin.php:684
 msgid "Guest picker will be removed from booking widget"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:685
+#: includes/class-listeo-core-admin.php:690
 msgid "Allow owners to make bookings"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:691
+#: includes/class-listeo-core-admin.php:696
 msgid "Add address field to booking confirmation form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:693
+#: includes/class-listeo-core-admin.php:698
 msgid "Used in WooCommerce Orders and required for some payment gateways "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:700
+#: includes/class-listeo-core-admin.php:705
 msgid "Disable payments in bookings"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:701
+#: includes/class-listeo-core-admin.php:706
 msgid ""
 "Bookings will have prices but the payments won't be handled by the site. "
 "Disable Wallet page in Liste Core -> Pages"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:710
+#: includes/class-listeo-core-admin.php:715
 msgid "Browse Listing"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:711
+#: includes/class-listeo-core-admin.php:716
 msgid "Settings for browse/archive listing view."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:715
+#: includes/class-listeo-core-admin.php:720
 msgid "Ajax based listing browsing"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:719
-#: includes/class-listeo-core-admin.php:730
-#: includes/class-listeo-core-admin.php:741
+#: includes/class-listeo-core-admin.php:724
+#: includes/class-listeo-core-admin.php:735
+#: includes/class-listeo-core-admin.php:746
 msgid "Enabled"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:720
-#: includes/class-listeo-core-admin.php:731
-#: includes/class-listeo-core-admin.php:742
+#: includes/class-listeo-core-admin.php:725
+#: includes/class-listeo-core-admin.php:736
+#: includes/class-listeo-core-admin.php:747
 msgid "Disabled"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:726
+#: includes/class-listeo-core-admin.php:731
 msgid "Make features taxonomy related to categories"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:727
+#: includes/class-listeo-core-admin.php:732
 msgid "This option will refresh list of features based on selected category"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:737
+#: includes/class-listeo-core-admin.php:742
 msgid "Restrict location search only to address field"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:738
+#: includes/class-listeo-core-admin.php:743
 msgid ""
 "This option will limit search only to address field if Radius search is not "
 "used, otherwise it searches for content and title as well"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:748
+#: includes/class-listeo-core-admin.php:753
 msgid "For taxonomy search use logical relation:"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:749
+#: includes/class-listeo-core-admin.php:754
 msgid ""
 "This option will limit let you choose search results that have one of the "
 "features or all of the features you look for."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:752
+#: includes/class-listeo-core-admin.php:757
 msgid "OR"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:753
+#: includes/class-listeo-core-admin.php:758
 msgid "AND"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:761
+#: includes/class-listeo-core-admin.php:766
 msgid "Registration"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:762
+#: includes/class-listeo-core-admin.php:767
 msgid "Settings for users registration and login."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:766
+#: includes/class-listeo-core-admin.php:771
 msgid "Enable Forced Front End Login"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:767
+#: includes/class-listeo-core-admin.php:772
 msgid ""
 "Enabling this option will redirect all wp-login request to frontend form. Be "
 "aware that on some servers or some configuration, especially with security "
@@ -1019,658 +1025,658 @@ msgid ""
 "disable that if things go wrong."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:772
+#: includes/class-listeo-core-admin.php:777
 msgid "Login/Registration Form Type"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:776
+#: includes/class-listeo-core-admin.php:781
 msgid "Ajax form in a popup"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:777
+#: includes/class-listeo-core-admin.php:782
 msgid "Separate page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:783
+#: includes/class-listeo-core-admin.php:788
 msgid "Automatically login user after successful registration"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:789
+#: includes/class-listeo-core-admin.php:794
 msgid "Enable Privacy Policy link in registration form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:795
+#: includes/class-listeo-core-admin.php:800
 msgid "Enable reCAPTCHA on registration form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:796
+#: includes/class-listeo-core-admin.php:801
 msgid ""
 "Check this checkbox to add reCAPTCHA to form. You need to provide API keys "
 "for that."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:801
+#: includes/class-listeo-core-admin.php:806
 msgid "Enable reCAPTCHA on reviews form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:802
+#: includes/class-listeo-core-admin.php:807
 msgid ""
 "Check this checkbox to add reCAPTCHA to Reviews form. You need to provide "
 "API keys for that."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:807
+#: includes/class-listeo-core-admin.php:812
 msgid "reCAPTCHA Site Key"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:808
-#: includes/class-listeo-core-admin.php:814
+#: includes/class-listeo-core-admin.php:813
+#: includes/class-listeo-core-admin.php:819
 msgid ""
 "Get the sitekey from https://www.google.com/recaptcha/admin#list - use "
 "reCaptcha v2"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:813
+#: includes/class-listeo-core-admin.php:818
 msgid "reCAPTCHA Secret Key"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:819
+#: includes/class-listeo-core-admin.php:824
 msgid "Hide Role field in Registration Form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:820
+#: includes/class-listeo-core-admin.php:825
 msgid ""
 "If hidden, set default role in Settings -> General -> New User Default Role"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:825
+#: includes/class-listeo-core-admin.php:830
 msgid "Hide Username field in Registration Form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:826
+#: includes/class-listeo-core-admin.php:831
 msgid "Username will be generated from email address (part before @)"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:832
+#: includes/class-listeo-core-admin.php:837
 msgid "Display First and Last name fields in registration form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:833
+#: includes/class-listeo-core-admin.php:838
 msgid "Adds optional input fields for first and last name"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:838
+#: includes/class-listeo-core-admin.php:843
 msgid "Add Password pickup field to registration form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:839
+#: includes/class-listeo-core-admin.php:844
 msgid ""
 "Enable to add password field, when disabled it will be randomly generated "
 "and sent via email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:844
+#: includes/class-listeo-core-admin.php:849
 msgid "Allow user to change his role in \"My Account\" page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:845
+#: includes/class-listeo-core-admin.php:850
 msgid "Works only for owners and guests"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:852
+#: includes/class-listeo-core-admin.php:857
 msgid "Pages"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:853
+#: includes/class-listeo-core-admin.php:858
 msgid "Set all pages required in Listeo."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:858
+#: includes/class-listeo-core-admin.php:863
 msgid "Dashboard Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:859
+#: includes/class-listeo-core-admin.php:864
 msgid "Main Dashboard page for user, content: [listeo_dashboard]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:865
+#: includes/class-listeo-core-admin.php:870
 msgid "Messages Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:866
+#: includes/class-listeo-core-admin.php:871
 msgid "Main page for user messages, content: [listeo_messages]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:872
+#: includes/class-listeo-core-admin.php:877
 msgid "Bookings Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:873
+#: includes/class-listeo-core-admin.php:878
 msgid "Page for owners to manage their bookings, content: [listeo_bookings]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:879
+#: includes/class-listeo-core-admin.php:884
 msgid "My Bookings Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:880
+#: includes/class-listeo-core-admin.php:885
 msgid "Page for guest to see their bookings,content: [listeo_my_bookings]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:886
+#: includes/class-listeo-core-admin.php:891
 msgid "Booking confirmation"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:887
+#: includes/class-listeo-core-admin.php:892
 msgid ""
 "Displays page for booking confirmation, content: "
 "[listeo_booking_confirmation]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:893
+#: includes/class-listeo-core-admin.php:898
 msgid "My Listings Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:894
+#: includes/class-listeo-core-admin.php:899
 msgid "Displays or listings added by user, content [listeo_my_listings]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:900
+#: includes/class-listeo-core-admin.php:905
 msgid "Wallet Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:901
+#: includes/class-listeo-core-admin.php:906
 msgid "Displays or owners earnings, content [listeo_wallet]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:907
+#: includes/class-listeo-core-admin.php:912
 msgid "Reviews Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:908
+#: includes/class-listeo-core-admin.php:913
 msgid "Displays reviews of user listings, content: [listeo_reviews]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:914
+#: includes/class-listeo-core-admin.php:919
 msgid "Bookmarks Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:915
+#: includes/class-listeo-core-admin.php:920
 msgid "Displays user bookmarks, content: [listeo_bookmarks]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:921
+#: includes/class-listeo-core-admin.php:926
 msgid "Submit Listing Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:922
+#: includes/class-listeo-core-admin.php:927
 msgid "Displays submit listing page, content: [listeo_submit_listing]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:928
+#: includes/class-listeo-core-admin.php:933
 msgid "My Profile Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:929
+#: includes/class-listeo-core-admin.php:934
 msgid "Displays user profile page, content: [listeo_my_account]"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:934
+#: includes/class-listeo-core-admin.php:939
 msgid "Lost Password Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:935
+#: includes/class-listeo-core-admin.php:940
 msgid "Select page that holds [listeo_lost_password] shortcode"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:941
+#: includes/class-listeo-core-admin.php:946
 msgid "Reset Password Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:942
+#: includes/class-listeo-core-admin.php:947
 msgid "Select page that holds [listeo_reset_password] shortcode"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:950
+#: includes/class-listeo-core-admin.php:955
 msgid "Claim Listing Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:951
+#: includes/class-listeo-core-admin.php:956
 msgid "Displays claim listing form"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:956
+#: includes/class-listeo-core-admin.php:961
 msgid "WooCommerce Orders Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:957
+#: includes/class-listeo-core-admin.php:962
 msgid "Displays orders page in dashboard menu"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:962
+#: includes/class-listeo-core-admin.php:967
 msgid "WooCommerce Subscription Page"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:963
+#: includes/class-listeo-core-admin.php:968
 msgid ""
 "Displays subscription page in dashboard menu (requires WooCommerce "
 "Subscription plugin)"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:969
+#: includes/class-listeo-core-admin.php:974
 msgid "iCal generator"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:970
+#: includes/class-listeo-core-admin.php:975
 msgid "Used to generate iCal output"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1001
+#: includes/class-listeo-core-admin.php:1006
 msgid "Emails"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1002
+#: includes/class-listeo-core-admin.php:1007
 msgid "Email settings."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1006
+#: includes/class-listeo-core-admin.php:1011
 msgid "\"From name\" in email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1007
+#: includes/class-listeo-core-admin.php:1012
 msgid ""
 "The name from who the email is received, by default it is your site name."
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1014
+#: includes/class-listeo-core-admin.php:1019
 msgid "\"From\" email "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1015
+#: includes/class-listeo-core-admin.php:1020
 msgid ""
 "This will act as the \"from\" and \"reply-to\" address. This emails should "
 "match your domain address"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1023
+#: includes/class-listeo-core-admin.php:1028
 msgid "Registration/Welcome email for new users"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1026
-#: includes/class-listeo-core-admin.php:1186
-#: includes/class-listeo-core-admin.php:1216
-#: includes/class-listeo-core-admin.php:1247
-#: includes/class-listeo-core-admin.php:1278
-#: includes/class-listeo-core-admin.php:1309
-#: includes/class-listeo-core-admin.php:1341
-#: includes/class-listeo-core-admin.php:1373
-#: includes/class-listeo-core-admin.php:1403
-#: includes/class-listeo-core-admin.php:1435
-#: includes/class-listeo-core-admin.php:1466
+#: includes/class-listeo-core-admin.php:1031
+#: includes/class-listeo-core-admin.php:1191
+#: includes/class-listeo-core-admin.php:1222
+#: includes/class-listeo-core-admin.php:1254
+#: includes/class-listeo-core-admin.php:1286
+#: includes/class-listeo-core-admin.php:1318
+#: includes/class-listeo-core-admin.php:1351
+#: includes/class-listeo-core-admin.php:1383
+#: includes/class-listeo-core-admin.php:1413
+#: includes/class-listeo-core-admin.php:1445
+#: includes/class-listeo-core-admin.php:1476
 msgid "Available tags are:"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1029
+#: includes/class-listeo-core-admin.php:1034
 msgid "Welcome Email Subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1030
+#: includes/class-listeo-core-admin.php:1035
 msgid "Welcome to {site_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1035
+#: includes/class-listeo-core-admin.php:1040
 msgid "Welcome Email Content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1054
+#: includes/class-listeo-core-admin.php:1059
 msgid "Listing Published notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1059
+#: includes/class-listeo-core-admin.php:1064
 msgid "Enable listing published notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1060
-#: includes/class-listeo-core-admin.php:1091
-#: includes/class-listeo-core-admin.php:1119
-#: includes/class-listeo-core-admin.php:1149
+#: includes/class-listeo-core-admin.php:1065
+#: includes/class-listeo-core-admin.php:1096
+#: includes/class-listeo-core-admin.php:1124
+#: includes/class-listeo-core-admin.php:1154
 msgid "Check this checkbox to enable sending emails to listing authors"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1065
+#: includes/class-listeo-core-admin.php:1070
 msgid "Published notification Email Subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1066
+#: includes/class-listeo-core-admin.php:1071
 msgid "Your listing was published - {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1072
+#: includes/class-listeo-core-admin.php:1077
 msgid "Published notification Email Content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1085
+#: includes/class-listeo-core-admin.php:1090
 msgid "New listing notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1090
+#: includes/class-listeo-core-admin.php:1095
 msgid "Enable new listing notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1096
+#: includes/class-listeo-core-admin.php:1101
 msgid "New listing notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1097
+#: includes/class-listeo-core-admin.php:1102
 msgid "Thank you for adding a listing"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1102
+#: includes/class-listeo-core-admin.php:1107
 msgid "New listing notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1113
+#: includes/class-listeo-core-admin.php:1118
 msgid "Expired listing notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1118
+#: includes/class-listeo-core-admin.php:1123
 msgid "Enable expired listing notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1124
+#: includes/class-listeo-core-admin.php:1129
 msgid "Expired listing notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1125
+#: includes/class-listeo-core-admin.php:1130
 msgid "Your listing has expired - {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1130
+#: includes/class-listeo-core-admin.php:1135
 msgid "Expired listing notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1143
+#: includes/class-listeo-core-admin.php:1148
 msgid "Expiring listing in next 5 days notification email "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1148
+#: includes/class-listeo-core-admin.php:1153
 msgid "Enable Expiring soon listing notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1154
+#: includes/class-listeo-core-admin.php:1159
 msgid "Expiring soon listing notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1155
+#: includes/class-listeo-core-admin.php:1160
 msgid "Your listing is expiring in 5 days - {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1160
+#: includes/class-listeo-core-admin.php:1165
 msgid "Expiring soon listing notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1173
+#: includes/class-listeo-core-admin.php:1178
 msgid "Booking confirmation to user (paid - not instant booking) "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1178
-#: includes/class-listeo-core-admin.php:1301
-#: includes/class-listeo-core-admin.php:1333
+#: includes/class-listeo-core-admin.php:1183
+#: includes/class-listeo-core-admin.php:1310
+#: includes/class-listeo-core-admin.php:1343
 msgid "Enable Booking confirmation notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1179
-#: includes/class-listeo-core-admin.php:1209
+#: includes/class-listeo-core-admin.php:1184
+#: includes/class-listeo-core-admin.php:1215
 msgid ""
 "Check this checkbox to enable sending emails to users after they request "
 "booking"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1184
+#: includes/class-listeo-core-admin.php:1189
 msgid "Booking confirmation notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1185
-#: includes/class-listeo-core-admin.php:1215
+#: includes/class-listeo-core-admin.php:1190
+#: includes/class-listeo-core-admin.php:1221
 msgid "Thank you for your booking - {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1191
+#: includes/class-listeo-core-admin.php:1197
 msgid "Booking confirmation notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1203
+#: includes/class-listeo-core-admin.php:1209
 msgid "Instant Booking confirmation to user"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1208
+#: includes/class-listeo-core-admin.php:1214
 msgid "Enable Instant Booking confirmation notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1214
+#: includes/class-listeo-core-admin.php:1220
 msgid "Instant Booking confirmation notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1221
+#: includes/class-listeo-core-admin.php:1228
 msgid "Instant Booking confirmation notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1234
+#: includes/class-listeo-core-admin.php:1241
 msgid "New booking request notification to owner "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1239
+#: includes/class-listeo-core-admin.php:1246
 msgid "Enable Booking request notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1240
+#: includes/class-listeo-core-admin.php:1247
 msgid ""
 "Check this checkbox to enable sending emails to owners when new booking was "
 "requested"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1245
-#: includes/class-listeo-core-admin.php:1307
-#: includes/class-listeo-core-admin.php:1339
+#: includes/class-listeo-core-admin.php:1252
+#: includes/class-listeo-core-admin.php:1316
+#: includes/class-listeo-core-admin.php:1349
 msgid "Booking request notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1246
+#: includes/class-listeo-core-admin.php:1253
 msgid "There is a new booking request for {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1252
-#: includes/class-listeo-core-admin.php:1314
-#: includes/class-listeo-core-admin.php:1346
+#: includes/class-listeo-core-admin.php:1260
+#: includes/class-listeo-core-admin.php:1324
+#: includes/class-listeo-core-admin.php:1356
 msgid "Booking request notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1265
+#: includes/class-listeo-core-admin.php:1273
 msgid "New Instant booking notification to owner "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1270
+#: includes/class-listeo-core-admin.php:1278
 msgid "Enable Instant Booking notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1271
+#: includes/class-listeo-core-admin.php:1279
 msgid ""
 "Check this checkbox to enable sending emails to owners when new instant "
 "booking was made"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1276
+#: includes/class-listeo-core-admin.php:1284
 msgid "Instant Booking notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1277
+#: includes/class-listeo-core-admin.php:1285
 msgid "There is a new instant booking for {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1283
+#: includes/class-listeo-core-admin.php:1292
 msgid "Instant Booking notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1296
+#: includes/class-listeo-core-admin.php:1305
 msgid "Free booking confirmation to user"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1302
+#: includes/class-listeo-core-admin.php:1311
 msgid ""
 "Check this checkbox to enable sending emails to users when booking was "
 "accepted by owner"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1308
+#: includes/class-listeo-core-admin.php:1317
 msgid "Your booking request was approved {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1328
+#: includes/class-listeo-core-admin.php:1338
 msgid "Booking approved - payment needed email to user"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1334
+#: includes/class-listeo-core-admin.php:1344
 msgid ""
 "Check this checkbox to enable sending emails to users when booking was "
 "accepted by owner and they need to pay"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1340
+#: includes/class-listeo-core-admin.php:1350
 msgid "Your booking request was approved {listing_name}, please pay"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1359
+#: includes/class-listeo-core-admin.php:1369
 msgid "Booking paid by user email to owner"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1364
+#: includes/class-listeo-core-admin.php:1374
 msgid "Enable Booking paid confirmation notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1365
+#: includes/class-listeo-core-admin.php:1375
 msgid ""
 "Check this checkbox to enable sending emails to owner when booking was paid "
 "by use"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1370
+#: includes/class-listeo-core-admin.php:1380
 msgid "Booking paid notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1371
+#: includes/class-listeo-core-admin.php:1381
 msgid "Your booking was paid by user - {listing_name}"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1377
+#: includes/class-listeo-core-admin.php:1387
 msgid "Booking paid notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1390
+#: includes/class-listeo-core-admin.php:1400
 msgid "Booking cancelled notification to user "
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1395
+#: includes/class-listeo-core-admin.php:1405
 msgid "Enable Booking cancellation notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1396
+#: includes/class-listeo-core-admin.php:1406
 msgid ""
 "Check this checkbox to enable sending emails to user when booking is "
 "cancelled"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1401
+#: includes/class-listeo-core-admin.php:1411
 msgid "Booking cancelled notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1402
+#: includes/class-listeo-core-admin.php:1412
 msgid "Your booking request for {listing_name} was cancelled"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1408
+#: includes/class-listeo-core-admin.php:1418
 msgid "Booking cancelled notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1421
+#: includes/class-listeo-core-admin.php:1431
 msgid "Email notification about new conversation"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1426
+#: includes/class-listeo-core-admin.php:1436
 msgid "Enable new conversation notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1427
+#: includes/class-listeo-core-admin.php:1437
 msgid ""
 "Check this checkbox to enable sending emails to user when there was new "
 "conversation started"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1432
+#: includes/class-listeo-core-admin.php:1442
 msgid "New conversation notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1433
+#: includes/class-listeo-core-admin.php:1443
 msgid "You got new conversation"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1439
+#: includes/class-listeo-core-admin.php:1449
 msgid "New conversation notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1452
+#: includes/class-listeo-core-admin.php:1462
 msgid "Email notification about new message"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1457
+#: includes/class-listeo-core-admin.php:1467
 msgid "Enable new message notification email"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1458
+#: includes/class-listeo-core-admin.php:1468
 msgid ""
 "Check this checkbox to enable sending emails to user when there was new "
 "message send"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1463
+#: includes/class-listeo-core-admin.php:1473
 msgid "New message notification email subject"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1464
+#: includes/class-listeo-core-admin.php:1474
 msgid "You got new message"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1470
+#: includes/class-listeo-core-admin.php:1480
 msgid "New message notification email content"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1552
+#: includes/class-listeo-core-admin.php:1562
 #: includes/class-listeo-core-settings.php:308
 msgid "Plugin Settings"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1604
+#: includes/class-listeo-core-admin.php:1614
 #: includes/class-listeo-core-settings.php:360
 msgid "Save Settings"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1757
+#: includes/class-listeo-core-admin.php:1767
 msgid "Upload an image"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1757
+#: includes/class-listeo-core-admin.php:1767
 msgid "Use image"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1757
+#: includes/class-listeo-core-admin.php:1767
 msgid "Upload new image"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1758
+#: includes/class-listeo-core-admin.php:1768
 msgid "Remove image"
 msgstr ""
 
-#: includes/class-listeo-core-admin.php:1947
-#: includes/class-listeo-core-admin.php:1956
+#: includes/class-listeo-core-admin.php:1957
+#: includes/class-listeo-core-admin.php:1966
 #: includes/class-listeo-core-settings.php:391
 #: includes/class-listeo-core-settings.php:400
 #: includes/class-listeo-core.php:743 includes/class-listeo-core.php:752
@@ -1686,7 +1692,12 @@ msgstr ""
 msgid "No bookings avaliable."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:155
+#: includes/class-listeo-core-bookings-admin.php:151
+#: includes/class-listeo-core-bookings-admin.php:160
+msgid "iCal import"
+msgstr ""
+
+#: includes/class-listeo-core-bookings-admin.php:164
 #: includes/class-listeo-core-post-types.php:238
 #: templates/account/my_listings.php:168 templates/account/my_listings.php:175
 #: templates/form-fields/floorplans.php:25
@@ -1694,158 +1705,158 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:156
-#: includes/class-listeo-core-bookings-admin.php:192
+#: includes/class-listeo-core-bookings-admin.php:165
+#: includes/class-listeo-core-bookings-admin.php:201
 #: templates/account/my_listings.php:186
-#: templates/booking/content-booking.php:221
-#: templates/booking/content-user-booking.php:215
+#: templates/booking/content-booking.php:243
+#: templates/booking/content-user-booking.php:248
 msgid "Delete"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:209
+#: includes/class-listeo-core-bookings-admin.php:218
 #: includes/class-listeo-core-payouts.php:618
 msgid "ID"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:210
+#: includes/class-listeo-core-bookings-admin.php:219
 msgid "Client"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:211
+#: includes/class-listeo-core-bookings-admin.php:220
 #: includes/class-listeo-core-users.php:159 includes/class-listeo-core.php:814
-#: listeo-core-template-functions.php:1286 templates/account/login-form.php:78
+#: listeo-core-template-functions.php:1297 templates/account/login-form.php:78
 #: templates/my-account.php:57
 msgid "Owner"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:213
+#: includes/class-listeo-core-bookings-admin.php:222
 msgid "Start date"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:214
+#: includes/class-listeo-core-bookings-admin.php:223
 msgid "End date"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:215
+#: includes/class-listeo-core-bookings-admin.php:224
 #: includes/class-listeo-core-post-types.php:567
 msgid "Type"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:216
+#: includes/class-listeo-core-bookings-admin.php:225
 msgid "Created"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:217
-#: includes/class-listeo-core-bookings-admin.php:354
+#: includes/class-listeo-core-bookings-admin.php:226
+#: includes/class-listeo-core-bookings-admin.php:363
 #: includes/class-listeo-core-meta-boxes.php:763
 msgid "Price"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:218
+#: includes/class-listeo-core-bookings-admin.php:227
 msgid "Action"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:293
+#: includes/class-listeo-core-bookings-admin.php:302
 msgid "Error while updating"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:309
+#: includes/class-listeo-core-bookings-admin.php:318
 msgid "User id"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:314
+#: includes/class-listeo-core-bookings-admin.php:323
 msgid "Owner id"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:319
+#: includes/class-listeo-core-bookings-admin.php:328
 msgid "Listing id"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:324
+#: includes/class-listeo-core-bookings-admin.php:333
 msgid "Date start"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:329
+#: includes/class-listeo-core-bookings-admin.php:338
 msgid "Date end"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:334
+#: includes/class-listeo-core-bookings-admin.php:343
 msgid "Order id"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:339
+#: includes/class-listeo-core-bookings-admin.php:348
 msgid "Status"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:344
+#: includes/class-listeo-core-bookings-admin.php:353
 msgid "Created date"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:349
+#: includes/class-listeo-core-bookings-admin.php:358
 msgid "Expiring date"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:361
+#: includes/class-listeo-core-bookings-admin.php:370
 #: lib/cmb2/includes/helper-functions.php:303
 #: templates/account/my_listings.php:137 templates/account/wallet.php:150
 msgid "Save"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:450
+#: includes/class-listeo-core-bookings-admin.php:459
 msgid "Manage Bookings"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-admin.php:477
+#: includes/class-listeo-core-bookings-admin.php:486
 msgid "Bookings per page"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:556
 #: includes/class-listeo-core-widgets.php:688
-#: listeo-core-template-functions.php:1326
-#: listeo-core-template-functions.php:1852 templates/form-fields/slots.php:5
+#: listeo-core-template-functions.php:1337
+#: listeo-core-template-functions.php:1869 templates/form-fields/slots.php:5
 msgid "Monday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:557
 #: includes/class-listeo-core-widgets.php:689
-#: listeo-core-template-functions.php:1327
-#: listeo-core-template-functions.php:1853 templates/form-fields/slots.php:6
+#: listeo-core-template-functions.php:1338
+#: listeo-core-template-functions.php:1870 templates/form-fields/slots.php:6
 msgid "Tuesday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:558
 #: includes/class-listeo-core-widgets.php:690
-#: listeo-core-template-functions.php:1328
-#: listeo-core-template-functions.php:1854 templates/form-fields/slots.php:7
+#: listeo-core-template-functions.php:1339
+#: listeo-core-template-functions.php:1871 templates/form-fields/slots.php:7
 msgid "Wednesday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:559
 #: includes/class-listeo-core-widgets.php:691
-#: listeo-core-template-functions.php:1329
-#: listeo-core-template-functions.php:1855 templates/form-fields/slots.php:8
+#: listeo-core-template-functions.php:1340
+#: listeo-core-template-functions.php:1872 templates/form-fields/slots.php:8
 msgid "Thursday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:560
 #: includes/class-listeo-core-widgets.php:692
-#: listeo-core-template-functions.php:1330
-#: listeo-core-template-functions.php:1856 templates/form-fields/slots.php:9
+#: listeo-core-template-functions.php:1341
+#: listeo-core-template-functions.php:1873 templates/form-fields/slots.php:9
 msgid "Friday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:561
 #: includes/class-listeo-core-widgets.php:693
-#: listeo-core-template-functions.php:1331
-#: listeo-core-template-functions.php:1857 templates/form-fields/slots.php:10
+#: listeo-core-template-functions.php:1342
+#: listeo-core-template-functions.php:1874 templates/form-fields/slots.php:10
 msgid "Saturday"
 msgstr ""
 
 #: includes/class-listeo-core-bookings-calendar.php:562
 #: includes/class-listeo-core-widgets.php:694
-#: listeo-core-template-functions.php:1332
-#: listeo-core-template-functions.php:1337
-#: listeo-core-template-functions.php:1858 templates/form-fields/slots.php:11
+#: listeo-core-template-functions.php:1343
+#: listeo-core-template-functions.php:1348
+#: listeo-core-template-functions.php:1875 templates/form-fields/slots.php:11
 msgid "Sunday"
 msgstr ""
 
@@ -1854,46 +1865,46 @@ msgstr ""
 msgid " slots available"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:930
+#: includes/class-listeo-core-bookings-calendar.php:931
 msgid "Order is cancelled."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1002
-#: includes/class-listeo-core-bookings-calendar.php:1195
+#: includes/class-listeo-core-bookings-calendar.php:1003
+#: includes/class-listeo-core-bookings-calendar.php:1199
 msgid "owner reservations"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1223
+#: includes/class-listeo-core-bookings-calendar.php:1227
 msgid "You shouldn't be here :)"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1307
+#: includes/class-listeo-core-bookings-calendar.php:1311
 msgid "Sorry, it looks like you've already made that reservation"
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1421
+#: includes/class-listeo-core-bookings-calendar.php:1425
 msgid "Unfortunately those dates are not available anymore."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1535
+#: includes/class-listeo-core-bookings-calendar.php:1539
 msgid "Those dates are not available."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1547
+#: includes/class-listeo-core-bookings-calendar.php:1551
 msgid ""
 "We have some technical problem, please try again later or contact "
 "administrator."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1555
+#: includes/class-listeo-core-bookings-calendar.php:1559
 msgid "Your booking is waiting for confirmation."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1561
+#: includes/class-listeo-core-bookings-calendar.php:1565
 msgid "We are waiting for your payment."
 msgstr ""
 
-#: includes/class-listeo-core-bookings-calendar.php:1568
+#: includes/class-listeo-core-bookings-calendar.php:1572
 msgid "Your booking was cancelled"
 msgstr ""
 
@@ -1998,41 +2009,41 @@ msgstr ""
 msgid "No users found."
 msgstr ""
 
-#: includes/class-listeo-core-emails.php:118
+#: includes/class-listeo-core-emails.php:125
 msgid "There is new listing waiting for approval"
 msgstr ""
 
-#: includes/class-listeo-core-emails.php:121
+#: includes/class-listeo-core-emails.php:128
 msgid "There is listing waiting for your approval \"{listing_name}\""
 msgstr ""
 
-#: includes/class-listeo-core-emails.php:627
-#: includes/class-listeo-core-emails.php:630
+#: includes/class-listeo-core-emails.php:754
+#: includes/class-listeo-core-emails.php:757
 #: templates/single-partials/single-listing-main-details.php:51
 msgid " at "
 msgstr ""
 
-#: includes/class-listeo-core-emails.php:641
+#: includes/class-listeo-core-emails.php:771
 #: templates/booking/content-booking.php:128
-#: templates/booking/content-user-booking.php:127
+#: templates/booking/content-user-booking.php:128
 #, php-format
 msgid "%d Child"
 msgid_plural "%s Children"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-listeo-core-emails.php:645
+#: includes/class-listeo-core-emails.php:775
 #: templates/booking/content-booking.php:131
-#: templates/booking/content-user-booking.php:130
+#: templates/booking/content-user-booking.php:131
 #, php-format
 msgid "%d Guest"
 msgid_plural "%s Guests"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-listeo-core-emails.php:649
+#: includes/class-listeo-core-emails.php:779
 #: templates/booking/content-booking.php:134
-#: templates/booking/content-user-booking.php:133
+#: templates/booking/content-user-booking.php:134
 #, php-format
 msgid "%d Ticket"
 msgid_plural "%s Tickets"
@@ -2236,15 +2247,18 @@ msgid "Menu Items"
 msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:212
+msgid "Opening Hours (set here in 24:00 format)"
+msgstr ""
+
+#: includes/class-listeo-core-meta-boxes.php:227
+msgid "Opening Hours Status"
+msgstr ""
+
 #: includes/class-listeo-core-meta-boxes.php:236
 #: includes/class-listeo-core-submit.php:631
 #: includes/class-listeo-core-submit.php:645
 #: includes/class-listeo-core-widgets.php:1171
 msgid "Opening Hours"
-msgstr ""
-
-#: includes/class-listeo-core-meta-boxes.php:227
-msgid "Opening Hours Status"
 msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:245
@@ -2260,7 +2274,7 @@ msgid " Closing"
 msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:282
-#: templates/single-listing.php:212
+#: templates/single-listing.php:47
 msgid "Verified Listing"
 msgstr ""
 
@@ -2307,7 +2321,7 @@ msgid "Slots Status"
 msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:368
-#: listeo-core-template-functions.php:1911
+#: listeo-core-template-functions.php:1928
 msgid "Slots"
 msgstr ""
 
@@ -2366,8 +2380,8 @@ msgstr ""
 #: includes/class-listeo-core-search.php:1168
 #: includes/class-listeo-core-submit.php:378
 #: listeo-core-template-functions.php:83 templates/listing-preview.php:70
-#: templates/single-listing.php:166
-#: templates/single-partials/single-listing-location.php:30
+#: templates/single-listing.php:190
+#: templates/single-partials/single-listing-location.php:35
 msgid "Location"
 msgstr ""
 
@@ -2422,7 +2436,7 @@ msgstr ""
 #: includes/class-listeo-core-meta-boxes.php:527
 #: includes/class-listeo-core-submit.php:443
 #: includes/class-listeo-core-submit.php:448 templates/listing-preview.php:61
-#: templates/single-listing.php:148
+#: templates/single-listing.php:172
 #: templates/single-partials/single-listing-gallery-content.php:8
 msgid "Gallery"
 msgstr ""
@@ -2444,7 +2458,7 @@ msgid "Contact details"
 msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:567
-#: includes/class-listeo-core-widgets.php:1361
+#: includes/class-listeo-core-widgets.php:1364
 msgid "Phone number"
 msgstr ""
 
@@ -2513,7 +2527,7 @@ msgstr ""
 
 #: includes/class-listeo-core-meta-boxes.php:667
 #: includes/class-listeo-core-meta-boxes.php:670
-#: includes/class-listeo-core-submit.php:476 templates/single-listing.php:162
+#: includes/class-listeo-core-submit.php:476 templates/single-listing.php:186
 #: templates/single-partials/single-listing-video.php:7
 msgid "Video"
 msgstr ""
@@ -2707,7 +2721,7 @@ msgid "listing"
 msgstr ""
 
 #: includes/class-listeo-core-post-types.php:165
-msgctxt "Job category slug - resave permalinks after changing this"
+msgctxt "Listing category slug - resave permalinks after changing this"
 msgid "listing-category"
 msgstr ""
 
@@ -2978,7 +2992,7 @@ msgid "by %s"
 msgstr ""
 
 #: includes/class-listeo-core-post-types.php:638
-#: templates/booking/content-booking.php:225
+#: templates/booking/content-booking.php:247
 msgid "Approve"
 msgstr ""
 
@@ -3006,8 +3020,8 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: includes/class-listeo-core-post-types.php:1133
-#: includes/class-listeo-core-submit.php:2457
+#: includes/class-listeo-core-post-types.php:1155
+#: includes/class-listeo-core-submit.php:2459
 msgid "Listings category"
 msgstr ""
 
@@ -3022,7 +3036,7 @@ msgid "Name"
 msgstr ""
 
 #: includes/class-listeo-core-reviews.php:157
-#: includes/class-listeo-core-widgets.php:1366 templates/account/login.php:161
+#: includes/class-listeo-core-widgets.php:1369 templates/account/login.php:161
 msgid "Email"
 msgstr ""
 
@@ -3101,7 +3115,7 @@ msgstr ""
 
 #: includes/class-listeo-core-reviews.php:910
 #: includes/class-listeo-core-reviews.php:916
-#: listeo-core-template-functions.php:1313
+#: listeo-core-template-functions.php:1324
 msgid "Helpful Review "
 msgstr ""
 
@@ -3117,7 +3131,7 @@ msgstr ""
 #: includes/class-listeo-core-search.php:909
 #: templates/archive/top-buttons.php:41
 #: templates/search-form/multi-checkbox-row.php:3
-#: templates/search-form/multi-checkbox.php:3
+#: templates/search-form/multi-checkbox.php:4
 msgid "Please choose category to display filters"
 msgstr ""
 
@@ -3271,8 +3285,8 @@ msgid "Submit Details"
 msgstr ""
 
 #: includes/class-listeo-core-submit.php:135
-#: includes/class-listeo-core-submit.php:1453
-#: listeo-core-template-functions.php:1176
+#: includes/class-listeo-core-submit.php:1455
+#: listeo-core-template-functions.php:1187
 msgid "Preview"
 msgstr ""
 
@@ -3316,7 +3330,6 @@ msgid "Human readable address, if not set, the Google address will be used"
 msgstr ""
 
 #: includes/class-listeo-core-submit.php:451
-#: includes/class-listeo-core-submit.php:469
 msgid ""
 "By selecting (clicking on a photo) one of the uploaded photos you will set "
 "it as Featured Image for this listing (marked by icon with star). Drag and "
@@ -3466,7 +3479,7 @@ msgid "Menu status"
 msgstr ""
 
 #: includes/class-listeo-core-submit.php:822 templates/listing-preview.php:65
-#: templates/single-listing.php:155
+#: templates/single-listing.php:179
 #: templates/single-partials/single-listing-pricing.php:29
 msgid "Pricing"
 msgstr ""
@@ -3566,28 +3579,28 @@ msgstr ""
 msgid "%s is invalid"
 msgstr ""
 
-#: includes/class-listeo-core-submit.php:1484
-#: includes/class-listeo-core-submit.php:1539
+#: includes/class-listeo-core-submit.php:1486
+#: includes/class-listeo-core-submit.php:1541
 msgid "You must be signed in to post a new listing."
 msgstr ""
 
-#: includes/class-listeo-core-submit.php:1684
-#: includes/class-listeo-core-submit.php:1687
-#: includes/class-listeo-core-submit.php:1693
+#: includes/class-listeo-core-submit.php:1686
+#: includes/class-listeo-core-submit.php:1689
+#: includes/class-listeo-core-submit.php:1695
 msgid "Invalid Package"
 msgstr ""
 
-#: includes/class-listeo-core-submit.php:2082
-#: listeo-core-template-functions.php:1174 templates/my-account.php:126
+#: includes/class-listeo-core-submit.php:2084
+#: listeo-core-template-functions.php:1185 templates/my-account.php:126
 #: templates/search-form/submit.php:4
 msgid "Submit"
 msgstr ""
 
-#: includes/class-listeo-core-submit.php:2154
+#: includes/class-listeo-core-submit.php:2156
 msgid "Choose a package"
 msgstr ""
 
-#: includes/class-listeo-core-submit.php:2312
+#: includes/class-listeo-core-submit.php:2314
 msgid "Edit Listing"
 msgstr ""
 
@@ -3799,35 +3812,35 @@ msgstr ""
 msgid "An unknown error occurred. Please try again later."
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1592
+#: includes/class-listeo-core-users.php:1596
 msgid "owner"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1595
+#: includes/class-listeo-core-users.php:1599
 msgid "guest"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1597
+#: includes/class-listeo-core-users.php:1601
 #, php-format
 msgid "New user registration on your site %s:"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1598
+#: includes/class-listeo-core-users.php:1602
 #, php-format
 msgid "Username: %s"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1599
+#: includes/class-listeo-core-users.php:1603
 #, php-format
 msgid "E-mail: %s"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1600
+#: includes/class-listeo-core-users.php:1604
 #, php-format
 msgid "Role: %s"
 msgstr ""
 
-#: includes/class-listeo-core-users.php:1602
+#: includes/class-listeo-core-users.php:1606
 #, php-format
 msgid "[%s] New User Registration"
 msgstr ""
@@ -3846,7 +3859,7 @@ msgstr ""
 #: includes/class-listeo-core-widgets.php:564
 #: includes/class-listeo-core-widgets.php:646
 #: includes/class-listeo-core-widgets.php:1172
-#: includes/class-listeo-core-widgets.php:1356
+#: includes/class-listeo-core-widgets.php:1359
 #: includes/class-listeo-core.php:356 lib/cmb2-tabs/example.php:28
 #: lib/cmb2-tabs/example.php:52 lib/cmb2-tabs/example.php:134
 #: lib/cmb2-tabs/example.php:158 templates/form-fields/pricing.php:36
@@ -3977,8 +3990,8 @@ msgstr ""
 
 #: includes/class-listeo-core-widgets.php:935
 #: includes/class-listeo-core-widgets.php:1044
-#: listeo-core-template-functions.php:2206
-#: listeo-core-template-functions.php:2209 templates/booking.php:210
+#: listeo-core-template-functions.php:2223
+#: listeo-core-template-functions.php:2226 templates/booking.php:210
 #: templates/single-partials/single-listing-pricing.php:55
 #: templates/single-partials/single-listing-pricing.php:64
 msgid "Free"
@@ -4037,76 +4050,76 @@ msgstr ""
 msgid "Now Closed"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1317
+#: includes/class-listeo-core-widgets.php:1320
 msgid "Closed"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1349
+#: includes/class-listeo-core-widgets.php:1352
 msgid "Shows Listing Owner box."
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1351
+#: includes/class-listeo-core-widgets.php:1354
 msgid "Listeo Owner Widget"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1355
+#: includes/class-listeo-core-widgets.php:1358
 msgid "Hosted By"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1371
+#: includes/class-listeo-core-widgets.php:1374
 msgid "Biographical info"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1376
+#: includes/class-listeo-core-widgets.php:1379
 msgid "Social Sites profiles"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1381
+#: includes/class-listeo-core-widgets.php:1384
 msgid "Show Send message button"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1475
+#: includes/class-listeo-core-widgets.php:1482
 #: templates/single-partials/single-listing-socials.php:65
 #, php-format
 msgid "Please %s sign %s in to see contact details."
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1497
-#: includes/class-listeo-core-widgets.php:1507
-#: includes/class-listeo-core-widgets.php:1516
+#: includes/class-listeo-core-widgets.php:1505
+#: includes/class-listeo-core-widgets.php:1515
+#: includes/class-listeo-core-widgets.php:1524
 #: templates/account/single_message.php:125
-#: templates/booking/content-booking.php:202
-#: templates/booking/content-user-booking.php:199
+#: templates/booking/content-booking.php:224
+#: templates/booking/content-user-booking.php:232
 #: templates/dashboard-bookings.php:103 templates/dashboard-bookings.php:113
 #: templates/dashboard-bookings.php:120
 msgid "Send Message"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1505
+#: includes/class-listeo-core-widgets.php:1513
 msgid "Your message to "
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1552
+#: includes/class-listeo-core-widgets.php:1560
 msgid "Your site&#8217;s most recent Posts."
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1555
+#: includes/class-listeo-core-widgets.php:1563
 msgid "Listeo Recent Posts"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1574
+#: includes/class-listeo-core-widgets.php:1582
 msgid "Recent Posts"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1665
+#: includes/class-listeo-core-widgets.php:1673
 msgid "Title:"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1668
+#: includes/class-listeo-core-widgets.php:1676
 msgid "Number of posts to show:"
 msgstr ""
 
-#: includes/class-listeo-core-widgets.php:1672
+#: includes/class-listeo-core-widgets.php:1680
 msgid "Display post date?"
 msgstr ""
 
@@ -4167,8 +4180,8 @@ msgid "Price (optional)"
 msgstr ""
 
 #: includes/class-listeo-core.php:358 templates/archive/top-buttons.php:80
-#: templates/booking/content-booking.php:217
-#: templates/booking/content-user-booking.php:218
+#: templates/booking/content-booking.php:239
+#: templates/booking/content-user-booking.php:251
 msgid "Cancel"
 msgstr ""
 
@@ -5177,130 +5190,110 @@ msgstr ""
 msgid "The physical condition of the business"
 msgstr ""
 
-#: listeo-core-template-functions.php:353
-msgid "Apartments"
-msgstr ""
-
-#: listeo-core-template-functions.php:354
-msgid "Houses"
-msgstr ""
-
-#: listeo-core-template-functions.php:355
-msgid "Commercial"
-msgstr ""
-
-#: listeo-core-template-functions.php:356
-msgid "Garages"
-msgstr ""
-
-#: listeo-core-template-functions.php:357
-msgid "Lots"
-msgstr ""
-
-#: listeo-core-template-functions.php:371
+#: listeo-core-template-functions.php:380
 msgid "Daily"
 msgstr ""
 
-#: listeo-core-template-functions.php:372
+#: listeo-core-template-functions.php:381
 msgid "Weekly"
 msgstr ""
 
-#: listeo-core-template-functions.php:373
+#: listeo-core-template-functions.php:382
 msgid "Monthly"
 msgstr ""
 
-#: listeo-core-template-functions.php:374
+#: listeo-core-template-functions.php:383
 msgid "Yearly"
 msgstr ""
 
-#: listeo-core-template-functions.php:387
+#: listeo-core-template-functions.php:396
 msgid "For Sale"
 msgstr ""
 
-#: listeo-core-template-functions.php:391
+#: listeo-core-template-functions.php:400
 msgid "For Rent"
 msgstr ""
 
-#: listeo-core-template-functions.php:395
+#: listeo-core-template-functions.php:404
 msgid "Sold"
 msgstr ""
 
-#: listeo-core-template-functions.php:398
+#: listeo-core-template-functions.php:407
 msgid "Rented"
 msgstr ""
 
-#: listeo-core-template-functions.php:483
+#: listeo-core-template-functions.php:494
 msgid "Any Type"
 msgstr ""
 
-#: listeo-core-template-functions.php:571
+#: listeo-core-template-functions.php:582
 msgid "--Choose page--"
 msgstr ""
 
-#: listeo-core-template-functions.php:744
+#: listeo-core-template-functions.php:755
 msgid "Published"
 msgstr ""
 
-#: listeo-core-template-functions.php:747
+#: listeo-core-template-functions.php:758
 msgid "Pending Payment"
 msgstr ""
 
-#: listeo-core-template-functions.php:750
+#: listeo-core-template-functions.php:761
 #: templates/booking/content-user-booking.php:72
 msgid "Expired"
 msgstr ""
 
-#: listeo-core-template-functions.php:754
+#: listeo-core-template-functions.php:765
 msgid "Pending Approval"
 msgstr ""
 
-#: listeo-core-template-functions.php:799
+#: listeo-core-template-functions.php:810
 msgid "Never/not set"
 msgstr ""
 
-#: listeo-core-template-functions.php:838
+#: listeo-core-template-functions.php:849
 msgid "Howdy, "
 msgstr ""
 
-#: listeo-core-template-functions.php:1272
+#: listeo-core-template-functions.php:1283
 msgid "Pingback:"
 msgstr ""
 
-#: listeo-core-template-functions.php:1272
+#: listeo-core-template-functions.php:1283
 msgid "(Edit)"
 msgstr ""
 
-#: listeo-core-template-functions.php:1290
+#: listeo-core-template-functions.php:1301
 #, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: listeo-core-template-functions.php:1895 templates/form-fields/slots.php:47
+#: listeo-core-template-functions.php:1912 templates/form-fields/slots.php:47
 msgid "No slots added"
 msgstr ""
 
-#: listeo-core-template-functions.php:1930
-#: listeo-core-template-functions.php:1940 templates/form-fields/slots.php:83
+#: listeo-core-template-functions.php:1947
+#: listeo-core-template-functions.php:1957 templates/form-fields/slots.php:83
 #: templates/form-fields/slots.php:94
 msgid "am"
 msgstr ""
 
-#: listeo-core-template-functions.php:1931
-#: listeo-core-template-functions.php:1941 templates/form-fields/slots.php:84
+#: listeo-core-template-functions.php:1948
+#: listeo-core-template-functions.php:1958 templates/form-fields/slots.php:84
 #: templates/form-fields/slots.php:95
 msgid "pm"
 msgstr ""
 
-#: listeo-core-template-functions.php:1947 templates/form-fields/slots.php:101
+#: listeo-core-template-functions.php:1964 templates/form-fields/slots.php:101
 msgid "Add"
 msgstr ""
 
-#: listeo-core-template-functions.php:2099
+#: listeo-core-template-functions.php:2116
 #, php-format
 msgid "\"%s\" (filetype %s) needs to be one of the following file types: %s"
 msgstr ""
 
-#: listeo-core-template-functions.php:2101
+#: listeo-core-template-functions.php:2118
 #, php-format
 msgid "Uploaded files need to be one of the following file types: %s"
 msgstr ""
@@ -5315,7 +5308,7 @@ msgstr ""
 
 #: templates/account/bookmarks.php:58 templates/account/my_listings.php:94
 #: templates/content-listing-grid.php:105 templates/content-listing.php:63
-#: templates/listing-preview.php:53 templates/single-listing.php:122
+#: templates/listing-preview.php:53 templates/single-listing.php:146
 #, php-format
 msgid "%s review"
 msgid_plural "%s reviews"
@@ -5384,36 +5377,36 @@ msgstr ""
 msgid "Your password should be at least 12 random characters long to be safe"
 msgstr ""
 
-#: templates/account/dashboard.php:24 templates/account/my_listings.php:42
+#: templates/account/dashboard.php:29 templates/account/my_listings.php:42
 #: templates/account/my_listings.php:52
 msgid "Active Listings"
 msgstr ""
 
-#: templates/account/dashboard.php:33
+#: templates/account/dashboard.php:41
 msgid "Total Views"
 msgstr ""
 
-#: templates/account/dashboard.php:53
+#: templates/account/dashboard.php:65
 msgid "Total Reviews"
 msgstr ""
 
-#: templates/account/dashboard.php:63
+#: templates/account/dashboard.php:78
 msgid "Times Bookmarked"
 msgstr ""
 
-#: templates/account/dashboard.php:76
+#: templates/account/dashboard.php:91
 msgid "Recent Activities"
 msgstr ""
 
-#: templates/account/dashboard.php:77
+#: templates/account/dashboard.php:92
 msgid "Clear All"
 msgstr ""
 
-#: templates/account/dashboard.php:85
+#: templates/account/dashboard.php:100
 msgid "Your Listing Packages"
 msgstr ""
 
-#: templates/account/dashboard.php:99 templates/account/my_packages.php:19
+#: templates/account/dashboard.php:114 templates/account/my_packages.php:19
 #: templates/listing-submit-package.php:50
 #, php-format
 msgid "You have %1$s listings posted out of %2$d"
@@ -5421,7 +5414,7 @@ msgid_plural "You have %1$s listings posted out of %2$d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/account/dashboard.php:101 templates/account/my_packages.php:21
+#: templates/account/dashboard.php:116 templates/account/my_packages.php:21
 #: templates/listing-submit-package.php:52
 #, php-format
 msgid "You have %s listings posted"
@@ -5429,7 +5422,7 @@ msgid_plural "You have %s listings posted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/account/dashboard.php:105 templates/account/my_packages.php:25
+#: templates/account/dashboard.php:120 templates/account/my_packages.php:25
 #: templates/listing-submit-package.php:56
 #, php-format
 msgid "listed for %s day"
@@ -5437,7 +5430,7 @@ msgid_plural "listed for %s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/account/dashboard.php:115
+#: templates/account/dashboard.php:130
 msgid "You don't have any listing packages yet."
 msgstr ""
 
@@ -5457,7 +5450,7 @@ msgstr ""
 msgid "My Listings"
 msgstr ""
 
-#: templates/account/logged_section.php:36 templates/single-listing.php:175
+#: templates/account/logged_section.php:36 templates/single-listing.php:199
 msgid "Reviews"
 msgstr ""
 
@@ -6007,53 +6000,58 @@ msgid "Canceled"
 msgstr ""
 
 #: templates/booking/content-booking.php:82
-#: templates/booking/content-user-booking.php:85
+#: templates/booking/content-user-booking.php:86
 msgid "Booking Date:"
 msgstr ""
 
 #: templates/booking/content-booking.php:92
 #: templates/booking/content-booking.php:102
-#: templates/booking/content-booking.php:195
-#: templates/booking/content-user-booking.php:95
-#: templates/booking/content-user-booking.php:104
-#: templates/booking/content-user-booking.php:192
+#: templates/booking/content-booking.php:217
+#: templates/booking/content-user-booking.php:96
+#: templates/booking/content-user-booking.php:105
+#: templates/booking/content-user-booking.php:225
 msgid "at"
 msgstr ""
 
 #: templates/booking/content-booking.php:124
-#: templates/booking/content-user-booking.php:123
+#: templates/booking/content-user-booking.php:124
 msgid "Booking Details:"
 msgstr ""
 
 #: templates/booking/content-booking.php:147
-#: templates/booking/content-user-booking.php:148
+#: templates/booking/content-user-booking.php:159
 msgid "Price:"
 msgstr ""
 
 #: templates/booking/content-booking.php:160
-#: templates/booking/content-user-booking.php:160
+#: templates/booking/content-user-booking.php:171
 msgid "Client:"
 msgstr ""
 
-#: templates/booking/content-booking.php:175
-#: templates/booking/content-user-booking.php:173
+#: templates/booking/content-booking.php:176
+#: templates/booking/content-user-booking.php:185
+msgid "Address:"
+msgstr ""
+
+#: templates/booking/content-booking.php:197
+#: templates/booking/content-user-booking.php:206
 msgid "Extra Services:"
 msgstr ""
 
-#: templates/booking/content-booking.php:181
-#: templates/booking/content-user-booking.php:179
+#: templates/booking/content-booking.php:203
+#: templates/booking/content-user-booking.php:212
 msgid "Message:"
 msgstr ""
 
-#: templates/booking/content-booking.php:188
+#: templates/booking/content-booking.php:210
 msgid "Request sent:"
 msgstr ""
 
-#: templates/booking/content-booking.php:209
+#: templates/booking/content-booking.php:231
 msgid "Confirm Payment"
 msgstr ""
 
-#: templates/booking/content-booking.php:213
+#: templates/booking/content-booking.php:235
 msgid "Reject"
 msgstr ""
 
@@ -6061,11 +6059,15 @@ msgstr ""
 msgid "Waiting for owner confirmation"
 msgstr ""
 
-#: templates/booking/content-user-booking.php:185
+#: templates/booking/content-user-booking.php:144
+msgid "Booking Location:"
+msgstr ""
+
+#: templates/booking/content-user-booking.php:218
 msgid "Booking requested on:"
 msgstr ""
 
-#: templates/booking/content-user-booking.php:211
+#: templates/booking/content-user-booking.php:244
 msgid "Pay"
 msgstr ""
 
@@ -6175,7 +6177,7 @@ msgstr ""
 msgid "Choose "
 msgstr ""
 
-#: templates/form-fields/text.php:31 templates/search-form/location.php:11
+#: templates/form-fields/text.php:31 templates/search-form/location.php:16
 msgid "Find My Location"
 msgstr ""
 
@@ -6183,7 +6185,7 @@ msgstr ""
 msgid "type and click here"
 msgstr ""
 
-#: templates/form-fields/text.php:33 templates/search-form/location.php:12
+#: templates/form-fields/text.php:33 templates/search-form/location.php:17
 msgid "type and hit enter"
 msgstr ""
 
@@ -6197,7 +6199,7 @@ msgid ""
 "submission using buttons at the end of that page."
 msgstr ""
 
-#: templates/listing-preview.php:60 templates/single-listing.php:147
+#: templates/listing-preview.php:60 templates/single-listing.php:171
 msgid "Overview"
 msgstr ""
 
@@ -6395,28 +6397,28 @@ msgstr ""
 msgid "Select min and max price range"
 msgstr ""
 
-#: templates/single-listing.php:177
+#: templates/single-listing.php:46
+msgid "Listing has been verified and belongs to the business owner or manager."
+msgstr ""
+
+#: templates/single-listing.php:52
+msgid "Click to claim this listing."
+msgstr ""
+
+#: templates/single-listing.php:56
+msgid "Not verified. Claim this listing!"
+msgstr ""
+
+#: templates/single-listing.php:201
 #: templates/single-partials/single-listing-reviews.php:176
 msgid "Add Review"
 msgstr ""
 
-#: templates/single-listing.php:211
-msgid "Listing has been verified and belongs to the business owner or manager."
-msgstr ""
-
-#: templates/single-listing.php:217
-msgid "Click to claim this listing."
-msgstr ""
-
-#: templates/single-listing.php:221
-msgid "Not verified. Claim this listing!"
-msgstr ""
-
-#: templates/single-partials/single-listing-location.php:34
+#: templates/single-partials/single-listing-location.php:39
 msgid "Street View"
 msgstr ""
 
-#: templates/single-partials/single-listing-location.php:35
+#: templates/single-partials/single-listing-location.php:40
 msgid "Get Direction"
 msgstr ""
 

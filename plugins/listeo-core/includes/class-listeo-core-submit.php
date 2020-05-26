@@ -466,8 +466,8 @@ class Listeo_Core_Submit  {
 							'label'       => __( 'Description', 'listeo_core' ),
 							'name'       => 'listing_description',
 							'type'        => 'wp-editor',
-							'description' => __( 'By selecting (clicking on a photo) one of the uploaded photos you will set it as Featured Image for this listing (marked by icon with star). Drag and drop thumbnails to re-order images in gallery.', 'listeo_core' ),
-							'placeholder' => 'Upload images',
+							'description' => '',
+							'placeholder' => 'Description',
 							'class'		  => '',
 							'priority'    => 1,
 							'required'    => true,
@@ -1426,7 +1426,9 @@ class Listeo_Core_Submit  {
 									$this->fields[ $group_key ]['fields'][ $key ]['value'] = get_post_meta( $listing->ID, $key, true );
 								}
 								//$this->fields[ $group_key ]['fields'][ $key ]['value'] = get_post_meta( $listing->ID, $key, true );
-								
+								if($this->fields[ $group_key ]['fields'][ $key ]['type'] == 'checkboxes'){
+								    $this->fields[ $group_key ]['fields'][ $key ]['value'] = get_post_meta( $listing->ID, $key, false );
+								}
 							break;
 						}
 					
@@ -1562,6 +1564,7 @@ class Listeo_Core_Submit  {
 					//$update_listing['post_status']   = 'pending';
 					$update_listing['post_status']   = apply_filters( 'submit_listing_post_status', get_option( 'listeo_new_listing_requires_approval' ) ? 'pending' : 'publish', $listing );
 				}
+			
 				$update_listing['post_date']     = current_time( 'mysql' );
 				$update_listing['post_date_gmt'] = current_time( 'mysql', 1 );
 				$update_listing['post_author']   = get_current_user_id();

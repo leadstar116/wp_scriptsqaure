@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Listeo-Core - Directory Plugin by Purethemes
- * Version: 1.4.1
+ * Version: 1.4.3
  * Plugin URI: http://www.purethemes.net/
  * Description: Directory & Listings Plugin from Purethemes.net
  * Author: Purethemes.net

@@ -170,6 +170,28 @@ switch ($data->status) {
 					</ul>
 					
 				</div>
+				<?php if( isset($details->billing_address_1) ) : ?>
+				<div class="inner-booking-list">
+					
+					<h5><?php esc_html_e('Address:', 'listeo_core'); ?></h5>
+					<ul class="booking-list" id="client">
+		
+						<?php if( isset($details->billing_address_1) ) : ?>
+							<li id="billing_address_1"><?php echo $details->billing_address_1; ?> </li>
+						<?php endif; ?>
+						<?php if( isset($details->billing_address_1) ) : ?>
+							<li id="billing_postcode"><?php echo $details->billing_postcode; ?> </li>
+						<?php endif; ?>	
+						<?php if( isset($details->billing_city) ) : ?>
+							<li id="billing_city"><?php echo $details->billing_city; ?> </li>
+						<?php endif; ?>
+						<?php if( isset($details->billing_country) ) : ?>
+							<li id="billing_country"><?php echo $details->billing_country; ?> </li>
+						<?php endif; ?>
+						
+					</ul>
+				</div>
+			<?php endif; ?>  
 				<?php if( isset($details->service) && !empty($details->service)) : ?>
 					<div class="inner-booking-list">
 						<h5><?php esc_html_e('Extra Services:', 'listeo_core'); ?></h5>

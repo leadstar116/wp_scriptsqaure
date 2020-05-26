@@ -64,9 +64,10 @@
                            
                             );
                           while ( $listeo_core_query->have_posts() ) {
-                              $term_list = wp_get_post_terms($listeo_core_query->post->ID, 'listing_category', array("fields" => "slugs"));
+                              
                                 // Setup listing data
-                                $listeo_core_query->the_post(); ?>
+                                $listeo_core_query->the_post(); 
+                                  $term_list = wp_get_post_terms($listeo_core_query->post->ID, 'listing_category', array("fields" => "slugs"));?>
                                 <div class="col-lg-4 col-md-6 isotope-item <?php  echo implode( " ",$term_list ); ?>">
                                 <?php $template_loader->set_template_data( $style_data )->get_template_part( 'content-listing','compact' );  ?>
                                 </div>
@@ -78,7 +79,7 @@
             }
         ?>
 
-        </div>
+        
 
         <?php 
             wp_reset_postdata();

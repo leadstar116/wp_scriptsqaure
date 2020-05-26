@@ -117,7 +117,10 @@ function get_the_listing_address( $post = null ) {
 	$friendly_address = get_post_meta( $post->ID, '_friendly_address', true );
 	$address = get_post_meta( $post->ID, '_address', true );
 	$output =  (!empty($friendly_address)) ? $friendly_address : $address ;
-	
+	$disable_address = get_option('listeo_disable_address');
+	if($disable_address){
+		$output = get_post_meta( $post->ID, '_friendly_address', true );
+	}
 	return apply_filters( 'the_listing_location', $output, $post );
 }
 
@@ -183,18 +186,25 @@ function the_listing_location_link($post = null, $map_link = true ) {
 
 	$address =  get_post_meta( $post, '_address', true );
 	$friendly_address =  get_post_meta( $post, '_friendly_address', true );
-
-	if(empty($friendly_address)) { $friendly_address = $address; }
-	
-	if ( $address ) {
-		if ( $map_link ) {
-			// If linking to google maps, we don't want anything but text here
-			echo apply_filters( 'the_listing_map_link', '<a class="listing-address popup-gmaps" href="' . esc_url( 'https://maps.google.com/maps?q=' . urlencode( strip_tags( $address ) ) . '' ) . '"><i class="fa fa-map-marker"></i>' . esc_html( strip_tags( $friendly_address ) ) . '</a>', $address, $post );
-		} else {
-			echo wp_kses_post( $friendly_address );
+	$disable_address = get_option('listeo_disable_address');
+	if($disable_address) {
+		echo $friendly_address;
+	} else {
+		if(empty($friendly_address)) { 
+			$friendly_address = $address; 
 		}
-	} 
-
+		
+		if ( $address ) {
+			if ( $map_link ) {
+				// If linking to google maps, we don't want anything but text here
+				echo apply_filters( 'the_listing_map_link', '<a class="listing-address popup-gmaps" href="' . esc_url( 'https://maps.google.com/maps?q=' . urlencode( strip_tags( $address ) ) . '' ) . '"><i class="fa fa-map-marker"></i>' . esc_html( strip_tags( $friendly_address ) ) . '</a>', $address, $post );
+			} else {
+				echo wp_kses_post( $friendly_address );
+			}
+		} 
+	
+	}
+	
 }
 
 
@@ -350,11 +360,10 @@ add_action( 'listeo_before_archive', 'listeo_archive_buttons', 25 ,2 );
  */
 function listeo_core_get_listing_types(){
 	 $options = array(
-        	'apartments' => __( 'Apartments', 'listeo_core' ),
-			'houses' 	 => __( 'Houses', 'listeo_core' ),
-			'commercial' => __( 'Commercial', 'listeo_core' ),
-			'garages' 	 => __( 'Garages', 'listeo_core' ),
-			'lots' 		 => __( 'Lots', 'listeo_core' ),
+        	'service' => __( 'Service', 'listeo_core' ),
+			'rental' 	 => __( 'Rental', 'listeo_core' ),
+			'event' => __( 'Event', 'listeo_core' ),
+			
     );
 	return apply_filters('listeo_core_get_listing_types',$options);
 }
@@ -425,7 +434,9 @@ function listeo_core_get_options_array($type,$data) {
 	if($type == 'taxonomy'){
 		$categories =  get_terms( $data, array(
 		    'hide_empty' => false,
+		  	'orderby' => 'term_order'
 		) );	
+
 		$options = array();
 		foreach ($categories as $cat) {
 			$options[$cat->term_id] = array ( 
@@ -775,7 +786,7 @@ function calculate_listing_expiry( $id ) {
 
 	// ...otherwise use the global option
 	if ( ! $duration ) {
-		$duration = absint( get_option( 'listeo_core_default_duration') );
+		$duration = absint( get_option( 'listeo_default_duration') );
 	}
 
 	if ( $duration ) {
@@ -1721,15 +1732,21 @@ function listeo_get_geo_data($post){
 		$icon = '<i class="im im-icon-Map-Marker2"></i>';
 	}
 	
-
+	$disable_address = get_option('listeo_disable_address');
+	$latitude = get_post_meta( $post->ID, '_geolocation_lat', true ); 
+	$longitude = get_post_meta( $post->ID, '_geolocation_long', true ); 
+	if(!empty($latitude) && $disable_address) {
+		$dither= '0.001';
+		$latitude = $latitude + (rand(5,15)-0.5)*$dither;
+	}
 	ob_start(); ?>
 
 	  	data-title="<?php the_title(); ?>"
     	data-friendly-address="<?php echo esc_attr(get_post_meta( $post->ID, '_friendly_address', true )); ?>" 
     	data-address="<?php the_listing_address(); ?>" 
     	data-image="<?php echo listeo_core_get_listing_image( $post->ID ); ?>" 
-    	data-longitude="<?php echo esc_attr( get_post_meta( $post->ID, '_geolocation_lat', true ) ); ?>" 
-    	data-latitude="<?php echo esc_attr( get_post_meta( $post->ID, '_geolocation_long', true ) ); ?>"
+    	data-longitude="<?php echo esc_attr( $latitude ); ?>" 
+    	data-latitude="<?php echo esc_attr( $longitude ); ?>"
     	<?php if(!get_option('listeo_disable_reviews')){ ?>
     	data-rating="<?php echo esc_attr( get_post_meta($post->ID, 'listeo-avg-rating', true ) ); ?>"
     	data-reviews="<?php echo esc_attr( listeo_get_reviews_number($post->ID)); ?>"
@@ -2213,7 +2230,7 @@ function listeo_get_extra_services_html($arr) {
 
 			}
 			
-			$output .= '<li>'.$booked_service->service->name.'<span class="services-list-price-tag">'.$price.'</span></li>';
+			$output .= '<li>'.$booked_service->service->name.' <span class="services-list-price-tag">'.$price.'</span></li>';
 			
 			# code...
 		}
@@ -2222,5 +2239,20 @@ function listeo_get_extra_services_html($arr) {
 	} else {
 		return wpautop( $arr );
 	}
-	
+}
+
+function listeo_get_users_name( $user_id = null ) {
+
+ $user_info = $user_id ? new WP_User( $user_id ) : wp_get_current_user();
+
+ if ( $user_info->first_name ) {
+
+ if ( $user_info->last_name ) {
+ return $user_info->first_name . ' ' . $user_info->last_name;
+ }
+
+ return $user_info->first_name;
+ }
+
+ return $user_info->display_name;
 }

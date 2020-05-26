@@ -257,7 +257,7 @@ public function subscription_ended( $subscription, $paused = false ) {
 
 	foreach ( $subscription->get_items() as $item ) {
 		
-		listeo_write_log('subscription_ended');
+
 		/**
 		 * @var WC_Order $parent
 		 */

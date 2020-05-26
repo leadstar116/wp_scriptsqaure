@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Listeo - Forms&Fields Editor
- * Version: 1.4.1
+ * Version: 1.4.2
  * Plugin URI: http://www.purethemes.net/
  * Description: Editor for Listeo - Directory Plugin from Purethemes.net
  * Author: Purethemes.net
@@ -83,10 +83,9 @@ class Listeo_Forms_And_Fields_Editor {
         include( 'includes/class-listeo-submit-builder.php' );
         //include( 'includes/class-listeo-import-export.php' );
 
-
-        $this->forms  = Listeo_Forms_Editor::instance();
         $this->fields  = Listeo_Fields_Editor::instance();
         $this->submit  = Listeo_Submit_Editor::instance();
+        $this->forms  = Listeo_Forms_Editor::instance();
         //$this->users  = Listeo_User_Fields_Editor::instance();
         //$this->import_export  = Listeo_Forms_Import_Export::instance();
         $this->reviews_criteria  = Listeo_Reviews_Criteria::instance();

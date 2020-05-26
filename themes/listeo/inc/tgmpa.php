@@ -65,7 +65,7 @@ function listeo_register_required_plugins() {
             'slug'          		=> 'js_composer', // The plugin slug (typically the folder name)
             'source'            	=> get_template_directory() . '/plugins/js_composer.zip', // The plugin source
             'required'          	=> true, // If false, the plugin is only 'recommended' instead of required
-            'version'          		=> '6.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+            'version'          		=> '6.2.0', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
             'force_activation'      => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
             'force_deactivation'    => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
             'external_url'      	=> '', // If set, overrides default API URL and points to an external URL
@@ -74,35 +74,35 @@ function listeo_register_required_plugins() {
 	        'name'                  => 'Revolution Slider',
 	        'slug'                  => 'revslider',
 	        'source'                => get_template_directory() . '/plugins/revslider.zip',
-	        'version'               => '6.1.7',
+	        'version'               => '6.2.5',
 	        'required'              => true,
 	    ),	
 	    array(
 	        'name'                  => 'Listeo Core',
 	        'slug'                  => 'listeo-core',
 	        'source'                => get_template_directory() . '/plugins/listeo-core.zip',
-	        'version'               => '1.4.1',
+	        'version'               => '1.4.3',
 	        'required'              => true,
 	    ),	 	    
 	    array(
 	        'name'                  => 'Listeo Shortcodes',
 	        'slug'                  => 'listeo-shortcodes',
 	        'source'                => get_template_directory() . '/plugins/listeo-shortcodes.zip',
-	        'version'               => '1.5',
+	        'version'               => '1.5.1',
 	        'required'              => true,
 	    ),	    
 	    array(
 	        'name'                  => 'Listeo VC Bridge',
 	        'slug'                  => 'listeo-vc-bridge',
 	        'source'                => get_template_directory() . '/plugins/listeo-vc-bridge.zip',
-	        'version'               => '1.5',
+	        'version'               => '1.5.1',
 	        'required'              => true,
 	    ),	
 	     array(
 	        'name'                  => 'Listeo Forms and Fields Editor',
 	        'slug'                  => 'listeo-forms-and-fields-editor',
 	        'source'                => get_template_directory() . '/plugins/listeo-forms-and-fields-editor.zip',
-	        'version'               => '1.4.1',
+	        'version'               => '1.4.2',
 	        'required'              => true,
 	    ),	     
 	    array(
@@ -187,7 +187,7 @@ function listeo_register_required_plugins() {
 		'default_path' => '',                      // Default absolute path to bundled plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
 		'has_notices'  => true,                    // Show admin notices or not.
-		'dismissable'  => false,                    // If false, a user cannot dismiss the nag message.
+		'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
 		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
 		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.

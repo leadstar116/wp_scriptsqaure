@@ -254,7 +254,7 @@ class Listeo_Submit_Editor {
 							'label'       => __( 'Description', 'listeo_core' ),
 							'name'       => 'listing_description',
 							'type'        => 'wp-editor',
-							'description' => __( 'By selecting (clicking on a photo) one of the uploaded photos you will set it as Featured Image for this listing (marked by icon with star). Drag and drop thumbnails to re-order images in gallery.', 'listeo_core' ),
+							'description' => '',
 							'placeholder' => 'Upload images',
 							'class'		  => '',
 							'priority'    => 1,
@@ -451,7 +451,12 @@ class Listeo_Submit_Editor {
 							'required'    => false,
 							'for_type'	  => ''
 						),	
-								
+						'_listing_timezone' => array(
+								'label'       => __( 'Listing Timezone', 'listeo_core' ),
+								'type'        => 'timezone',
+								'required'    => false,
+								'name'        => '_listing_timezone',
+						),	
 						
 				),
 			),
@@ -1184,6 +1189,14 @@ class Listeo_Submit_Editor {
 					'priority'    => 1,
 					'required'    => false,
 				),
+			
+				'_listing_timezone' => array(
+								'label'       => __( 'Listing Timezone', 'listeo_core' ),
+								'type'        => 'timezone',
+								'required'    => false,
+								'name'        => '_listing_timezone',
+								'for_type'	  => ''
+						),	
 				'_slots_status' => array(
 						'label'       => __( 'Booking status', 'listeo_core' ),
 						'type'        => 'skipped',
@@ -1600,17 +1613,20 @@ class Listeo_Submit_Editor {
 					<?php
 		
 	    			foreach ($fields as $key => $value) { 
+
 	    				
 	    				if(isset($fields_temp[$key])) {
 	    					$value = $fields_temp[$key];
 	    				}
+
 
 	    				if(in_array($key,array('render_row_col','priority'))){
 	    					continue;
 	    				}
 
 	    				?>
-	    				<tr valign="top" class="field-edit-<?php echo $key;?>" <?php  if(in_array($key,array('taxonomy','name'))){ ?>style="display: none;" <?php } ?>>
+	    				<tr valign="top" class="field-edit-<?php echo $key;?>" 
+	    					<?php  if(in_array($key,array('taxonomy','name'))){ ?>style="display: none;" <?php } ?>>
 	    					<th scope="row">
 								<label for="field_meta_key">
 								<?php echo $this->get_label_nicename($key); ?></label>
@@ -1644,6 +1660,7 @@ class Listeo_Submit_Editor {
 										<option <?php selected('hidden',$value); ?> value="hidden">Hidden input</option>
 										<option <?php selected('files',$value); ?> value="files">Files (Gallery)</option>
 										<option <?php selected('file',$value); ?> value="file">Single File Upload</option>
+										<option <?php selected('timezone',$value); ?> value="timezone">Timezone field</option>
 									</select>
 									
 									<?php

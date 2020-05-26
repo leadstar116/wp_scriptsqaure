@@ -6,7 +6,8 @@ use SiteGround_Optimizer\Emojis_Removal\Emojis_Removal;
 use SiteGround_Optimizer\Lazy_Load\Lazy_Load;
 use SiteGround_Optimizer\Images_Optimizer\Images_Optimizer;
 use SiteGround_Optimizer\Minifier\Minifier;
-use SiteGround_Optimizer\Combinator\Combinator;
+use SiteGround_Optimizer\Combinator\Css_Combinator;
+use SiteGround_Optimizer\Combinator\Js_Combinator;
 use SiteGround_Optimizer\Combinator\Fonts_Combinator;
 use SiteGround_Optimizer\Helper\Helper;
 /**
@@ -99,7 +100,11 @@ class Front_End_Optimization {
 		}
 
 		if ( Options::is_enabled( 'siteground_optimizer_combine_css' ) ) {
-			new Combinator();
+			new Css_Combinator();
+		}
+
+		if ( Options::is_enabled( 'siteground_optimizer_combine_javascript' ) ) {
+			new Js_Combinator();
 		}
 
 		// Enabled async load js files.
@@ -187,7 +192,7 @@ class Front_End_Optimization {
 	 * @return string           Original filepath.
 	 */
 	public static function get_original_filepath( $original ) {
-		$home_url = Helper::get_home_url();
+		$home_url = Helper::get_site_url();
 		// Get the home_url from database. Some plugins like qtranslate for example,
 		// modify the home_url, which result to wrong replacement with ABSPATH for resources loaded via link.
 		// Very ugly way to handle resources without protocol.
@@ -299,6 +304,11 @@ class Front_End_Optimization {
 			return $src;
 		}
 
+		// Exclude all elementor single page/post styles.
+		if ( 1 === preg_match( '~elementor\/.*\/post-[0-9]+\.css~', $src ) ) {
+			return $src;
+		}
+
 		$exclude_list = apply_filters( 'sgo_rqs_exclude', array() );
 
 		if (
@@ -329,7 +339,18 @@ class Front_End_Optimization {
 	 */
 	private function check_for_builders() {
 
-		$builder_paramas = apply_filters( 'sgo_pb_params', array( 'fl_builder', 'vcv-action', 'et_fb', 'ct_builder', 'tve' ) );
+		$builder_paramas = apply_filters(
+			'sgo_pb_params',
+			array(
+				'fl_builder',
+				'vcv-action',
+				'et_fb',
+				'ct_builder',
+				'tve',
+				'preview',
+				'elementor-preview',
+			)
+		);
 
 		foreach ( $builder_paramas as $param ) {
 			if ( isset( $_GET[ $param ] ) ) {

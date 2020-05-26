@@ -4,10 +4,6 @@
     ExpiresDefault                                      "access plus 6 months"
   # CSS
     ExpiresByType text/css                              "access plus 1 year"
-  # HTML components (HTCs)
-    ExpiresByType text/x-component                      "access plus 2 months"
-  # HTML
-    ExpiresByType text/html                             "access plus 6 months"
   # JavaScript
     ExpiresByType application/javascript                "access plus 1 year"
     ExpiresByType application/x-javascript              "access plus 1 year"

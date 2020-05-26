@@ -4,6 +4,7 @@
 
 $(document).ready(function(){ 
 
+
   $('.listeo_core-dashboard-action-delete').click(function(e) {
         e.preventDefault();
         if (window.confirm(listeo_core.areyousure)) {
@@ -619,7 +620,7 @@ $(document).ready(function(){
         
         var valid_filetypes = [ 'ical', 'ics', 'ifb', 'icalendar', 'calendar' ];
         
-        if( url.indexOf('calendar') !== -1 || $.inArray( filetype, valid_filetypes ) > -1 ) {
+        if( url.indexOf('calendar') !== -1 || url.indexOf('ical') !== -1 || $.inArray( filetype, valid_filetypes ) > -1 ) {
         
             $.ajax({
               type: 'POST', 

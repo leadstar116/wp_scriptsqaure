@@ -42,7 +42,7 @@ endif;
 		$listing_type = get_post_meta( $data->listing_id , '_listing_type', true );
 		if(empty($listing_type)) {
 			$listing_types = get_option('listeo_listing_types',array( 'service', 'rental', 'event' ));
-			if(sizeof($listing_types) == 1 ){
+			if(is_array($listing_types) && sizeof($listing_types) == 1 ){
 				$listing_type = $listing_types[0];
 			} else {
 				$listing_type = 'service';	

@@ -37,8 +37,32 @@ else: ?>
 ================================================== -->
 <div class="container">
 	<div class="row sticky-wrapper">
+			<!-- Sidebar
+		================================================== -->
+		<div class="col-lg-4 col-md-4 col-lg-push-8  margin-top-75 sticky">
+
+				<?php if( get_post_meta($post->ID,'_verified',true ) == 'on') : ?>
+					<!-- Verified Badge -->
+					<div class="verified-badge with-tip" data-tip-content="<?php esc_html_e('Listing has been verified and belongs to the business owner or manager.','listeo_core'); ?>">
+						<i class="sl sl-icon-check"></i> <?php esc_html_e('Verified Listing','listeo_core') ?>
+					</div>
+				<?php else:
+					if(get_option('listeo_claim_page_button')){
+					$claim_page = get_option('listeo_claim_page');?>
+					<div class="claim-badge with-tip" data-tip-content="<?php esc_html_e('Click to claim this listing.','listeo_core'); ?>">
+						<?php 
+						$link =  add_query_arg ('subject', get_permalink(), get_permalink($claim_page)) ; ?>
+
+						<a href="<?php echo $link; ?>"><i class="sl sl-icon-question"></i> <?php esc_html_e('Not verified. Claim this listing!','listeo_core') ?></a>
+					</div>
+					<?php }
+
+					endif; ?>
+				<?php get_sidebar('listing'); ?>
+		</div>
+		<!-- Sidebar / End -->
 <?php while ( have_posts() ) : the_post();  ?>
-		<div class="col-lg-8 col-md-8 padding-right-30">
+		<div class="col-lg-8 col-md-8 col-lg-pull-4 padding-right-30">
 			
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar">
@@ -202,30 +226,7 @@ else: ?>
 			
 		</div>
 		<?php endwhile; // End of the loop. ?>
-		<!-- Sidebar
-		================================================== -->
-		<div class="col-lg-4 col-md-4 margin-top-75 sticky">
-
-				<?php if( get_post_meta($post->ID,'_verified',true ) == 'on') : ?>
-					<!-- Verified Badge -->
-					<div class="verified-badge with-tip" data-tip-content="<?php esc_html_e('Listing has been verified and belongs to the business owner or manager.','listeo_core'); ?>">
-						<i class="sl sl-icon-check"></i> <?php esc_html_e('Verified Listing','listeo_core') ?>
-					</div>
-				<?php else:
-					if(get_option('listeo_claim_page_button')){
-					$claim_page = get_option('listeo_claim_page');?>
-					<div class="claim-badge with-tip" data-tip-content="<?php esc_html_e('Click to claim this listing.','listeo_core'); ?>">
-						<?php 
-						$link =  add_query_arg ('subject', get_permalink(), get_permalink($claim_page)) ; ?>
-
-						<a href="<?php echo $link; ?>"><i class="sl sl-icon-question"></i> <?php esc_html_e('Not verified. Claim this listing!','listeo_core') ?></a>
-					</div>
-					<?php }
-
-					endif; ?>
-				<?php get_sidebar('listing'); ?>
-		</div>
-		<!-- Sidebar / End -->
+	
 
 	</div>
 </div>

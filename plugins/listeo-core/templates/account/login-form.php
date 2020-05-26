@@ -165,4 +165,10 @@ if(function_exists('mo_openid_initialize_social_login')) { ?>
 		?>
 </div>
 <?php } ?>
+
+<?php
+if(class_exists('NextendSocialLogin', false)){
+    echo NextendSocialLogin::renderButtonsWithContainer();
+}
+?>
 				

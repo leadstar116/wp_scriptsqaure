@@ -209,7 +209,7 @@ class Listeo_Core_Meta_Boxes {
   		//  Opening hours
 		$opening_hours_options = array(
 				'id'           => 'listeo_core_opening_metaboxes',
-				'title'        => __( 'Opening Hours', 'listeo_core' ),
+				'title'        => __( 'Opening Hours (set here in 24:00 format)', 'listeo_core' ),
 				'object_types' => array( 'listing' ),
 				'show_names'   => true,
 

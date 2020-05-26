@@ -1,11 +1,12 @@
 <?php
 if(isset($data->options_cb) && !empty($data->options_cb)){
+
 	switch ($data->options_cb) {
 		case 'listeo_core_get_offer_types':
 			$data->options = listeo_core_get_offer_types_flat(false);
 			break;
 
-		case 'listeo_core_get_listing_types':
+		case 'listeo_get_listing_types':
 			$data->options = listeo_core_get_listing_types();
 			break;
 
@@ -24,6 +25,11 @@ if(isset($_GET[$data->name])) {
 	$selected = sanitize_text_field($_GET[$data->name]);
 } else {
 	$selected = '';
+	if(isset($data->default) && !empty($data->default)){
+		$selected = $data->default;
+	} else {
+		$selected = '';	
+	}
 } 
 ?>
 	<div class="<?php if(isset($data->class)) { echo esc_attr($data->class); } ?> <?php if(isset($data->css_class)) { echo esc_attr($data->css_class); }?>">

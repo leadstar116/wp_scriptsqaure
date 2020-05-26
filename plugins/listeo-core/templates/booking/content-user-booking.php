@@ -70,6 +70,7 @@ if(isset($data->order_id) && !empty($data->order_id) && $data->status == 'confir
    	 $class[] = 'expired-booking';
    	 unset($tag[1]);
    	 $tag[] = '<span class="booking-status">'.esc_html__('Expired', 'listeo_core').'</span>';
+   	 $show_delete = true;
 	}
 }
 
@@ -137,7 +138,17 @@ if(isset($data->order_id) && !empty($data->order_id) && $data->status == 'confir
 				</div>	
 				<?php } ?>	
 				
+				<?php $address = get_post_meta( $data->listing_id, '_address', true ); 
+				if($address) { ?>
+				<div class="inner-booking-list">
+					<h5><?php esc_html_e('Booking Location:', 'listeo_core'); ?></h5>
+					<ul class="booking-list">
+						<?php echo $address; ?>
+						
+					</ul>
+				</div>
 				<?php 
+				}
 				
 				$currency_abbr = get_option( 'listeo_currency' );
 				$currency_postion = get_option( 'listeo_currency_postion' );
@@ -168,6 +179,28 @@ if(isset($data->order_id) && !empty($data->order_id) && $data->status == 'confir
 						<?php endif; ?>
 					</ul>
 				</div>
+				<?php if( isset($details->billing_address_1) ) : ?>
+				<div class="inner-booking-list">
+					
+					<h5><?php esc_html_e('Address:', 'listeo_core'); ?></h5>
+					<ul class="booking-list" id="client">
+		
+						<?php if( isset($details->billing_address_1) ) : ?>
+							<li id="billing_address_1"><?php echo $details->billing_address_1; ?> </li>
+						<?php endif; ?>
+						<?php if( isset($details->billing_address_1) ) : ?>
+							<li id="billing_postcode"><?php echo $details->billing_postcode; ?> </li>
+						<?php endif; ?>	
+						<?php if( isset($details->billing_city) ) : ?>
+							<li id="billing_city"><?php echo $details->billing_city; ?> </li>
+						<?php endif; ?>
+						<?php if( isset($details->billing_country) ) : ?>
+							<li id="billing_country"><?php echo $details->billing_country; ?> </li>
+						<?php endif; ?>
+						
+					</ul>
+				</div>
+				<?php endif; ?>
 				<?php if( isset($details->service) && !empty($details->service)) : ?>
 					<div class="inner-booking-list">
 						<h5><?php esc_html_e('Extra Services:', 'listeo_core'); ?></h5>

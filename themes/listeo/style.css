@@ -4,7 +4,7 @@ Theme URI: http://listeo.pro/
 Author: Purethemes.me
 Author URI: http://purethemes.net/
 Description: Directory WordPress Theme by Purethemes
-Version: 1.3.1
+Version: 1.3.3
 License: ThemeForest
 License URI: http://themeforest.net/licenses
 Text Domain: listeo
@@ -11220,6 +11220,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 .dashboard-stat.color-1 {
 	background: linear-gradient(to left, rgba(255,255,255,0) 25%, rgba(255,255,255,0.2));
 	background-color: #64bc36;
+	cursor: pointer;
 }
 
 .dashboard-stat.color-2 {
@@ -11230,6 +11231,7 @@ a.dashboard-responsive-nav-trigger { display: none; }
 .dashboard-stat.color-3 {
 	background: linear-gradient(to left, rgba(255,255,255,0) 25%, rgba(255,255,255,0.3));
 	background-color: #ffae00;
+	cursor: pointer;
 }
 
 .dashboard-stat.color-4 {
@@ -13871,7 +13873,7 @@ box-sizing: border-box; }
 	-o-transition: opacity 0.3s ease;
 	transition: opacity 0.3s ease;
 	font-size: 13px;
-	top: 130px;
+	top: 160px;
 	left: -10px;
 	width: 140px;
 	background: #be2626;
@@ -25064,5 +25066,15 @@ li.listeo-download-detail:before {
 .checkboxes.in-row.pricing-quanity-buttons label {padding-left: 25px; font-weight: 500;color: #999; }
 
 .fm-input.pricing-bookable-options { max-width: 200px; }
-
 .fm-input.pricing-bookable-options select { margin: 0; }
+
+@media (max-width: 480px) {.listing-links.contact-links li { width: 100% !important; }}
+
+p.order-again {
+display: none !important;
+}
+
+a.wcs-switch-link.button { color: #fff!important; position: relative; margin: 0; padding: 2px 7px; font-size: 13px !important; float: right; top: -7px; right: 15px;
+}
+
+.transparent-header .main-search-container { height: auto; z-index: 999; position: relative; } #header-container { position: relative; z-index: 1001; }

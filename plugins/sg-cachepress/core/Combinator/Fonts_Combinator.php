@@ -5,7 +5,7 @@ use SiteGround_Optimizer\Helper\Helper;
 use SiteGround_Optimizer\Front_End_Optimization\Front_End_Optimization;
 
 /**
- * SG Combinator main plugin class
+ * SG Fonts Combinator main plugin class
  */
 class Fonts_Combinator {
 

@@ -171,7 +171,21 @@ Our plugin uses a cookie in order to function properly. It does not store person
 
 == Changelog ==
 
+= Version 5.5.1 =
+* Better Elementor support
+* Better Divi support
+* Better sourcemapping removal
+
+= Version 5.5.0 =
+* New - Combine JavaScript Files
+* New - WebP quality control plus lossless option
+* New - What's new and opportunities slider
+* Improved - better WPML support (mostly memcached)
+* Improved - better Elementor support
+* Improved - better Browser Caching rules for cPanel users
+
 = Version 5.4.6 =
+* Interface revamp for better accessability
 * Improved compatibility with page builders
 * Improved compatibility with latest Elementor
 * Added support for popular AMP plugins 

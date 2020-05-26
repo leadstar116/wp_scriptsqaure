@@ -379,7 +379,8 @@ class Listeo_Core_Bookmarks_Share_Widget extends Listeo_Core_Widget {
 				$classObj = new Listeo_Core_Bookmarks;
 				
 				if( $classObj->check_if_added($post->ID) ) { ?>
-					<button onclick="window.location.href='<?php echo get_permalink( get_option( 'listeo_bookmarks_page' ))?>'" class="like-button save liked" ><span class="like-icon liked"></span> <?php esc_html_e('Bookmarked','listeo_core') ?></button> 
+					<button onclick="window.location.href='<?php echo get_permalink( get_option( 'listeo_bookmarks_page' ))?>'" class="like-button save liked" ><span class="like-icon liked"></span> <?php esc_html_e('Bookmarked','listeo_core') ?>
+				</button> 
 				<?php } else { 
 					if(is_user_logged_in()){ ?>
 						<button class="like-button listeo_core-bookmark-it"
@@ -420,8 +421,11 @@ class Listeo_Core_Bookmarks_Share_Widget extends Listeo_Core_Widget {
 			        </ul>
 			
 					<div class="clearfix"></div>
-			</div>
+		
 	 	<?php endif;
+	 	?>
+	 		</div>
+	 	<?php
 		echo $after_widget; 
 
 		$content = ob_get_clean();
@@ -1235,6 +1239,7 @@ class Listeo_Core_Opening_Widget extends Listeo_Core_Widget {
 		<ul>
 			<?php
 			$clock_format = get_option('listeo_clock_format');
+
 			foreach ($days as $d_key => $value) {
 				$opening_day = get_post_meta( $post_id, '_'.$d_key.'_opening_hour', true ); 
 				$closing_day = get_post_meta( $post_id, '_'.$d_key.'_closing_hour', true ); 
@@ -1242,8 +1247,10 @@ class Listeo_Core_Opening_Widget extends Listeo_Core_Widget {
 				?>
 					
 					<?php 
-					if(is_array($opening_day)){
+
+					if(is_array($opening_day)){	
 						if(!empty($opening_day[0])) :
+
 							echo '<li>'; echo esc_html($value); 
 						
 							echo '<span>';
@@ -1314,7 +1321,7 @@ class Listeo_Core_Opening_Widget extends Listeo_Core_Widget {
 								
 								?> </span>
 						<?php } else { ?>
-							<li><span><?php esc_html_e('Closed','listeo_core') ?></span>
+							<li><?php echo $value; ?><span><?php esc_html_e('Closed','listeo_core') ?></span>
 						<?php } ?>
 						</li>
 					<?php } ?>
@@ -1396,17 +1403,20 @@ class Listeo_Core_Owner_Widget extends Listeo_Core_Widget {
 	 * @return void
 	 */
 	public function widget( $args, $instance ) {
-		if ( $this->get_cached_widget( $args ) ) {
-			return;
-		}
+		// if ( $this->get_cached_widget( $args ) ) {
+		// 	return;
+		// }
 
 		ob_start();
 
 		extract( $args );
 		$title  = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		$queried_object = get_queried_object();
-		$owner_id = get_the_author_meta( 'ID' );
-		
+		if(!$queried_object){
+			return;
+		}
+		$owner_id = $queried_object->post_author;
+	
 		if(!$owner_id) {
 			return;
 		}
@@ -1416,11 +1426,13 @@ class Listeo_Core_Owner_Widget extends Listeo_Core_Widget {
 			$listing_type = get_post_meta( $post_id, '_listing_type', true );
 		}
 		
+		
 		echo $before_widget;
             
 		if ( $title ) {	?>
 			<div class="hosted-by-title">
-				<h4><span><?php echo $title; ?></span> <a href="<?php echo esc_url(get_author_posts_url( $owner_id )); ?>"><?php echo $owner_data->first_name; ?> <?php echo $owner_data->last_name; ?></a></h4>
+				<h4><span><?php echo $title; ?></span> <a href="<?php echo esc_url(get_author_posts_url( $owner_id )); ?>">
+					<?php echo listeo_get_users_name($owner_id); ?></a></h4>
 				<a href="<?php echo esc_url(get_author_posts_url( $owner_id )); ?>" class="hosted-by-avatar"><?php echo get_avatar( $owner_id, 56 );  ?></a>
 			</div>
 			
@@ -1439,6 +1451,7 @@ class Listeo_Core_Owner_Widget extends Listeo_Core_Widget {
 		
 		$show_email = (isset($instance['email']) && !empty($instance['email'])) ? true : false ;
 		$show_phone = (isset($instance['phone']) && !empty($instance['phone'])) ? true : false ;
+		$show_social = (isset($instance['social']) && !empty($instance['social'])) ? true : false ;
 		$visibility_setting = get_option('listeo_user_contact_details_visibility'); // hide_all, show_all, show_logged, show_booked,  
 		if($visibility_setting == 'hide_all') {
 			$show_details = false;
@@ -1471,10 +1484,12 @@ class Listeo_Core_Owner_Widget extends Listeo_Core_Widget {
 					
 				</ul>
 			<?php }
-		} else { ?>
+		} else { 
+			if($visibility_setting != 'hide_all') { ?>
 			<p id="owner-widget-not-logged-in"><?php printf( esc_html__( 'Please %s sign %s in to see contact details.', 'listeo_core' ), '<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">', '</a>' ) ?></p>
-		<?php } ?>
-		<?php if($show_details){ ?>
+		<?php } 
+		}?>
+		<?php if($show_details && $show_social){ ?>
 			<ul class="listing-details-sidebar social-profiles">
 				<?php if(isset($owner_data->twitter) && !empty($owner_data->twitter)) : ?><li><a href="<?php echo esc_url($owner_data->twitter) ?>" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li><?php endif; ?>
 				<?php if(isset($owner_data->facebook) && !empty($owner_data->facebook)) : ?><li><a href="<?php echo esc_url($owner_data->facebook) ?>" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li><?php endif; ?>

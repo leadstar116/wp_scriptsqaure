@@ -425,7 +425,7 @@ $(document).ready(function(){
 
         if(listeo_core.country){
           var geocoder = new L.Control.Geocoder.Nominatim( {
-              geocodingQueryParams: {countrycodes: listeo_core.country}
+              geocodingQueryParams: {countrycodes: listeo_core.country} //accept-language: 'en'
           });
         } else {
           var geocoder = new L.Control.Geocoder.Nominatim();  
@@ -562,12 +562,17 @@ $(document).ready(function(){
         zoom.addTo(map_single);
 
         map_single.scrollWheelZoom.disable();
-
-        marker = new L.marker([lat,lng], {
+        if($('#singleListingMap-container').hasClass('circle-point')) {
+           marker = new L.circleMarker([lat,lng], {
+                radius:40
+          }).addTo(map_single);
+        } else {
+          marker = new L.marker([lat,lng], {
                 icon: listeoIcon,
-                
-              }).addTo(map_single);
-
+          }).addTo(map_single);
+  
+        }
+        
         switch(listeo_core.map_provider) {
           case 'osm':
               L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -809,6 +814,7 @@ $(window).on('load', function() {
 
       $(".geoLocation, #listeo_core-search-form .location a,.main-search-input-item.location a,.form-field-_address-container a").on("click", function (e) {
           e.preventDefault();
+          
           geolocate();
       });
 
@@ -854,7 +860,7 @@ $(window).on('load', function() {
     
       if(listeo_core.maps_autolocate){
         
-        $(".geoLocation, #listeo_core-search-form .location a,.main-search-input-item.location a,.form-field-_address-container a").trigger('click')
+        $(".geoLocation, #listeo_core-search-form .location a,.main-search-input-item.location a").trigger('click')
       }
   });
 })(this.jQuery);

@@ -10,6 +10,7 @@ function listeo_listings_carousel( $atts, $content ) {
             'tax-service_category'    => '',
             'tax-rental_category'    => '',
             'tax-event_category'    => '',
+            'relation'    => 'OR',
             'exclude_posts' => '',
             'include_posts' => '',
             'feature'       => '',
@@ -126,6 +127,7 @@ function listeo_listings_carousel( $atts, $content ) {
                 ));
             
         }
+         $args['tax_query']['relation'] =  $relation;
 
         
        
@@ -134,7 +136,7 @@ function listeo_listings_carousel( $atts, $content ) {
             $tags         = is_array( $tags ) ? $tags : array_filter( array_map( 'trim', explode( ',', $tags ) ) );
             $args['tag__in'] = $tags;
         }
-        $args['tax_query']['relation'] =  'OR';
+       
         
         $i = 0;
 

@@ -4,7 +4,9 @@
 function listeo_pricing_tables_wc($atts, $content) {
     extract(shortcode_atts(array(
         "orderby" => "price",
+        "custom_url" => "",
         "from_vs" => 'no'
+
         ), $atts));
     ob_start();
     global $wp_query;

@@ -535,7 +535,7 @@ class purethemes_walker_nav_edit extends Walker_Nav_Menu {
                          <?php $content = get_post_meta( $item->ID, '_menu-item-html', true); ?>
                          <textarea id="edit-menu-item-html-<?php echo esc_attr($item_id); ?>" class="widefat edit-menu-item-html" rows="3" cols="20" name="menu-item-html[<?php echo esc_attr($item_id); ?>]"><?php
                          $allowed_tags = wp_kses_allowed_html( 'post' );
-                         echo wp_kses( $content, $allowed_html_array );
+                         echo wp_kses( $content, $allowed_tags );
 
                           ?></textarea>
                     </label>

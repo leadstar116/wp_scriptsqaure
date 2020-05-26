@@ -1,3 +1,16 @@
+## 3.1.3 - May 19, 2020
+
+* Tweak: Updated Google-Fonts lists.
+* Tweak: Slightly tweaked some of the default control styles
+
+## 3.1.2 - 2020-04-20
+
+### Fixed
+* Added back `font-display:swap` to Google Fonts.
+
+### Changed
+* Updated Google-Fonts lists.
+
 ## 3.1.1 - 2020-04-05
 
 ### Changed

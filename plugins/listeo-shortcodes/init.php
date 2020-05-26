@@ -3,7 +3,7 @@
 Plugin Name: Listeo Shortcodes
 Plugin URI:
 Description: Shortcodes required by Listeo Theme.
-Version: 1.5
+Version: 1.5.1
 Author: Purethemes.net
 Author URI: http://purethemes.net
 Text Domain: listeo-shortcodes

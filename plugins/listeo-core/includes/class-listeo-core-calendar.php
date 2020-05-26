@@ -157,7 +157,7 @@ class Listeo_Core_Calendar {
 						if($cellValue == $today){
 							$weekDays .= 'todays_date';
 						} 
-						if($j == 5 || $j == 6 ){
+						if($j == 1 || $j == 6 ){
 							$weekDays .= ' weekend';
 						}
 						$weekDays .= '"data-timestamp="'.strtotime("$cellValue.$this->currentMonth.$this->currentYear").'"';

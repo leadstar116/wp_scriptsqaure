@@ -9,19 +9,19 @@
 $top_layout = get_option('pp_listings_top_layout','map');
 ($top_layout == 'half') ? get_header('split') : get_header();
 
-$template_loader = new Listeo_Core_Template_Loader;
-
+$template_loader = new Listeo_Core_Template_Loader; 
+ 
 
 $content_layout = get_option('pp_listings_layout','list');
 
 switch ($top_layout) {
 	case 'map_searchform':
-		$template_loader->get_template_part( 'archive/map' );
+		$template_loader->get_template_part( 'archive/map' ); 
 		break;
 	case 'map': ?>
 		<!-- Map
 		================================================== -->
-
+		
 		<div id="map-container" class="fullwidth-home-map">
 
 	    <div id="map" data-map-zoom="<?php echo get_option('listeo_map_zoom_global',9); ?>" >
@@ -30,20 +30,20 @@ switch ($top_layout) {
 
 		    <!-- Scroll Enabling Button -->
 			<a href="#" id="scrollEnabling" title="<?php esc_html_e('Enable or disable scrolling on map','listeo_core') ?>"><?php esc_html_e('Enable Scrolling','listeo_core'); ?></a>
-
+			
 		</div>
 		<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
 		<?php
 		break;
-
-
+	
+	
 	case 'half':
 	case 'disable':
 		/*empty*/
 		break;
 
 	default:
-		$template_loader->get_template_part( 'archive/titlebar' );
+		$template_loader->get_template_part( 'archive/titlebar' ); 
 		break;
 }
 
@@ -53,8 +53,8 @@ if($top_layout == 'half') {
 
 
 
-<?php
-$sidebar_side = get_option('pp_listings_sidebar_layout');
+<?php 
+$sidebar_side = get_option('pp_listings_sidebar_layout'); 
 ?>
 
 <!-- Content
@@ -62,7 +62,7 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 <div class="container <?php echo esc_attr($sidebar_side); if( $top_layout == 'map') { echo esc_attr(' margin-top-40'); } ?> ?>" >
 	<div class="row sticky-wrapper">
 
-
+		
 			<?php switch ($sidebar_side) {
 				case 'full-width':
 					?><div class="col-md-12"><?php
@@ -73,22 +73,22 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 				case 'right-sidebar':
 					?><div class="col-lg-9 col-md-8 padding-right-30 listings-column-content mobile-content-container"><?php
 					break;
-
+				
 				default:
 					?><div class="col-lg-9 col-md-8 padding-right-30 listings-column-content"><?php
 					break;
 			} ?>
 			<!-- Search -->
-
-			<?php
-			if( $top_layout == 'search') {
+			
+			<?php 
+			if( $top_layout == 'search') { 
 				 echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="gray-style margin-top-0 margin-bottom-40"]');
 				} ?>
-
+			
 			<!-- Search Section / End -->
-
+		
 			<?php $top_buttons = get_option('listeo_listings_top_buttons');
-
+						
 			if($top_buttons=='enable'){
 				$top_buttons_conf = get_option('listeo_listings_top_buttons_conf');
 				if(is_array($top_buttons_conf) && !empty($top_buttons_conf)){
@@ -100,31 +100,31 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 					<div class="row margin-bottom-15">
 					<?php do_action( 'listeo_before_archive', $content_layout, $list_top_buttons ); ?>
 				</div>
-				<?php
+				<?php 
 			} ?>
-				<?php
+				<?php 
 				switch ($content_layout) {
 					case 'list':
-						$container_class = $content_layout.'-layout';
+						$container_class = $content_layout.'-layout'; 
 						break;
-
+					
 					case 'compact':
 					case 'grid':
-						$container_class = $content_layout.'-layout row';
+						$container_class = $content_layout.'-layout row'; 
 						break;
 					default:
-						$container_class = 'list-layout';
+						$container_class = 'list-layout'; 
 						break;
-				}
+				} 
 				 ?>
-
+				 
 				<!-- Listings -->
 				<div class="listings-container <?php echo esc_attr($container_class) ?>">
 					<?php if($content_layout == 'list'): ?>
 						<div class="row">
 					<?php endif;
-
-					if ( have_posts() ) :
+					
+					if ( have_posts() ) : 
 						$data = '';
 						if($content_layout == 'grid'){
 							if ( $sidebar_side == 'full-width'){
@@ -149,28 +149,28 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 
 								switch ($content_layout) {
 									case 'list':
-									$template_loader->get_template_part( 'content-listing' );
+									$template_loader->get_template_part( 'content-listing' ); 
 										break;
-
-
+									
+									
 									case 'grid':
 										if ( $sidebar_side == 'full-width'){
 											echo '<div class="col-lg-4 col-md-6 "> ';
 										} else {
 											echo '<div class="col-lg-6 col-md-12"> ';
 										}
-
-										$template_loader->get_template_part( 'content-listing-grid' );
+										
+										$template_loader->get_template_part( 'content-listing-grid' ); 
 										echo '</div>';
 										break;
-
+									
 									case 'compact':
 										if ( $sidebar_side == 'full-width'){
 											echo '<div class="col-lg-4 col-md-6 "> ';
 										} else {
 											echo '<div class="col-lg-6 col-md-12"> ';
 										}
-										$template_loader->get_template_part( 'content-listing-compact' );
+										$template_loader->get_template_part( 'content-listing-compact' );  
 										echo '</div>';
 										break;
 
@@ -192,29 +192,29 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 									global $wp_query;
      								$pages = $wp_query->max_num_pages;
 									echo listeo_core_ajax_pagination( $pages, 1 );
-								} else
-								if(function_exists('wp_pagenavi')) {
+								} else 
+								if(function_exists('wp_pagenavi')) { 
 									wp_pagenavi(array(
 										'next_text' => '<i class="fa fa-chevron-right"></i>',
 										'prev_text' => '<i class="fa fa-chevron-left"></i>',
 										'use_pagenavi_css' => false,
 										));
 								} else {
-									the_posts_navigation();
+									the_posts_navigation();	
 								}?>
 							</nav>
 						</div>
 						<?php
-
+						
 
 					else :
 
-						$template_loader->get_template_part( 'archive/no-found' );
+						$template_loader->get_template_part( 'archive/no-found' ); 
 
 					endif; ?>
 					<?php if($content_layout == 'list'): ?>
 						</div>
-					<?php endif; ?>
+					<?php endif; ?>	
 				</div>
 		</div>
 		<?php if($sidebar_side != 'full-width') : ?>

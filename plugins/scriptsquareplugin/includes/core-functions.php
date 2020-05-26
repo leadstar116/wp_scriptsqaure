@@ -31,7 +31,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name)
             )
         ];
 
-        $request = wp_remote_get($url . "drugs?drugname=".$drug_name."&includestrength=false", $args);
+        $request = wp_remote_get($url . "drugs?drugname=".$drug_name."&includestrength=true", $args);
 
         if (is_wp_error($request)) {
             $result['success'] = false;

@@ -338,14 +338,16 @@ class Listeo_Core_Bookings_Calendar {
          // get slots
          $_slots = self :: get_slots_from_meta ( $listing_id );
          $slots_status = get_post_meta ( $listing_id, '_slots_status', true );
-         
+
          if(isset($slots_status) && !empty($slots_status)) {
+            $_slots = self :: get_slots_from_meta ( $listing_id );
+         } else {
             $_slots = false;
          }
         // get listing type
         $listing_type = get_post_meta ( $listing_id, '_listing_type', true );
      
-        
+
          // default we have one free place
          $free_places = 1;
 
@@ -710,6 +712,7 @@ class Listeo_Core_Bookings_Calendar {
         if(!$booking_data){
             return;
         }
+
         $user_id = $booking_data['bookings_author']; 
         $owner_id = $booking_data['owner_id'];
         $current_user_id = get_current_user_id();
@@ -885,7 +888,7 @@ class Listeo_Core_Bookings_Calendar {
                  $mail_args = array(
                     'email'         => $user_info->user_email,
                     'booking'       => $booking_data,
-                    'expiration'    => $expired_after,
+                    'expiration'    => $expiring_date,
                     'payment_url'   => $payment_url
                     );
                  
@@ -1098,7 +1101,10 @@ class Listeo_Core_Bookings_Calendar {
             return $services_price+$reservation_price+$normal_price*$multiply;
         }
         // prepare dates for loop
-
+        // TODO CHECK THIS
+    // $format = "d/m/Y  H:i:s";
+    //     $firstDay =  DateTime::createFromFormat($format, $date_start. '00:00:01' );
+    //     $lastDay =  DateTime::createFromFormat($format, $date_end. '23:59:59');
         $firstDay = new DateTime( $date_start );
         $lastDay = new DateTime( $date_end . '23:59:59') ;
 
@@ -1127,7 +1133,7 @@ class Listeo_Core_Bookings_Calendar {
                 $start_of_week = intval( get_option( 'start_of_week' ) ); // 0 - sunday, 1- monday
                 // when we have weekends
                 if($start_of_week == 0 ) {
-                    if ( isset( $weekend_price ) && $day == 5 || $day == 67) {
+                    if ( isset( $weekend_price ) && $day == 5 || $day == 6) {
                         $price += $weekend_price;
                     }  else { $price += $normal_price; }
                 } else {
@@ -1264,7 +1270,7 @@ class Listeo_Core_Bookings_Calendar {
                         //$services_price += (float) preg_replace("/[^0-9\.]/", '', $service['price']);
                         $comment_services[] =  array(
                             'service' => $service, 
-                            'guests' => $data['adults'], 
+                            'guests' => $guests, 
                             'days' => $days_count, 
                             'countable' =>  $countable[$i],
                             'price' => listeo_calculate_service_price($service, $data['adults'], $days_count, $countable[$i] ) 
@@ -1851,7 +1857,7 @@ class Listeo_Core_Bookings_Calendar {
         $tax_query[] = array(
                'taxonomy' => 'product_type',
                'field' => 'slug',
-               'terms' => array( 'listing_booking' ), // Don't display products in the clothing category on the shop page.
+               'terms' => array( 'listing_booking' ), // 
                'operator' => 'NOT IN'
         );
 

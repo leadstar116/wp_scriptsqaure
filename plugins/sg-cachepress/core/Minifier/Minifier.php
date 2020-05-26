@@ -69,6 +69,7 @@ class Minifier {
 		'pdf-catalog',
 		'tve',
 		'elementor-preview',
+		'preview',
 	);
 
 	/**
@@ -101,8 +102,8 @@ class Minifier {
 
 		if ( Options::is_enabled( 'siteground_optimizer_optimize_javascript' ) ) {
 			// Minify the js files.
-			add_action( 'wp_print_scripts', array( $this, 'minify_scripts' ), PHP_INT_MAX - 1 );
-			add_action( 'wp_print_footer_scripts', array( $this, 'minify_scripts' ), 9.999999 );
+			add_action( 'wp_print_scripts', array( $this, 'minify_scripts' ), 20 );
+			add_action( 'wp_print_footer_scripts', array( $this, 'minify_scripts' ) );
 		}
 
 		if ( Options::is_enabled( 'siteground_optimizer_optimize_css' ) ) {
@@ -170,7 +171,7 @@ class Minifier {
 			$original_filepath = Front_End_Optimization::get_original_filepath( $wp_scripts->registered[ $handle ]->src );
 
 			// Build the minified version filename.
-			$filename = $this->assets_dir . $handle . '.min.js';
+			$filename = $this->assets_dir . $wp_scripts->registered[ $handle ]->handle . '.min.js';
 
 			// Check for original file modifications and create the minified copy.
 			$is_minified_file_ok = $this->check_and_create_file( $filename, $original_filepath );
@@ -178,7 +179,7 @@ class Minifier {
 			// Check that everythign with minified file is ok.
 			if ( $is_minified_file_ok ) {
 				// Replace the script src with the minified version.
-				$wp_scripts->registered[ $handle ]->src = str_replace( ABSPATH, Helper::get_home_url(), $filename );
+				$wp_scripts->registered[ $handle ]->src = str_replace( ABSPATH, Helper::get_site_url(), $filename );
 			}
 		}
 	}
@@ -294,7 +295,7 @@ class Minifier {
 			// Check that everythign with minified file is ok.
 			if ( $is_minified_file_ok ) {
 				// Replace the script src with the minified version.
-				$wp_styles->registered[ $handle ]->src = str_replace( ABSPATH, Helper::get_home_url(), $filename );
+				$wp_styles->registered[ $handle ]->src = str_replace( ABSPATH, Helper::get_site_url(), $filename );
 			}
 		}
 	}

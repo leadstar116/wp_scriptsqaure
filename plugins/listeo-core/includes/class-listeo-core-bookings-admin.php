@@ -143,13 +143,22 @@ class Bookings_Admin_List extends WP_List_Table {
 			case 'listing_id':	
 				return get_the_title($item[ $column_name ]);
 			case 'owner_id':
+			if($item[ $column_name ] != 0){
 				$avatar = get_avatar( $item[ $column_name ], 32 );
 				$user_data = get_userdata( $item[ $column_name ] );
 				return '<a href="' . get_edit_user_link($user_data->ID) . '" >' . $user_data->user_login . '</a>';
+			} else {
+				return esc_html__('iCal import','listeo_core');
+			}
+				
 			case 'bookings_author':
+			if($item[ $column_name ] != 0){
 				$avatar = get_avatar( $item[ $column_name ], 32 );
 				$user_data = get_userdata( $item[ $column_name ] );
-				return  '<a href="' . get_edit_user_link($user_data->ID) . '" >' . $user_data->user_login . '</a>';
+				return '<a href="' . get_edit_user_link($user_data->ID) . '" >' . $user_data->user_login . '</a>';
+			} else {
+				return esc_html__('iCal import','listeo_core');
+			}
 			case 'action' :
 				$actions = array(
 					'edit' => sprintf('<a href="?page=%s&action=%s&id=%s">' . __('Edit', 'listeo_core') . '</a>',$_REQUEST['page'],'edit',$item['ID']),

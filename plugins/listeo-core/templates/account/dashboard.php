@@ -17,15 +17,23 @@ endif;
 
 <!-- Content -->
 <div class="row">
-
+	
+	<?php 
+	$listings_page = get_option('listeo_listings_page');   
+	if($listings_page) : ?>
+	<a href="<?php echo esc_url(get_permalink($listings_page)); ?>?status=active">
+	<?php endif; ?>
 	<!-- Item -->
 	<div class="col-lg-3 col-md-6">
 		<div class="dashboard-stat color-1">
 			<div class="dashboard-stat-content"><h4><?php $user_post_count = count_user_posts( $current_user->ID , 'listing' ); echo $user_post_count; ?></h4> <span><?php esc_html_e('Active Listings','listeo_core'); ?></span></div>
 			<div class="dashboard-stat-icon"><i class="im im-icon-Map2"></i></div>
 		</div>
+		
 	</div>
-
+	<?php if($listings_page) : ?>
+	</a>
+	<?php endif; ?>
 	<?php $total_views = get_user_meta( $current_user->ID, 'listeo_total_listing_views', true ); ?>
 	<!-- Item -->
 	<div class="col-lg-3 col-md-6">
@@ -47,13 +55,20 @@ endif;
 	);
 	 
 	?>
+	<?php $reviews_page = get_option('listeo_reviews_page');
+	if($reviews_page):  ?>
 	<!-- Item -->
+	<a href="<?php echo esc_url(get_permalink($reviews_page)); ?>">
+	<?php endif; ?>
 	<div class="col-lg-3 col-md-6">
 		<div class="dashboard-stat color-3">
 			<div class="dashboard-stat-content"><h4><?php echo esc_html($author_posts_comments_count); ?></h4> <span><?php esc_html_e('Total Reviews','listeo_core'); ?></span></div>
 			<div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
 		</div>
 	</div>
+	<?php if($reviews_page):  ?>
+	</a>
+<?php endif; ?>
 
 
 	<!-- Item -->

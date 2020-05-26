@@ -13,25 +13,25 @@ if(isset($data)) :
 	$ajax_browsing  = (isset($data->ajax_browsing)) ? $data->ajax_browsing : get_option('listeo_ajax_browsing');
 
 	if(isset($data->{'tax-region'} )) {
-		$search_data .= ' data-region="'.$data->{'tax-region'}.'" ';
+		$search_data .= ' data-region="'.esc_attr($data->{'tax-region'}).'" ';
 	}
 	
 	if(isset($data->{'tax-listing_category'} )) {
-		$search_data .= ' data-category="'.$data->{'tax-listing_category'}.'" ';
+		$search_data .= ' data-category="'.esc_attr($data->{'tax-listing_category'}).'" ';
 	}
 
 	if(isset($data->{'tax-listing_feature'} )) {
-		$search_data .= ' data-feature="'.$data->{'tax-listing_feature'}.'" ';
+		$search_data .= ' data-feature="'.esc_attr($data->{'tax-listing_feature'}).'" ';
 	}
 	
 	if(isset($data->{'tax-rental_category'} )) {
-		$search_data .= ' data-rental-category="'.$data->{'tax-rental_category'}.'" ';
+		$search_data .= ' data-rental-category="'.esc_attr($data->{'tax-rental_category'}).'" ';
 	}
 	if(isset($data->{'tax-service_category'} )) {
-		$search_data .= ' data-service-category="'.$data->{'tax-service_category'}.'" ';
+		$search_data .= ' data-service-category="'.esc_attr($data->{'tax-service_category'}).'" ';
 	}	
 	if(isset($data->{'tax-event_category'} )) {
-		$search_data .= ' data-event-category="'.$data->{'tax-event_category'}.'" ';
+		$search_data .= ' data-event-category="'.esc_attr($data->{'tax-event_category'}).'" ';
 	}
 
 endif; 

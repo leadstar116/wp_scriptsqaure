@@ -3,7 +3,7 @@
 Plugin Name: Listeo VC Bridge
 Plugin URI:
 Description: Adds Visual Composer compatibiliy to Listeo theme..
-Version: 1.5
+Version: 1.5.1
 Author: Purethems.net
 Author URI: http://purethemes.net
 */

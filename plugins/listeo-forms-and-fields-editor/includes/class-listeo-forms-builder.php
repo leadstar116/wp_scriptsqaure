@@ -32,7 +32,7 @@ class Listeo_Forms_Editor {
        add_filter('listeo_core_search_fields_half', array( $this,'add_listeo_core_search_fields_half_form_editor')); 
        add_filter('listeo_core_search_fields_home', array( $this,'add_listeo_core_search_fields_home_form_editor')); 
        add_filter('listeo_core_search_fields_homebox', array( $this,'add_listeo_core_search_fields_homebox_form_editor'));
-       add_action( 'admin_action_foo_modal_box',  array( $this,'foo_render_action_page') ); 
+      // add_action( 'admin_action_foo_modal_box',  array( $this,'foo_render_action_page') ); 
        
 
        
@@ -90,8 +90,7 @@ class Listeo_Forms_Editor {
             );
             $predefined_options = apply_filters( 'listeo_predefined_options', array(
                 'listeo_get_listing_types'     => __( 'Listing Types list', 'wp-job-manager-applications' ),
-                // 'listeo_get_offer_types'        => __( 'Offer Types list', 'wp-job-manager-applications' ),
-                // 'listeo_get_rental_period'         => __( 'Rental Period list', 'wp-job-manager-applications' ),
+               
             ) );
 
             if ( ! empty( $_GET['reset-fields'] ) && ! empty( $_GET['_wpnonce'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'reset' ) ) {
@@ -251,6 +250,7 @@ class Listeo_Forms_Editor {
                                 'name'   => __( 'Keyword search', 'listeo_core' ),
                                 'key'           => 'keyword_search',
                                 
+                                'default'      => '',
                                 'priority'      => 1,
                                 'place'         => 'main',
                                 'type'          => 'text',
@@ -270,6 +270,7 @@ class Listeo_Forms_Editor {
                                 'key'           => 'location_search',
                                 'name'          => 'location_search',
                                 'id'            => 'location_search',
+                                'default'      => '',
                                 'priority'      => 2,
                                 'place'         => 'main',
                                 'type'          => 'location',
@@ -291,10 +292,12 @@ class Listeo_Forms_Editor {
                             '_listing_type' => array(
                                 'placeholder'   => __( 'Listing Type', 'listeo' ),
                                 'id'           => '_listing_type',
+                                'key'           => '_listing_type',
                                 'name'           => __( 'Listing Type', 'listeo' ),
                                 'class'         => 'col-md-12',
                                 'priority'      => 1,
                                 'place'         => 'main',
+                                'default'      => '',
                                 'type'          => 'select',
                                 'options_source' => 'custom',
                                 'options'       => array(
@@ -420,7 +423,8 @@ $meta_fields = array(
         //$field_label            = ! empty( $_POST['label'] ) ? array_map( 'sanitize_text_field', $_POST['label'] )                  : array();
         $field_placeholder      = ! empty( $_POST['placeholder'] ) ? array_map( 'wp_kses_post', $_POST['placeholder'] )             : array();
         $field_class            = ! empty( $_POST['class'] ) ? array_map( 'sanitize_text_field', $_POST['class'] )                  : array();
-        $field_css_class        = ! empty( $_POST['css_class'] ) ? array_map( 'sanitize_text_field', $_POST['css_class'] )          : array();
+        $field_css_class        = ! empty( $_POST['css_class'] ) ? array_map( 'sanitize_text_field', $_POST['css_class'] )          : array(); 
+        $field_default          = ! empty( $_POST['default'] ) ? array_map( 'sanitize_text_field', $_POST['default'] )          : array();
         $field_multi            = ! empty( $_POST['multi'] ) ? array_map( 'sanitize_text_field', $_POST['multi'] )                  : array();
        
         $field_priority         = ! empty( $_POST['priority'] ) ? array_map( 'sanitize_text_field', $_POST['priority'] )            : array();
@@ -457,6 +461,7 @@ $meta_fields = array(
             endif;
             
             $new_field['css_class']          = $field_css_class[ $key ];
+            $new_field['default']            = isset($field_default[ $key ]) ? $field_default[ $key ] : false;
             $new_field['multi']              = isset($field_multi[ $key ]) ? $field_multi[ $key ] : false;
             $new_field['priority']           = $field_priority[ $key ];
             $new_field['place']              = isset($field_place[ $key ]) ? $field_place[ $key ] : 'main';

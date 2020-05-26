@@ -162,7 +162,7 @@ class Listeo_Core_Post_Types {
 
 		// Ensure rewrite slugs are set. Use legacy translation options if not.
 		$permalinks['listing_rewrite_slug']          = untrailingslashit( empty( $permalinks['listing_base'] ) ? _x( 'listing', 'Job permalink - resave permalinks after changing this', 'listeo_core' ) : $permalinks['listing_base'] );
-		$permalinks['category_rewrite_slug']     = untrailingslashit( empty( $permalinks['category_base'] ) ? _x( 'listing-category', 'Job category slug - resave permalinks after changing this', 'listeo_core' ) : $permalinks['category_base'] );
+		$permalinks['category_rewrite_slug']     = untrailingslashit( empty( $permalinks['category_base'] ) ? _x( 'listing-category', 'Listing category slug - resave permalinks after changing this', 'listeo_core' ) : $permalinks['category_base'] );
 		
 		$permalinks['listings_archive_rewrite_slug'] = untrailingslashit( empty( $permalinks['listings_archive'] ) ? 'listings' : $permalinks['listings_archive'] );
 
@@ -1033,27 +1033,49 @@ class Listeo_Core_Post_Types {
 
 	function add_listings_permastructure() {
 		global $wp_rewrite;
+
 		$standard_slug = apply_filters( 'listeo_rewrite_listing_slug', 'listing' );
 		$permalinks = Listeo_Core_Post_Types::get_permalink_structure();
 		$slug = (isset($permalinks['listing_base']) && !empty($permalinks['listing_base'])) ? $permalinks['listing_base'] : $standard_slug ;
 		
 
-		add_permastruct( 'region', $slug.'/%region%', false );
-		add_permastruct( 'listing', $slug.'/%region%/%listing%', false );
+		//add_permastruct( 'region', $slug.'/%region%', false );
+		//add_permastruct( 'listing_category', $slug.'/%listing_category%', false );
+		add_permastruct( 'listing', $slug.'/%region%/%listing_category%/%listing%', false );
 	}
 
 	function listing_permalinks( $permalink, $post ) {
 		if ( $post->post_type !== 'listing' )
 			return $permalink;
-		$terms = get_the_terms( $post->ID, 'region' );
-
-		if ( ! $terms )
-			return str_replace( '%region%/', '-/', $permalink );
 		
-		$post_terms = array();
-		foreach ( $terms as $term )
-			$post_terms[] = $term->slug;
-		return str_replace( '%region%', implode( ',', $post_terms ) , $permalink );
+		$regions = get_the_terms( $post->ID, 'region' );
+		if ( ! $regions ) {
+			$permalink = str_replace( '%region%/', '-/', $permalink );
+		} else {
+
+		$post_regions = array();
+		foreach ( $regions as $region )
+			$post_regions[] = $region->slug;
+
+		$permalink = str_replace( '%region%', implode( ',', $post_regions ) , $permalink );
+		}
+
+		$categories = get_the_terms( $post->ID, 'listing_category' );
+		if ( ! $categories ) {
+			$permalink = str_replace( '%listing_category%/', '-/', $permalink );
+		} else {
+
+
+
+		$post_categories = array();
+		foreach ( $categories as $category )
+			$post_categories[] = $category->slug;
+		
+		$permalink = str_replace( '%listing_category%', implode( ',', $post_categories ) , $permalink );
+		}
+
+
+		return $permalink;
 	}
 
 	// Make sure that all term links include their parents in the permalinks

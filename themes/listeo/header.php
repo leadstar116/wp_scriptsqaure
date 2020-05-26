@@ -18,6 +18,8 @@
 
 
 <?php wp_head(); ?>
+<script async src="https://imgbb.com/upload.js" data-sibling="#send-message-from-widget .button" data-auto-insert="viewer-links" data-sibling-pos="before"></script>
+
 </head>
 
 <body <?php body_class(); ?>>
