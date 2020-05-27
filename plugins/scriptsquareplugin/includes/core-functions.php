@@ -22,6 +22,7 @@ function scriptsquareplugin_geocode($address){
 
     $resp = json_decode( wp_remote_retrieve_body( $resp_json ), true );
 
+    print_r($resp);
     // response status will be 'OK', if able to geocode given address
     if($resp['status']=='OK'){
 
@@ -276,6 +277,7 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         $zip_code = get_query_var( 'location_search' );
         if(preg_match("/^\d+/", $zip_code, $matches)){
             $address = $matches[0];
+            echo $address;
             $zip_code = scriptsquareplugin_geocode($address);
         }
 
