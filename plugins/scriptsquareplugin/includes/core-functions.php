@@ -235,6 +235,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
             update_option('scriptsquare_drugs_data', $search_result);
 
+            print_r($search_result); exit;
             $result['content'] = $search_result;
         }
     }
@@ -280,7 +281,6 @@ function scriptsquare_pre_get_posts_listings( $query ) {
 
         $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
 
-        print_r($result); exit;
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
@@ -331,8 +331,8 @@ add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
 remove_action('pre_get_posts', 'pre_get_posts_listings');
 add_action('pre_get_posts', 'scriptsquare_pre_get_posts_listings');
 
-remove_filter( 'template_include', 'listing_templates' );
-add_filter( 'template_include', 'scriptsquare_listing_templates' );
+// remove_filter( 'template_include', 'listing_templates' );
+// add_filter( 'template_include', 'scriptsquare_listing_templates' );
 
 // custom plugin styles
 function scriptsquareplugin_custom_styles() {
