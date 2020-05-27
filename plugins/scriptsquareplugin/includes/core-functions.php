@@ -27,7 +27,11 @@ function scriptsquareplugin_geocode($address){
     if($resp['status']=='OK'){
 
         // get the important data
-        $zip_code = $resp['results'][0]['address_components'][7]['long_name'];
+        foreach($resp['results'][0]['address_components'] as $item) {
+            if($item['types'][0] == 'postal_code') {
+                $zip_code = $item['long_name'];
+            }
+        }
         return $zip_code;
 
     }else{
