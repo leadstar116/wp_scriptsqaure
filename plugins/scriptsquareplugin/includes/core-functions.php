@@ -326,6 +326,7 @@ function scriptsquare_listing_templates( $template ) {
     return $template;
 }
 
+
 // add custom option for drugs data
 $scriptsquare_drugs_data = array();
 add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
@@ -334,8 +335,8 @@ add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
 remove_action('pre_get_posts', 'pre_get_posts_listings');
 add_action('pre_get_posts', 'scriptsquare_pre_get_posts_listings');
 
-// remove_filter( 'template_include', 'listing_templates' );
-// add_filter( 'template_include', 'scriptsquare_listing_templates' );
+remove_filter( 'template_include', 'listing_templates' );
+add_filter( 'template_include', 'scriptsquare_listing_templates' );
 
 // custom plugin styles
 function scriptsquareplugin_custom_styles() {

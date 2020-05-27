@@ -1,14 +1,21 @@
 <?php
-echo 'aaaa'; exit;
 $template_loader = new Listeo_Core_Template_Loader;
-$is_featured = listeo_core_is_featured($post->ID);
-$listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
+
+$drugs = get_option('scriptsquare_drugs_data');
+echo '<pre>';
+
+foreach($drugs['content'] as $drug) {
+?>
 <!-- Listing Item -->
 
 	<div class="col-lg-12 col-md-12">
-		<div class="listing-item-container listing-geo-data  list-layout <?php echo esc_attr('listing-type-'.$listing_type) ?>" <?php echo listeo_get_geo_data($post); ?> >
+		<div class="listing-item-container listing-geo-data list-layout">
 			HELLO THANH
-			<a href="<?php the_permalink(); ?>" class="listing-item <?php if($is_featured){ ?>featured-listing<?php } ?>">
+			<?php
+				print_r($drug);
+				continue;
+			?>
+			<a href="<?php the_permalink(); ?>" class="listing-item">
 				<!--
 				 <div class="listing-small-badges-container">
 		            <?php if($is_featured){ ?>
@@ -122,5 +129,5 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 			</a>
 		</div>
 	</div>
-
+<?php } ?>
 <!-- Listing Item / End -->

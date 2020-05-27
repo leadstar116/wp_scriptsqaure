@@ -1,5 +1,5 @@
-<?php 
-$template_loader = new Listeo_Core_Template_Loader; 
+<?php
+$template_loader = new Listeo_Core_Template_Loader;
   ?>
 <!-- Content
 ================================================== -->
@@ -11,7 +11,7 @@ $template_loader = new Listeo_Core_Template_Loader;
 			<!-- Search -->
 
 			<section class="search">
-<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
+				<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -34,11 +34,11 @@ $template_loader = new Listeo_Core_Template_Loader;
 					</div> -->
 
 					<?php $top_buttons = get_option('listeo_listings_top_buttons');
-						
+
 					if($top_buttons=='enable'){
 						$top_buttons_conf = get_option('listeo_listings_top_buttons_conf');
 						if(is_array($top_buttons_conf) && !empty($top_buttons_conf)){
-					
+
 							if (($key = array_search('radius', $top_buttons_conf)) !== false) {
 							    unset($top_buttons_conf[$key]);
 							}
@@ -50,10 +50,10 @@ $template_loader = new Listeo_Core_Template_Loader;
 							$list_top_buttons = '';
 						}
 						?>
-							
+
 						<?php do_action( 'listeo_before_archive', $content_layout, $list_top_buttons ); ?>
-						
-						<?php 
+
+						<?php
 					} ?>
 
 				</div>
@@ -62,22 +62,22 @@ $template_loader = new Listeo_Core_Template_Loader;
 				<!-- Listings -->
 				<div class="row fs-listings">
 
-					<?php 
-					
+					<?php
+
 					switch ($content_layout) {
 						case 'list':
 						case 'grid':
-							$container_class = $content_layout.'-layout'; 
+							$container_class = $content_layout.'-layout';
 							break;
-						
+
 						case 'compact':
-							$container_class = $content_layout; 
+							$container_class = $content_layout;
 							break;
 
 						default:
-							$container_class = 'list-layout'; 
+							$container_class = 'list-layout';
 							break;
-					} 
+					}
 
 					$data = '';
 					if($content_layout == 'grid'){
@@ -100,7 +100,7 @@ $template_loader = new Listeo_Core_Template_Loader;
 					<div data-grid_columns="2" <?php echo $data; ?> data-orderby="<?php echo $orderby_value;  ?>" data-style="<?php echo esc_attr($content_layout) ?>" class="listings-container <?php echo esc_attr($container_class) ?>" id="listeo-listings-container">
 						<div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
 						<?php
-						if ( have_posts() ) : 
+						if ( have_posts() ) :
 
 
 							/* Start the Loop */
@@ -108,18 +108,18 @@ $template_loader = new Listeo_Core_Template_Loader;
 
 								switch ($content_layout) {
 									case 'list':
-										$template_loader->get_template_part( 'content-listing' ); 
+										$template_loader->get_template_part( 'content-listing' );
 									break;
-									
+
 									case 'grid':
 										echo '<div class="col-lg-6 col-md-12"> ';
-										$template_loader->get_template_part( 'content-listing-grid' ); 
+										$template_loader->get_template_part( 'content-listing-grid' );
 										echo '</div>';
 									break;
-									
+
 									case 'compact':
 										echo '<div class="col-lg-6 col-md-12"> ';
-										$template_loader->get_template_part( 'content-listing-compact' );  
+										$template_loader->get_template_part( 'content-listing-compact' );
 										echo '</div>';
 									break;
 
@@ -133,7 +133,7 @@ $template_loader = new Listeo_Core_Template_Loader;
 
 						else :
 
-							$template_loader->get_template_part( 'archive/no-found' ); 
+							$template_loader->get_template_part( 'archive/no-found' );
 
 						endif; ?>
 
@@ -145,29 +145,29 @@ $template_loader = new Listeo_Core_Template_Loader;
 						<?php
 							if($ajax_browsing == 'on') {
 									global $wp_query;
-     								$pages = $wp_query->max_num_pages;	
+     								$pages = $wp_query->max_num_pages;
 									echo listeo_core_ajax_pagination( $pages, 1 );
-							} else 
-							if(function_exists('wp_pagenavi')) { 
+							} else
+							if(function_exists('wp_pagenavi')) {
 								wp_pagenavi(array(
 									'next_text' => '<i class="fa fa-chevron-right"></i>',
 									'prev_text' => '<i class="fa fa-chevron-left"></i>',
 									'use_pagenavi_css' => false,
 									));
 							} else {
-								the_posts_navigation();	
+								the_posts_navigation();
 							}?>
 						</nav>
 					</div>
-					<div class="copyrights margin-top-0"><?php $copyrights = get_option( 'pp_copyrights' , '&copy; Theme by Purethemes.net. All Rights Reserved.' ); 
-		
+					<div class="copyrights margin-top-0"><?php $copyrights = get_option( 'pp_copyrights' , '&copy; Theme by Purethemes.net. All Rights Reserved.' );
+
 				        if (function_exists('icl_register_string')) {
 				            icl_register_string('Copyrights in footer','copyfooter', $copyrights);
 				            echo icl_t('Copyrights in footer','copyfooter', $copyrights);
 				        } else {
 				            echo wp_kses($copyrights,array( 'a' => array('href' => array(),'title' => array()),'br' => array(),'em' => array(),'strong' => array(),));
 				        } ?>
-				        	
+
 				    </div>
 				</div>
 			</section>
@@ -181,9 +181,9 @@ $template_loader = new Listeo_Core_Template_Loader;
 		    <div id="map" class="split-map" data-map-zoom="<?php echo get_option('listeo_map_zoom_global',9); ?>" data-map-scroll="true">
 		        <!-- map goes here -->
 		    </div>
-		    
+
 		</div>
-		
+
 	</div>
 </div>
 
