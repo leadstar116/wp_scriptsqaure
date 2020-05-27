@@ -114,7 +114,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
         } else {
             $drugs = [];
             $search_result = [];
-
+            print_r($zip_data);
             if(empty($zip_data) || empty($drug_data)) {
                 $drugs = [];
             } else {
