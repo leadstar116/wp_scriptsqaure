@@ -1,4 +1,5 @@
 <?php
+echo 'test'; exit;
 $template_loader = new Listeo_Core_Template_Loader;
 $is_featured = listeo_core_is_featured($post->ID);
 $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>

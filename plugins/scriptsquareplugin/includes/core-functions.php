@@ -283,7 +283,7 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         }
 
         $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
-        print_r($result); exit;
+
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
