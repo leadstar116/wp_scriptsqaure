@@ -276,11 +276,9 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         $query->set('order', $ordering_args['order'] );
 
         $keyword = get_query_var( 'keyword_search' );
-        $zip_code = get_query_var( 'location_search' );
-        if(preg_match("/^\d+/", $zip_code, $matches)){
-            $address = $matches[0];
-            $zip_code = scriptsquareplugin_geocode($address);
-        }
+        $address = get_query_var( 'location_search' );
+
+        $zip_code = scriptsquareplugin_geocode($address);
 
         $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
 
