@@ -9,10 +9,33 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+function scriptsquareplugin_geocode($address){
 
+    // url encode the address
+    $address = urlencode($address);
+    $api_key = get_option( 'listeo_maps_api_server' );
+    // google map geocode api url
+    $url = "https://maps.google.com/maps/api/geocode/json?address={$address}&key={$api_key}";
+
+    // get the json response
+    $resp_json = wp_remote_get($url);
+
+    $resp = json_decode( wp_remote_retrieve_body( $resp_json ), true );
+
+    // response status will be 'OK', if able to geocode given address
+    if($resp['status']=='OK'){
+
+        // get the important data
+        $zip_code = $resp['results'][0]['address_components'][7]['long_name'];
+        return $zip_code;
+
+    }else{
+        return false;
+    }
+}
 
 // Get Drug By Name
-function scriptsquareplugin_get_drug_by_name($drug_name)
+function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 {
     $result = [
         'success' => true,
@@ -31,6 +54,47 @@ function scriptsquareplugin_get_drug_by_name($drug_name)
             )
         ];
 
+        $zip_data = [];
+        $ncpdp_array = [];
+
+        if($zip_code){
+            $request = wp_remote_get($url . "pharmacies?zip=".$zip_code."&radius=10", $args);
+
+            if (is_wp_error($request)) {
+                $result['success'] = false;
+                $result['error_message'] = 'There was an error when making api call!';
+                return $result;
+            }
+
+            $body = wp_remote_retrieve_body($request);
+
+            $zip_data_array = json_decode($body);
+
+            if(isset($zip_data_array->message)) {
+                $result['success'] = false;
+                $result['error_message'] = $zip_data_array->message;
+                return $result;
+            } else {
+                foreach($zip_data_array as $pharmacy) {
+                    $zip_data[$pharmacy->NCPDP] = [
+                        'NCPDP'             => $pharmacy->NCPDP,
+                        'NPI'               => $pharmacy->NPI,
+                        'Pharmacy'          => $pharmacy->Pharmacy,
+                        'StoreNumber'       => $pharmacy->StoreNumber,
+                        'Address1'          => $pharmacy->Address1,
+                        'Distance'          => $pharmacy->Distance,
+                        'AffiliationCode'   => $pharmacy->AffiliationCode,
+                        'Affiliation'       => $pharmacy->Affiliation,
+                        'City'              => $pharmacy->City,
+                        'State'             => $pharmacy->State,
+                        'Zip'               => $pharmacy->Zip,
+                        'Phone'             => $pharmacy->Phone,
+                    ];
+                    $ncpdp_array[] = "".$pharmacy->NCPDP;
+                }
+            }
+        }
+
         $request = wp_remote_get($url . "drugs?drugname=".$drug_name."&includestrength=true", $args);
 
         if (is_wp_error($request)) {
@@ -41,53 +105,137 @@ function scriptsquareplugin_get_drug_by_name($drug_name)
 
         $body = wp_remote_retrieve_body($request);
 
-        $data = json_decode($body);
+        $drug_data = json_decode($body);
 
-        if(isset($data->message)) {
+        if(isset($drug_data->message)) {
             $result['success'] = false;
-            $result['error_message'] = $data->message;
+            $result['error_message'] = $drug_data->message;
             return $result;
         } else {
             $drugs = [];
-            update_option('scriptsquare_drugs_data', $data);
-            /*
-            foreach($data as $item) {
-                $drug = [
-                    'Item_Status_Flag'          => $item->Item_Status_Flag,
-                    'Dosage_Form'               => $item->Dosage_Form,
-                    'Dosage_Form2'              => $item->Dosage_Form2,
-                    'GPI10'                     => $item->GPI10,
-                    'Maintenance_Drug_Code'     => $item->Maintenance_Drug_Code,
-                    'RX_OTC_Indicator_Code'     => $item->RX_OTC_Indicator_Code,
-                    'Product_Name'              => $item->Product_Name,
-                    'Rx_Rank_Code'              => $item->Rx_Rank_Code,
-                    'Repackage_Code'            => $item->Repackage_Code,
-                    'Route_of_Administration'   => $item->Route_of_Administration,
-                    'Third_Party_Restriction_Code'          => $item->Third_Party_Restriction_Code,
-                    'Unit_Dose_Unit_of_Use_Package_Code'    => $item->Unit_Dose_Unit_of_Use_Package_Code,
-                ];
-                echo '<pre>';
-                print_r($drug);
-                $request = wp_remote_get($url . "drugs?gpi10=".$item->GPI10, $args);
-                if (is_wp_error($request)) {
-                    $result['success'] = false;
-                    $result['error_message'] = 'There was an error when making api call!';
-                    return $result;
+            $search_result = [];
+
+            if(empty($zip_data) || empty($drug_data)) {
+                $drugs = [];
+            } else {
+                $gpi10_code = '';
+                $gpi14_code = '';
+                foreach($drug_data as $data) {
+                    $drug = [];
+                    $drug['product_name'] = $data->Product_Name;
+                    $drug['gpi10'] = $data->GPI;
+                    $drug['dosage_form'] = $data->Dosage_Form;
+                    $drug['strength'] = $data->Strength;
+                    $drug['full_name'] = $data->Drug_Name_Full;
+                    $drug['type'] = $data->DrugType;
+                    $drugs[$data->Drug_Name_Full] = $drug;
+                    $gpi10_code = $data->GPI;
+                }
+                //Get GPI14 code from GPI10
+                if(!empty($gpi10_code)) {
+                    $request = wp_remote_get($url . "drugs?gpi10=".$gpi10_code, $args);
+                    if (is_wp_error($request)) {
+                        $result['success'] = false;
+                        $result['error_message'] = 'There was an error when making api call!';
+                        return $result;
+                    }
+
+                    $body = wp_remote_retrieve_body($request);
+                    $gpi10_data_array = json_decode($body);
+                    if(isset($gpi10_data_array->message)) {
+                        $result['success'] = false;
+                        $result['error_message'] = $gpi10_data_array->message;
+                        return $result;
+                    } else {
+                        foreach($gpi10_data_array as $gpi10_data) {
+                            if(isset($drugs[$gpi10_data->Drug_Name_Full])) {
+                                $drugs[$gpi10_data->Drug_Name_Full]['gpi14'] = $gpi10_data->GPI14;
+                            }
+                        }
+                    }
+                }
+                //Get NDC from GPI14
+                $ndc_array = [];
+                if(!empty($drugs)) {
+                    foreach($drugs as $drug) {
+                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['gpi14'], $args);
+                        if (is_wp_error($request)) {
+                            $result['success'] = false;
+                            $result['error_message'] = 'There was an error when making api call!';
+                            return $result;
+                        }
+
+                        $body = wp_remote_retrieve_body($request);
+                        $gpi14_data_array = json_decode($body);
+
+                        if(isset($gpi14_data_array->message)) {
+                            $result['success'] = false;
+                            $result['error_message'] = $gpi14_data_array->message;
+                            return $result;
+                        } else {
+                            foreach($gpi14_data_array as $gpi14_data) {
+                                if(isset($drugs[$gpi14_data->Drug_Name_Full])) {
+                                    $drugs[$gpi14_data->Drug_Name_Full]['NDC'] = $gpi14_data->NDC;
+                                    $drugs[$gpi14_data->NDC] = $drugs[$gpi14_data->Drug_Name_Full];
+                                    $ndc_array[] = "".$gpi14_data->NDC;
+                                }
+                            }
+                        }
+                    }
                 }
 
-                $body = wp_remote_retrieve_body($request);
-                $gpi10_data = json_decode($body);
-                if(isset($gpi10_data->message)) {
-                    $result['success'] = false;
-                    $result['error_message'] = $gpi10_data->message;
-                    return $result;
-                } else {
-                    print_r($gpi10_data);
-                    exit;
+                //Get Price from NDC and NDCPC
+                //Paramount API has limit for pharmacy and drug sizes.
+                $size = 70;
+                $ncpdp_chunk = array_chunk($ncpdp_array, $size);
+                $ndc_chunk = array_chunk($ndc_array, $size);
+
+                $price_array = [];
+
+                foreach($ncpdp_chunk as $ncpdp) {
+                    foreach($ndc_chunk as $ndc) {
+                        $body = [
+                            'NCPDP'  => $ncpdp,
+                            'NDC' => $ndc,
+                            'Quantity' => 30
+                        ];
+
+                        $body = wp_json_encode( $body );
+                        $args['body'] = $body;
+                        $args['data_format'] = 'body';
+                        $request = wp_remote_post($url . "drugprices", $args);
+                        if (is_wp_error($request)) {
+                            $result['success'] = false;
+                            $result['error_message'] = 'There was an error when making api call!';
+                            return $result;
+                        }
+
+                        $body = wp_remote_retrieve_body($request);
+                        $price_data_array = json_decode($body);
+                        if(isset($price_data_array->message)) {
+                            $result['success'] = false;
+                            $result['error_message'] = $price_data_array->message;
+                            return $result;
+                        } else {
+                            $price_array = array_merge($price_array, $price_data_array);
+                        }
+                    }
+                }
+
+                //Get Result. Rearrange array with Pharmacy, Drug Info and Price
+                foreach($price_array as $price) {
+                    $search_result[] = [
+                        'Cost'          => $price->Cost,
+                        'Pharmacy'      => $zip_data[$price->NCPDP],
+                        'Drug'          => $drugs[$price->NDC],
+                        'BrandGeneric'  => $price->BrandGeneric
+                    ];
                 }
             }
-            */
-            $result['content'] = $data;
+
+            update_option('scriptsquare_drugs_data', $search_result);
+
+            $result['content'] = $search_result;
         }
     }
 
@@ -124,9 +272,15 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         $query->set('order', $ordering_args['order'] );
 
         $keyword = get_query_var( 'keyword_search' );
+        $zip_code = get_query_var( 'location_search' );
+        if(preg_match("/^\d+/", $zip_code, $matches)){
+            $address = $matches[0];
+            $zip_code = scriptsquareplugin_geocode($address);
+        }
 
-        $result = scriptsquareplugin_get_drug_by_name($keyword);
+        $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
 
+        print_r($result); exit;
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
