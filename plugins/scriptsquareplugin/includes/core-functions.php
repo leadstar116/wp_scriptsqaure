@@ -22,7 +22,6 @@ function scriptsquareplugin_geocode($address){
 
     $resp = json_decode( wp_remote_retrieve_body( $resp_json ), true );
 
-    print_r($resp);
     // response status will be 'OK', if able to geocode given address
     if($resp['status']=='OK'){
 
@@ -240,7 +239,6 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
             update_option('scriptsquare_drugs_data', $search_result);
 
-            print_r($search_result); exit;
             $result['content'] = $search_result;
         }
     }
@@ -281,13 +279,11 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         $zip_code = get_query_var( 'location_search' );
         if(preg_match("/^\d+/", $zip_code, $matches)){
             $address = $matches[0];
-            echo $address;
             $zip_code = scriptsquareplugin_geocode($address);
         }
 
-        echo $zip_code; exit;
         $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
-
+        print_r($result); exit;
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
