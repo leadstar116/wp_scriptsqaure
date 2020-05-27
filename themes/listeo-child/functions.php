@@ -11,6 +11,10 @@ function remove_parent_theme_features() {
 }
 add_action( 'after_setup_theme', 'remove_parent_theme_features', 10 );
 
+function wpb_custom_new_menu() {
+  register_nav_menu('my-custom-menu',__( 'SS Page Menu' ));
+}
+add_action( 'init', 'wpb_custom_new_menu' );
 
 
 ?>

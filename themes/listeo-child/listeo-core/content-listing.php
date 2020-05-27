@@ -1,5 +1,4 @@
 <?php
-echo 'test'; exit;
 $template_loader = new Listeo_Core_Template_Loader;
 $is_featured = listeo_core_is_featured($post->ID);
 $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
@@ -7,13 +6,14 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 
 	<div class="col-lg-12 col-md-12">
 		<div class="listing-item-container listing-geo-data  list-layout <?php echo esc_attr('listing-type-'.$listing_type) ?>" <?php echo listeo_get_geo_data($post); ?> >
+			HELLO THANH
 			<a href="<?php the_permalink(); ?>" class="listing-item <?php if($is_featured){ ?>featured-listing<?php } ?>">
 				<!--
 				 <div class="listing-small-badges-container">
 		            <?php if($is_featured){ ?>
 		                <div class="listing-small-badge featured-badge"><i class="fa fa-star"></i> <?php esc_html_e('Featured','listeo_core'); ?></div><br>
 		            <?php } ?>
-
+		           
 		        </div>
 		        -->
 				<!-- Image -->
@@ -53,7 +53,7 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 							<?php if( get_post_meta($post->ID,'_verified',true ) == 'on') : ?><i class="verified-icon"></i><?php endif; ?>
 						</h3>
 						<span><?php the_listing_location_link($post->ID, false); ?></span>
-
+						
 						<?php
 						if(!get_option('listeo_disable_reviews')){
 							$rating = get_post_meta($post->ID, 'listeo-avg-rating', true);
@@ -69,7 +69,7 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 								</div>
 						<?php endif;
 						}?>
-
+						
 						<?php if($listing_type  == 'event' || get_the_listing_price_range() ) : ?>
 						<div class="listing-list-small-badges-container">
 						<?php  endif; ?>
@@ -83,7 +83,7 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 
 				                if($_event_datetime) {
 				               		$_event_date = list($_event_datetime) = explode(' ', $_event_datetime);
-
+				                	
 					                if($_event_date) :
 					            //Dates in the m/d/y or d-m-y formats are disambiguated by looking at the separator between the various components: if the separator is a slash (/), then the American m/d/y is assumed; whereas if the separator is a dash (-) or a dot (.), then the European d-m-y format is assumed.
 					                	if(substr($date_format, 0, 1) === 'd'){
@@ -97,7 +97,7 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 				        <?php if($listing_type  == 'event' || get_the_listing_price_range() ) : ?>
 			            </div>
 			            <?php  endif; ?>
-
+			            
 					</div>
 
 					<?php
@@ -116,7 +116,7 @@ $listing_type = get_post_meta( $post->ID,'_listing_type',true ); ?>
 		                    <span class="save like-icon tooltip left"  title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>"   ></span>
 		                <?php } ?>
 		        	<?php } ?>
-
+		        	
 				</div>
 			</a>
 		</div>
