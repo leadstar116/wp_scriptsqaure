@@ -1,0 +1,2 @@
+2020-05-28T14:23:06+00:00 CRITICAL Cannot redeclare format_phone() (previously declared in /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-content/themes/listeo-child/listeo-core/content-listing.php:5) in /Volumes/Work/Workspace/Thanh/GoodRX/wordpress_scriptsquare/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 11
+

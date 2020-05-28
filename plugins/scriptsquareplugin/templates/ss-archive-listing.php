@@ -12,50 +12,45 @@ $top_layout = get_option('pp_listings_top_layout','map');
 $template_loader = new Listeo_Core_Template_Loader;
 $ss_template_loader = new ScriptSquare_Template_Loader;
 
+//function for phone number
+function format_phone($country, $phone) {
+	$function = 'format_phone_' . $country;
+	if(function_exists($function)) {
+		return $function($phone);
+	}
+	return $phone;
+}
+
+function format_phone_us($phone) {
+	// note: making sure we have something
+	if(!isset($phone{3})) { return ''; }
+	// note: strip out everything but numbers
+	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$length = strlen($phone);
+	switch($length) {
+		case 7:
+			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			break;
+		case 10:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+			break;
+		case 11:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
+			break;
+		default:
+			return $phone;
+			break;
+	}
+}
+// end of function
 
 $content_layout = get_option('pp_listings_layout','list');
 
-switch ($top_layout) {
-	case 'map_searchform':
-		$template_loader->get_template_part( 'archive/map' );
-		break;
-	case 'map': ?>
-		<!-- Map
-		================================================== -->
-
-		<div id="map-container" class="fullwidth-home-map">
-
-	    <div id="map" data-map-zoom="<?php echo get_option('listeo_map_zoom_global',9); ?>" >
-		        <!-- map goes here -->
-		    </div>
-
-		    <!-- Scroll Enabling Button -->
-			<a href="#" id="scrollEnabling" title="<?php esc_html_e('Enable or disable scrolling on map','listeo_core') ?>"><?php esc_html_e('Enable Scrolling','listeo_core'); ?></a>
-
-		</div>
-		<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
-		<?php
-		break;
-
-
-	case 'half':
-	case 'disable':
-		/*empty*/
-		break;
-
-	default:
-		$template_loader->get_template_part( 'archive/titlebar' );
-		break;
-}
-
 if($top_layout == 'half') {
 	$ss_template_loader->get_template_part( 'ss-archive-listing-half' );
-} else { ?>
-
-
-
-<?php
-$sidebar_side = get_option('pp_listings_sidebar_layout');
+} else {
+	$sidebar_side = get_option('pp_listings_sidebar_layout');
+	$drugs = get_option('scriptsquare_drugs_data');
 ?>
 
 <!-- Content
@@ -121,7 +116,7 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 							$template_loader->get_template_part( 'content-listing' );
 						}
 					else :
-						$template_loader->get_template_part( 'archive/no-found' );
+						$ss_template_loader->get_template_part( 'archive/ss-no-found' );
 					endif; ?>
 					<?php if($content_layout == 'list'): ?>
 						</div>

@@ -235,6 +235,9 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         'BrandGeneric'  => $price->BrandGeneric
                     ];
                 }
+                usort($search_result, function($a, $b) {
+                    return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
+                });
             }
 
             update_option('scriptsquare_drugs_data', $search_result);

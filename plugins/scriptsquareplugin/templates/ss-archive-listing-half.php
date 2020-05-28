@@ -10,10 +10,12 @@ $top_layout = get_option('pp_listings_top_layout','map');
 ($top_layout == 'half') ? get_header('split') : get_header();
 
 $template_loader = new Listeo_Core_Template_Loader;
+$ss_template_loader = new ScriptSquare_Template_Loader;
 
 $content_layout = get_option('pp_listings_layout','list');
 
 $drugs = get_option('scriptsquare_drugs_data');
+print_r($drugs);
 
 $sidebar_side = get_option('pp_listings_sidebar_layout');
 ?>
@@ -95,7 +97,7 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 					<div data-grid_columns="2" <?php echo $data; ?> data-orderby="<?php echo $orderby_value;  ?>" data-style="<?php echo esc_attr($content_layout) ?>" class="listings-container <?php echo esc_attr($container_class) ?>" id="listeo-listings-container">
 						<div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
 						<?php
-						if ( $drugs['success'] ) :
+                        if ( $drugs['success'] ) {
                             $count = 0;
                             foreach($drugs['content'] as $drug) {
                                 $count++;
@@ -103,9 +105,10 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
                                 update_option('scriptsquare_drug', $drug);
                                 $template_loader->get_template_part( 'content-listing' );
                             }
-						else :
-							$template_loader->get_template_part( 'archive/no-found' );
-						endif; ?>
+                        } else {
+                            echo 'bbb'; exit;
+							$ss_template_loader->get_template_part( 'archive/ss-no-found' );
+						} ?>
 
 						<div class="clearfix"></div>
 					</div>
