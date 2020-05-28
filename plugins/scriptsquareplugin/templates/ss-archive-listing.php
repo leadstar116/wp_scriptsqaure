@@ -12,38 +12,6 @@ $top_layout = get_option('pp_listings_top_layout','map');
 $template_loader = new Listeo_Core_Template_Loader;
 $ss_template_loader = new ScriptSquare_Template_Loader;
 
-//function for phone number
-function format_phone($country, $phone) {
-	$function = 'format_phone_' . $country;
-	if(function_exists($function)) {
-		return $function($phone);
-	}
-	return $phone;
-}
-
-function format_phone_us($phone) {
-	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
-	// note: strip out everything but numbers
-	$phone = preg_replace("/[^0-9]/", "", $phone);
-	$length = strlen($phone);
-	switch($length) {
-		case 7:
-			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
-			break;
-		case 10:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
-			break;
-		case 11:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
-			break;
-		default:
-			return $phone;
-			break;
-	}
-}
-// end of function
-
 $content_layout = get_option('pp_listings_layout','list');
 
 if($top_layout == 'half') {
@@ -103,7 +71,8 @@ if($top_layout == 'half') {
 				 ?>
 
 				<!-- Listings -->
-				<div class="listings-container <?php echo esc_attr($container_class) ?>">
+				<div class="listings-container <?php echo esc_attr($container_class) ?>" id="listeo-listings-container">
+					<div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
 					<?php if($content_layout == 'list'): ?>
 						<div class="row">
 					<?php endif;

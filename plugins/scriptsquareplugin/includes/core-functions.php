@@ -422,6 +422,174 @@ function scriptsquare_listing_templates( $template ) {
     return $template;
 }
 
+//function for phone number
+function format_phone($country, $phone) {
+	$function = 'format_phone_' . $country;
+	if(function_exists($function)) {
+		return $function($phone);
+	}
+	return $phone;
+}
+
+function format_phone_us($phone) {
+	// note: making sure we have something
+	if(!isset($phone{3})) { return ''; }
+	// note: strip out everything but numbers
+	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$length = strlen($phone);
+	switch($length) {
+		case 7:
+			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			break;
+		case 10:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+			break;
+		case 11:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
+			break;
+		default:
+			return $phone;
+			break;
+	}
+}
+// end of function
+
+//replace ajax call
+function scriptsquare_ajax_get_listings() {
+    $template_loader = new Listeo_Core_Template_Loader;
+    $ss_template_loader = new ScriptSquare_Template_Loader;
+/*
+    $location  	= (isset($_REQUEST['location_search'])) ? sanitize_text_field( stripslashes( $_REQUEST['location_search'] ) ) : '';
+    $keyword   	= (isset($_REQUEST['keyword_search'])) ? sanitize_text_field( stripslashes( $_REQUEST['keyword_search'] ) ) : '';
+    $radius   	= (isset($_REQUEST['search_radius'])) ?  sanitize_text_field( stripslashes( $_REQUEST['search_radius'] ) ) : '';
+*/
+
+    $orderby   	= (isset($_REQUEST['listeo_core_order'])) ?  sanitize_text_field( stripslashes( $_REQUEST['listeo_core_order'] ) ) : '';
+/*
+    $style   	= sanitize_text_field( stripslashes( $_REQUEST['style'] ) );
+    $grid_columns  = sanitize_text_field( stripslashes( $_REQUEST['grid_columns'] ) );
+    $per_page   = sanitize_text_field( stripslashes( $_REQUEST['per_page'] ) );
+    $date_range =  (isset($_REQUEST['date_range'])) ? sanitize_text_field( stripslashes( $_REQUEST['date_range'] ) ) : '';
+
+
+    $region   	= (isset($_REQUEST['tax-region'])) ?  sanitize_text_field( stripslashes( $_REQUEST['tax-region'] ) ) : '';
+    $category   	= (isset($_REQUEST['tax-listing_category'])) ?  sanitize_text_field( stripslashes( $_REQUEST['tax-listing_category'] ) ) : '';
+    $feature   	= (isset($_REQUEST['tax-listing_feature'])) ?  sanitize_text_field( stripslashes( $_REQUEST['tax-listing_feature'] ) ) : '';
+
+    $date_start = '';
+    $date_end = '';
+
+    if($date_range){
+
+        $dates = explode(' - ',$date_range);
+        $date_start = $dates[0];
+        $date_end = $dates[1];
+
+        // $date_start = esc_sql ( date( "Y-m-d H:i:s", strtotime(  $date_start )  ) );
+     //    $date_end = esc_sql ( date( "Y-m-d H:i:s", strtotime( $date_end ) )  );
+
+    }
+
+    if(empty($per_page)) { $per_page = get_option('listeo_listings_per_page',10); }
+
+    $query_args = array(
+        'ignore_sticky_posts'    => 1,
+        'post_type'         => 'listing',
+        'orderby'           => $orderby,
+        'order'             =>  $order,
+        'offset'            => ( absint( $_REQUEST['page'] ) - 1 ) * absint( $per_page ),
+        'location'   		=> $location,
+        'keyword'   		=> $keyword,
+        'search_radius'   	=> $radius,
+        'posts_per_page'    => $per_page,
+        'date_start'    	=> $date_start,
+        'date_end'    		=> $date_end,
+        'tax-region'    		=> $region,
+        'tax-listing_feature'   => $feature,
+        'tax-listing_category'  => $category,
+
+    );
+
+    $query_args['listeo_orderby'] = (isset($_REQUEST['listeo_core_order'])) ? sanitize_text_field( $_REQUEST['listeo_core_order'] ) : false;
+
+    $taxonomy_objects = get_object_taxonomies( 'listing', 'objects' );
+    foreach ($taxonomy_objects as $tax) {
+        if(isset($_REQUEST[ 'tax-'.$tax->name ] )) {
+            $query_args[ 'tax-'.$tax->name ] = $_REQUEST[ 'tax-'.$tax->name ];
+        }
+    }
+
+    $available_query_vars = $this->build_available_query_vars();
+    foreach ($available_query_vars as $key => $meta_key) {
+        if(isset($_REQUEST[ $meta_key ])){
+            $query_args[ $meta_key ] = $_REQUEST[ $meta_key ];
+        }
+
+    }
+
+
+    // add meta boxes support
+
+    $orderby = isset($_REQUEST['listeo_core_order']) ? $_REQUEST['listeo_core_order'] : 'date';
+
+
+    // if ( ! is_null( $featured ) ) {
+    // 	$featured = ( is_bool( $featured ) && $featured ) || in_array( $featured, array( '1', 'true', 'yes' ) ) ? true : false;
+    // }
+
+
+    $listings = Listeo_Core_Listing::get_real_listings( apply_filters( 'listeo_core_output_defaults_args', $query_args ));
+    $result = array(
+        'found_listings'    => $listings->have_posts(),
+        'max_num_pages' => $listings->max_num_pages,
+    );
+*/
+    $drugs = get_option('scriptsquare_drugs_data');
+
+    $order = 'Distance';
+    $direction = 1;
+    if($orderby == 'distance-asc') {
+        $order = 'Distance';
+        $direction = 1;
+    } else if($orderby == 'distance-desc') {
+        $order = 'Distance';
+        $direction = 0;
+    } else if($orderby == 'price-asc') {
+        $order = 'g_price';
+        $direction = 1;
+    } else if($orderby == 'price-desc') {
+        $order = 'g_price';
+        $direction = 0;
+    }
+    scriptsquareplugin_sort_drugs($drugs['content'], $order, $direction);
+    update_option('scriptsquare_drugs_data', $drugs);
+
+    ob_start();
+    ?>
+        <div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
+            <?php
+                if ( $drugs['success'] ) :
+                    $count = 0;
+                    foreach($drugs['content'] as $drug) {
+                        $count++;
+                        if($count>20) break;
+                        update_option('scriptsquare_drug', $drug);
+                        $template_loader->get_template_part( 'content-listing' );
+                    }
+                else :
+                    $ss_template_loader->get_template_part( 'archive/ss-no-found' );
+                endif;
+            ?>
+            <div class="clearfix"></div>
+        </div>
+    <?php
+
+    $result['html'] = ob_get_clean();
+    $result['pagination'] = [];//listeo_core_ajax_pagination( $listings->max_num_pages, absint( $_REQUEST['page'] ) );
+
+    wp_send_json($result);
+
+}
 
 // add custom option for drugs data
 $scriptsquare_drugs_data = array();
@@ -436,6 +604,11 @@ add_action('pre_get_posts', 'scriptsquare_pre_get_posts_listings');
 
 remove_filter( 'template_include', 'listing_templates' );
 add_filter( 'template_include', 'scriptsquare_listing_templates' );
+
+// remove listeo core ajax action
+remove_all_actions( 'wp_ajax_listeo_get_listings');
+add_action( 'wp_ajax_listeo_get_listings', 'scriptsquare_ajax_get_listings' );
+
 
 // custom plugin styles
 function scriptsquareplugin_custom_styles() {
