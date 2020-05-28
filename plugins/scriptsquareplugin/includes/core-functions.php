@@ -606,8 +606,8 @@ remove_filter( 'template_include', 'listing_templates' );
 add_filter( 'template_include', 'scriptsquare_listing_templates' );
 
 // remove listeo core ajax action
-remove_all_actions( 'wp_ajax_listeo_get_listings');
-add_action( 'wp_ajax_listeo_get_listings', 'scriptsquare_ajax_get_listings' );
+// remove_all_actions( 'wp_ajax_listeo_get_listings');
+// add_action( 'wp_ajax_listeo_get_listings', 'scriptsquare_ajax_get_listings' );
 
 
 // custom plugin styles
