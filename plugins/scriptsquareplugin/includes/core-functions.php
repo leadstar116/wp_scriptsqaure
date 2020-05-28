@@ -235,6 +235,9 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         'BrandGeneric'  => $price->BrandGeneric
                     ];
                 }
+                usort($search_result, function($a, $b) {
+                    return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
+                });
             }
 
             update_option('scriptsquare_drugs_data', $search_result);
@@ -328,6 +331,9 @@ function scriptsquare_listing_templates( $template ) {
 // add custom option for drugs data
 $scriptsquare_drugs_data = array();
 add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
+
+$scriptsquare_drug = array();
+add_option('scriptsquare_drug', $scriptsquare_drug);
 
 // remove listeo core
 remove_action('pre_get_posts', 'pre_get_posts_listings');
