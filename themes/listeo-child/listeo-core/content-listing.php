@@ -2,7 +2,6 @@
 $template_loader = new Listeo_Core_Template_Loader;
 
 $drug = get_option('scriptsquare_drug');
-print_r($drug);
 $listing_type = '';
 $is_featured = false;
 ?>

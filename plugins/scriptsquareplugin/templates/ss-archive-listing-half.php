@@ -15,7 +15,6 @@ $ss_template_loader = new ScriptSquare_Template_Loader;
 $content_layout = get_option('pp_listings_layout','list');
 
 $drugs = get_option('scriptsquare_drugs_data');
-print_r($drugs);
 
 $sidebar_side = get_option('pp_listings_sidebar_layout');
 ?>
