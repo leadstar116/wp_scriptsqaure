@@ -9,7 +9,11 @@ $is_featured = false;
 
 	<div class="col-lg-12 col-md-12">
 		<div class="listing-item-container listing-geo-data list-layout">
-			<a href="" class="listing-item">
+			<?php
+			print_r($drug);
+			//continue;
+			?>
+			<div class="listing-item">
 				<div class="listing-small-badges-container">
 		            <?php if($is_featured){ ?>
 		                <div class="listing-small-badge featured-badge"><i class="fa fa-star"></i> <?php esc_html_e('Featured','listeo_core'); ?></div><br>
@@ -43,7 +47,7 @@ $is_featured = false;
 						<span style="display: block;line-height: 2em;">
 							<?php //the_listing_location_link($post->ID, false); ?>
 							<?php $thephone =  format_phone('us',$drug['Pharmacy']['Phone'], 2)?>
-							<?php echo $thephone  ?>
+							<a style="color: #777;" href="tel:+1-<?php echo $drug['Pharmacy']['Phone'] ?>"><?php echo $thephone  ?></a>
 						</span>
 
 						<?php
@@ -66,14 +70,14 @@ $is_featured = false;
 						*/?>
 					</div>
 						<div class="button" style="display: inline-block;position: absolute;float: right;bottom: 50%;right: 35px;transform: translateY(50%);">
-
+							<?php echo round($drug['Cost'], 2) ?>
 							<button class="button tooltip left" title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>">Get Coupon</button>
 
 						</div>
 
 
 				</div>
-			</a>
+			</div>
 			<!--</a> -->
 		</div>
 	</div>
