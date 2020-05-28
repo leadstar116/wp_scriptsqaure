@@ -78,7 +78,7 @@ if($top_layout == 'half') {
 
 			<?php
 			if( $top_layout == 'search') {
-				 echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="gray-style margin-top-0 margin-bottom-40"]');
+				 echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="gray-style margin-top-40 margin-bottom-40"]');
 				} ?>
 
 			<!-- Search Section / End -->

@@ -122,47 +122,51 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
             if(empty($zip_data) || empty($drug_data)) {
                 $drugs = [];
             } else {
-                $gpi10_code = '';
-                $gpi14_code = '';
                 foreach($drug_data as $data) {
                     $drug = [];
                     $drug['product_name'] = $data->Product_Name;
-                    $drug['gpi10'] = $data->GPI;
+                    $drug['GPI'] = $data->GPI;
                     $drug['dosage_form'] = $data->Dosage_Form;
                     $drug['strength'] = $data->Strength;
                     $drug['full_name'] = $data->Drug_Name_Full;
                     $drug['type'] = $data->DrugType;
-                    $drugs[$data->Drug_Name_Full] = $drug;
-                    $gpi10_code = $data->GPI;
+                    $drugs[$data->GPI] = $drug;
                 }
                 //Get GPI14 code from GPI10
-                if(!empty($gpi10_code)) {
-                    $request = wp_remote_get($url . "drugs?gpi10=".$gpi10_code, $args);
-                    if (is_wp_error($request)) {
-                        $result['success'] = false;
-                        $result['error_message'] = 'There was an error when making api call!';
-                        return $result;
-                    }
+                /*
+                if(!empty($drugs)) {
+                    foreach($drugs as $drug) {
+                        $request = wp_remote_get($url . "drugs?gpi10=".$drug['gpi10'], $args);
+                        if (is_wp_error($request)) {
+                            $result['success'] = false;
+                            $result['error_message'] = 'There was an error when making api call!';
+                            return $result;
+                        }
 
-                    $body = wp_remote_retrieve_body($request);
-                    $gpi10_data_array = json_decode($body);
-                    if(isset($gpi10_data_array->message)) {
-                        $result['success'] = false;
-                        $result['error_message'] = $gpi10_data_array->message;
-                        return $result;
-                    } else {
-                        foreach($gpi10_data_array as $gpi10_data) {
-                            if(isset($drugs[$gpi10_data->Drug_Name_Full])) {
-                                $drugs[$gpi10_data->Drug_Name_Full]['gpi14'] = $gpi10_data->GPI14;
+                        $body = wp_remote_retrieve_body($request);
+                        $gpi10_data_array = json_decode($body);
+                        print_r($gpi10_data_array);
+                        if(isset($gpi10_data_array->message)) {
+                            $result['success'] = false;
+                            $result['error_message'] = $gpi10_data_array->message;
+                            return $result;
+                        } else {
+                            foreach($gpi10_data_array as $gpi10_data) {
+                                if(isset($drugs[$gpi10_data->GPI14])) {
+                                    $drugs[$gpi10_data->Drug_Name_Full]['gpi14'] = $gpi10_data->GPI14;
+                                } else {
+
+                                }
                             }
                         }
                     }
                 }
+                */
                 //Get NDC from GPI14
                 $ndc_array = [];
                 if(!empty($drugs)) {
                     foreach($drugs as $drug) {
-                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['gpi14'], $args);
+                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['GPI'], $args);
                         if (is_wp_error($request)) {
                             $result['success'] = false;
                             $result['error_message'] = 'There was an error when making api call!';
@@ -178,21 +182,39 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                             return $result;
                         } else {
                             foreach($gpi14_data_array as $gpi14_data) {
-                                if(isset($drugs[$gpi14_data->Drug_Name_Full])) {
-                                    $drugs[$gpi14_data->Drug_Name_Full]['NDC'] = $gpi14_data->NDC;
-                                    $drugs[$gpi14_data->NDC] = $drugs[$gpi14_data->Drug_Name_Full];
-                                    $ndc_array[] = "".$gpi14_data->NDC;
+                                if(isset($drugs[$gpi14_data->GPI14])) {
+                                    if(!isset($drugs[$gpi14_data->GPI14]['NDC'])) {
+                                        $drugs[$gpi14_data->GPI14]['NDC'] = [
+                                            'G' => [],
+                                            'B' => []
+                                        ];
+                                    }
+                                    //if generic
+                                    if($gpi14_data->Multi_Source_Code == 'Y') {
+                                        $drugs[$gpi14_data->GPI14]['NDC']['G'][] = [
+                                            'NDC' => $gpi14_data->NDC,
+                                            'Drug_Name_Full' => $gpi14_data->Drug_Name_Full
+                                        ];
+                                    } else {
+                                        $drugs[$gpi14_data->GPI14]['NDC']['B'][] = [
+                                            'NDC' => $gpi14_data->NDC,
+                                            'Drug_Name_Full' => $gpi14_data->Drug_Name_Full
+                                        ];
+                                    }
+
+                                    if(!in_array($gpi14_data->NDC, $ndc_array)) {
+                                        $ndc_array[] = "".$gpi14_data->NDC;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
                 //Get Price from NDC and NDCPC
                 //Paramount API has limit for pharmacy and drug sizes.
-                $size = 70;
-                $ncpdp_chunk = array_chunk($ncpdp_array, $size);
-                $ndc_chunk = array_chunk($ndc_array, $size);
+                $ncpdp_size = 70; $ndc_size = 40;
+                $ncpdp_chunk = array_chunk($ncpdp_array, $ncpdp_size);
+                $ndc_chunk = array_chunk($ndc_array, $ndc_size);
 
                 $price_array = [];
 
@@ -216,6 +238,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
                         $body = wp_remote_retrieve_body($request);
                         $price_data_array = json_decode($body);
+
                         if(isset($price_data_array->message)) {
                             $result['success'] = false;
                             $result['error_message'] = $price_data_array->message;
@@ -227,14 +250,62 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                 }
 
                 //Get Result. Rearrange array with Pharmacy, Drug Info and Price
+                /*
                 foreach($price_array as $price) {
-                    $search_result[] = [
-                        'Cost'          => $price->Cost,
-                        'Pharmacy'      => $zip_data[$price->NCPDP],
-                        'Drug'          => $drugs[$price->NDC],
-                        'BrandGeneric'  => $price->BrandGeneric
-                    ];
+                    if($price->BrandGeneric == 'G') {
+                        $search_result[] = [
+                            'Cost'          => $price->Cost,
+                            'Pharmacy'      => $zip_data[$price->NCPDP],
+                            'Drug'          => $drugs[$price->NDC],
+                            'BrandGeneric'  => $price->BrandGeneric
+                        ];
+                    }
                 }
+                */
+                $drugs_with_pharmacies = [];
+                foreach($drugs as $drug) {
+                    $drugs_with_pharmacies[$drug['GPI']] = [
+                        'drug' => $drug,
+                        'pharmacy' => [],
+                    ];
+                    foreach($zip_data as $pharmacy) {
+                        $g_price = 0; $g_count = 0;
+                        $b_price = 0; $b_count = 0;
+                        foreach($price_array as $price) {
+                            foreach($drug['NDC']['G'] as $ndc) {
+                                if($ndc['NDC'] == $price->NDC && $price->NCPDP == $pharmacy['NCPDP']) {
+                                    $g_price += $price->Cost;
+                                    $g_count++;
+                                    break;
+                                }
+                            }
+                            foreach($drug['NDC']['B'] as $ndc) {
+                                if($ndc['NDC'] == $price->NDC) {
+                                    $b_price += $price->Cost;
+                                    $b_count++;
+                                    break;
+                                }
+                            }
+                        }
+                        $drugs_with_pharmacies[$drug['GPI']]['pharmacy'][] = [
+                            'pharmacy' => $pharmacy,
+                            'g_price' => $g_price/$g_count,
+                            'b_price' => $b_price/$b_count,
+                        ];
+                    }
+                }
+
+                foreach($drugs_with_pharmacies as $drug) {
+                    foreach($drug['pharmacy'] as $pharmacy) {
+                        $search_result[] = [
+                            'b_price'       => $pharmacy['b_price'],
+                            'g_price'       => $pharmacy['g_price'],
+                            'Pharmacy'      => $pharmacy['pharmacy'],
+                            'Drug'          => $drug['drug'],
+                        ];
+                    }
+                }
+
                 usort($search_result, function($a, $b) {
                     return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
                 });
