@@ -1,0 +1,10 @@
+2020-05-28T13:50:25+00:00 CRITICAL Cannot redeclare format_phone_us() (previously declared in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php:12) in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 12
+
+2020-05-28T13:52:54+00:00 CRITICAL Cannot redeclare format_phone_us() (previously declared in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php:12) in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 12
+
+2020-05-28T13:55:28+00:00 CRITICAL Cannot redeclare format_phone_us() (previously declared in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php:12) in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 12
+
+2020-05-28T13:56:38+00:00 CRITICAL Cannot redeclare format_phone_us() (previously declared in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php:12) in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 12
+
+2020-05-28T13:56:45+00:00 CRITICAL Cannot redeclare format_phone_us() (previously declared in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php:12) in /home/seacabo/public_html/script/wp-content/themes/listeo-child/listeo-core/content-listing.php on line 12
+
