@@ -37,6 +37,31 @@ function scriptsquareplugin_geocode($address){
         return false;
     }
 }
+// Sort drugs
+function scriptsquareplugin_sort_drugs(&$drugs, $sort_by="Distance", $option=1)
+{
+    if($sort_by == "Distance") {
+        if($option) {
+            usort($drugs, function($a, $b) {
+                return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
+            });
+        } else {
+            usort($drugs, function($a, $b) {
+                return $b['Pharmacy']['Distance'] <=> $a['Pharmacy']['Distance'];
+            });
+        }
+    } else if($sort_by == 'g_price') {
+        if($option) {
+            usort($drugs, function($a, $b) {
+                return $a['g_price'] <=> $b['g_price'];
+            });
+        } else {
+            usort($drugs, function($a, $b) {
+                return $b['g_price'] <=> $a['g_price'];
+            });
+        }
+    }
+}
 
 // Get Drug By Name
 function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
@@ -132,6 +157,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                     $drug['type'] = $data->DrugType;
                     $drugs[$data->GPI] = $drug;
                 }
+
                 //Get GPI14 code from GPI10
                 /*
                 if(!empty($drugs)) {
@@ -166,7 +192,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                 $ndc_array = [];
                 if(!empty($drugs)) {
                     foreach($drugs as $drug) {
-                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['GPI'], $args);
+                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['GPI']."&DrugType=G&DrugName=SILDENAFIL_TAB_25MG", $args);
                         if (is_wp_error($request)) {
                             $result['success'] = false;
                             $result['error_message'] = 'There was an error when making api call!';
@@ -210,6 +236,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         }
                     }
                 }
+
                 //Get Price from NDC and NDCPC
                 //Paramount API has limit for pharmacy and drug sizes.
                 $ncpdp_size = 70; $ndc_size = 40;
@@ -305,10 +332,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         ];
                     }
                 }
-
-                usort($search_result, function($a, $b) {
-                    return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
-                });
+                scriptsquareplugin_sort_drugs($search_result, 'Distance', 1);
             }
 
             update_option('scriptsquare_drugs_data', $search_result);
@@ -416,5 +440,6 @@ add_filter( 'template_include', 'scriptsquare_listing_templates' );
 // custom plugin styles
 function scriptsquareplugin_custom_styles() {
     wp_enqueue_style( 'scriptsquareplugin', plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/scriptsquareplugin_style.css', array(), null, 'screen' );
+    wp_enqueue_script( 'scriptsquareplugin', plugin_dir_url( dirname( __FILE__ ) ) . 'public/js/scriptsquareplugin_ajax.js', array('jquery') );
 }
 add_action( 'wp_enqueue_scripts', 'scriptsquareplugin_custom_styles' );
