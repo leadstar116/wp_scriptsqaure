@@ -2,47 +2,53 @@
 $template_loader = new Listeo_Core_Template_Loader;
 
 $drugs = get_option('scriptsquare_drugs_data');
-echo '<pre>';
+echo count($drugs['content']);
+echo "<br>";
+echo sizeof($drugs['content']);
+//echo '<pre>';
+$count = 0;
+//vars to avoid errors
+$listing_type = '';
 
 foreach($drugs['content'] as $drug) {
+	if($count==20) break;
 ?>
 <!-- Listing Item -->
 
 	<div class="col-lg-12 col-md-12">
 		<div class="listing-item-container listing-geo-data list-layout">
-			HELLO THANH
+			
 			<?php
-				print_r($drug);
-				continue;
+				//print_r($drug);
+			    $count++;
+				
 			?>
-			<a href="<?php the_permalink(); ?>" class="listing-item">
-				<!--
+			<!-- <a href="<?php the_permalink(); ?>" class="listing-item"> -->
+				
 				 <div class="listing-small-badges-container">
 		            <?php if($is_featured){ ?>
 		                <div class="listing-small-badge featured-badge"><i class="fa fa-star"></i> <?php esc_html_e('Featured','listeo_core'); ?></div><br>
 		            <?php } ?>
 
 		        </div>
-		        -->
+		        
 				<!-- Image -->
-				<!--
 				<div class="listing-item-image">
 					<?php $template_loader->get_template_part( 'content-listing-image');  ?>
 					<?php $terms = get_the_terms( get_the_ID(), 'listing_category' );
-							if ( $terms && ! is_wp_error( $terms ) ) :
-							    $categories = array();
-							    foreach ( $terms as $term ) {
-							        $categories[] = $term->name;
-							    }
-
-							    $categories_list = join( ", ", $categories );
-							    ?>
-							    <span class="tag">
-							        <?php  esc_html_e( $categories_list ) ?>
-							    </span>
-							<?php endif; ?>
+					if ( $terms && ! is_wp_error( $terms ) ) :
+						$categories = array();
+						foreach ( $terms as $term ) {
+							$categories[] = $term->name;
+						}
+						
+						$categories_list = join( ", ", $categories );
+						?>
+						<span class="tag">
+								        <?php  esc_html_e( $categories_list ) ?>
+								    </span>
+					<?php endif; ?>
 				</div>
-				-->
 
 				<!-- Content -->
 				<div class="listing-item-content">
@@ -57,10 +63,16 @@ foreach($drugs['content'] as $drug) {
 			        }?>
 					<div class="listing-item-inner">
 						<h3>
-							<?php the_title(); ?>
-							<?php if( get_post_meta($post->ID,'_verified',true ) == 'on') : ?><i class="verified-icon"></i><?php endif; ?>
+							<?php echo $drug['Pharmacy']['Pharmacy']; ?>
+							<?php //the_title(); ?>
+							<?php //if( get_post_meta($post->ID,'_verified',true ) == 'on') : ?>
+								<!--<i class="verified-icon"></i>-->
+							<?//php endif; ?>
 						</h3>
-						<span><?php the_listing_location_link($post->ID, false); ?></span>
+						<span>
+							<?php //the_listing_location_link($post->ID, false); ?>
+							<?php echo 'Distance: ' . $drug['Pharmacy']['Distance']//the_listing_location_link($post->ID, false); ?>
+						</span>
 
 						<?php
 						if(!get_option('listeo_disable_reviews')){
@@ -107,26 +119,15 @@ foreach($drugs['content'] as $drug) {
 			            <?php  endif; ?>
 
 					</div>
-
-					<?php
-		       		if( listeo_core_check_if_bookmarked($post->ID) ) {
-		                $nonce = wp_create_nonce("listeo_core_bookmark_this_nonce"); ?>
-		                <span class="like-icon listeo_core-unbookmark-it liked"
-		                data-post_id="<?php echo esc_attr($post->ID); ?>"
-		                data-nonce="<?php echo esc_attr($nonce); ?>" ></span>
-		            <?php } else {
-		                if(is_user_logged_in()){
-		                    $nonce = wp_create_nonce("listeo_core_remove_fav_nonce"); ?>
-		                    <span class="save listeo_core-bookmark-it like-icon"
-		                    data-post_id="<?php echo esc_attr($post->ID); ?>"
-		                    data-nonce="<?php echo esc_attr($nonce); ?>" ></span>
-		                <?php } else { ?>
-		                    <span class="save like-icon tooltip left"  title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>"   ></span>
-		                <?php } ?>
-		        	<?php } ?>
+						<div class="button" style="display: inline-block;position: absolute;float: right;bottom: 50%;right: 35px;transform: translateY(50%);">
+							
+							<button class="button tooltip left" title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>">Get Coupon</button>
+							
+						</div>
+					
 
 				</div>
-			</a>
+			<!--</a> -->
 		</div>
 	</div>
 <?php } ?>
