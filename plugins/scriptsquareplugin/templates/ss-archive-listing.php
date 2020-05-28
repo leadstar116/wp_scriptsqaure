@@ -10,147 +10,134 @@ $top_layout = get_option('pp_listings_top_layout','map');
 ($top_layout == 'half') ? get_header('split') : get_header();
 
 $template_loader = new Listeo_Core_Template_Loader;
+$ss_template_loader = new ScriptSquare_Template_Loader;
+
 
 $content_layout = get_option('pp_listings_layout','list');
 
-$drugs = get_option('scriptsquare_drugs_data');
+switch ($top_layout) {
+	case 'map_searchform':
+		$template_loader->get_template_part( 'archive/map' );
+		break;
+	case 'map': ?>
+		<!-- Map
+		================================================== -->
 
+		<div id="map-container" class="fullwidth-home-map">
+
+	    <div id="map" data-map-zoom="<?php echo get_option('listeo_map_zoom_global',9); ?>" >
+		        <!-- map goes here -->
+		    </div>
+
+		    <!-- Scroll Enabling Button -->
+			<a href="#" id="scrollEnabling" title="<?php esc_html_e('Enable or disable scrolling on map','listeo_core') ?>"><?php esc_html_e('Enable Scrolling','listeo_core'); ?></a>
+
+		</div>
+		<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
+		<?php
+		break;
+
+
+	case 'half':
+	case 'disable':
+		/*empty*/
+		break;
+
+	default:
+		$template_loader->get_template_part( 'archive/titlebar' );
+		break;
+}
+
+if($top_layout == 'half') {
+	$ss_template_loader->get_template_part( 'ss-archive-listing-half' );
+} else { ?>
+
+
+
+<?php
 $sidebar_side = get_option('pp_listings_sidebar_layout');
 ?>
 
 <!-- Content
 ================================================== -->
-<div class="fs-container">
+<div class="container <?php echo esc_attr($sidebar_side); if( $top_layout == 'map') { echo esc_attr(' margin-top-40'); } ?> ?>" >
+	<div class="row sticky-wrapper">
 
-	<div class="fs-inner-container content">
-		<div class="fs-content">
 
+			<?php switch ($sidebar_side) {
+				case 'full-width':
+					?><div class="col-md-12"><?php
+					break;
+				case 'left-sidebar':
+					?><div class="col-lg-9 col-md-8 listings-column-content mobile-content-container"><?php
+					break;
+				case 'right-sidebar':
+					?><div class="col-lg-9 col-md-8 padding-right-30 listings-column-content mobile-content-container"><?php
+					break;
+
+				default:
+					?><div class="col-lg-9 col-md-8 padding-right-30 listings-column-content"><?php
+					break;
+			} ?>
 			<!-- Search -->
 
-			<section class="search">
-				<a href="#" id="show-map-button" class="show-map-button" data-enabled="<?php  esc_attr_e('Show Map ','listeo'); ?>" data-disabled="<?php  esc_attr_e('Hide Map ','listeo'); ?>"><?php esc_html_e('Show Map ','listeo') ?></a>
-				<div class="row">
-					<div class="col-md-12">
+			<?php
+			if( $top_layout == 'search') {
+				 echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="gray-style margin-top-0 margin-bottom-40"]');
+				} ?>
 
-							<?php echo do_shortcode('[listeo_search_form source="half" more_custom_class="margin-bottom-30"]'); ?>
+			<!-- Search Section / End -->
 
-					</div>
+			<?php $top_buttons = get_option('listeo_listings_top_buttons');
+
+			if($top_buttons=='enable'){
+				$top_buttons_conf = get_option('listeo_listings_top_buttons_conf');
+				if(is_array($top_buttons_conf) && !empty($top_buttons_conf)){
+					$list_top_buttons = implode("|", $top_buttons_conf);
+				}  else {
+					$list_top_buttons = '';
+				}
+				?>
+					<div class="row margin-bottom-15">
+					<?php do_action( 'listeo_before_archive', $content_layout, $list_top_buttons ); ?>
 				</div>
-
-			</section>
-			<!-- Search / End -->
-
-			<?php $content_layout = get_option('pp_listings_layout','list'); ?>
-			<section class="listings-container margin-top-45">
-				<!-- Sorting / Layout Switcher -->
-				<div class="row fs-switcher">
-
-					<!-- <div class="col-md-6">
-						Showing Results
-						<p class="showing-results">14 Results Found </p>
-					</div> -->
-
-					<?php $top_buttons = get_option('listeo_listings_top_buttons');
-
-					if($top_buttons=='enable'){
-						$top_buttons_conf = get_option('listeo_listings_top_buttons_conf');
-						if(is_array($top_buttons_conf) && !empty($top_buttons_conf)){
-
-							if (($key = array_search('radius', $top_buttons_conf)) !== false) {
-							    unset($top_buttons_conf[$key]);
-							}
-							if (($key = array_search('filters', $top_buttons_conf)) !== false) {
-							    unset($top_buttons_conf[$key]);
-							}
-							$list_top_buttons = implode("|", $top_buttons_conf);
-						}  else {
-							$list_top_buttons = '';
-						}
-						?>
-
-						<?php do_action( 'listeo_before_archive', $content_layout, $list_top_buttons ); ?>
-
-						<?php
-					} ?>
-
-				</div>
+				<?php
+			} ?>
+				<?php
+					$container_class = 'content-layout';
+				 ?>
 
 				<!-- Listings -->
-				<div class="row fs-listings">
-
-					<?php
-
-					$container_class = 'content-layout';
-
-					$data = '';
-					$data .= ' data-region="'.get_query_var( 'region').'" ';
-					$data .= ' data-category="'.get_query_var( 'listing_category').'" ';
-					$data .= ' data-feature="'.get_query_var( 'listing_feature').'" ';
-					$data .= ' data-service-category="'.get_query_var( 'service_category').'" ';
-					$data .= ' data-rental-category="'.get_query_var( 'rental_category').'" ';
-					$data .= ' data-event-category="'.get_query_var( 'event_category').'" ';
-					$orderby_value = isset( $_GET['listeo_core_order'] ) ? (string) $_GET['listeo_core_order']  : get_option( 'listeo_sort_by','date' );
-								?>
-					<!-- Listings -->
-					<div data-grid_columns="2" <?php echo $data; ?> data-orderby="<?php echo $orderby_value;  ?>" data-style="<?php echo esc_attr($content_layout) ?>" class="listings-container <?php echo esc_attr($container_class) ?>" id="listeo-listings-container">
-						<div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
-						<?php
-						if ( $drugs['success'] ) :
+				<div class="listings-container <?php echo esc_attr($container_class) ?>">
+					<?php if($content_layout == 'list'): ?>
+						<div class="row">
+					<?php endif;
+					if ( $drugs['success'] ) :
+						$count = 0;
+						foreach($drugs['content'] as $drug) {
+							$count++;
+							if($count>20) break;
+							update_option('scriptsquare_drug', $drug);
 							$template_loader->get_template_part( 'content-listing' );
-						else :
-							$template_loader->get_template_part( 'archive/no-found' );
-						endif; ?>
-
-						<div class="clearfix"></div>
-					</div>
-					<?php $ajax_browsing = get_option('listeo_ajax_browsing'); ?>
-					<div class="pagination-container margin-top-45 margin-bottom-60 row  <?php if( isset($ajax_browsing) && $ajax_browsing == 'on' ) { echo esc_attr('ajax-search'); } ?>">
-						<nav class="pagination col-md-12">
-						<?php
-							if($ajax_browsing == 'on') {
-									global $wp_query;
-     								$pages = $wp_query->max_num_pages;
-									echo listeo_core_ajax_pagination( $pages, 1 );
-							} else
-							if(function_exists('wp_pagenavi')) {
-								wp_pagenavi(array(
-									'next_text' => '<i class="fa fa-chevron-right"></i>',
-									'prev_text' => '<i class="fa fa-chevron-left"></i>',
-									'use_pagenavi_css' => false,
-									));
-							} else {
-								the_posts_navigation();
-							}?>
-						</nav>
-					</div>
-					<div class="copyrights margin-top-0"><?php $copyrights = get_option( 'pp_copyrights' , '&copy; Theme by Purethemes.net. All Rights Reserved.' );
-
-				        if (function_exists('icl_register_string')) {
-				            icl_register_string('Copyrights in footer','copyfooter', $copyrights);
-				            echo icl_t('Copyrights in footer','copyfooter', $copyrights);
-				        } else {
-				            echo wp_kses($copyrights,array( 'a' => array('href' => array(),'title' => array()),'br' => array(),'em' => array(),'strong' => array(),));
-				        } ?>
-
-				    </div>
+						}
+					else :
+						$template_loader->get_template_part( 'archive/no-found' );
+					endif; ?>
+					<?php if($content_layout == 'list'): ?>
+						</div>
+					<?php endif; ?>
 				</div>
-			</section>
-
 		</div>
-	</div>
-	<div class="fs-inner-container map-fixed">
-
-		<!-- Map -->
-		<div id="map-container" class="">
-		    <div id="map" class="split-map" data-map-zoom="<?php echo get_option('listeo_map_zoom_global',9); ?>" data-map-scroll="true">
-		        <!-- map goes here -->
-		    </div>
-
-		</div>
-
+		<?php if($sidebar_side != 'full-width') : ?>
+			<!-- Sidebar
+			================================================== -->
+			<div class="col-lg-3 col-md-4 listings-sidebar-content mobile-sidebar-container">
+				<?php $template_loader->get_template_part( 'sidebar-listeo' );?>
+			</div>
+			<!-- Sidebar / End -->
+		<?php endif; ?>
 	</div>
 </div>
 
-<div class="clearfix"></div>
-
 <?php get_footer(); ?>
+<?php } //eof split ?>

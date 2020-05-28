@@ -329,6 +329,9 @@ function scriptsquare_listing_templates( $template ) {
 $scriptsquare_drugs_data = array();
 add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
 
+$scriptsquare_drug = array();
+add_option('scriptsquare_drug', $scriptsquare_drug);
+
 // remove listeo core
 remove_action('pre_get_posts', 'pre_get_posts_listings');
 add_action('pre_get_posts', 'scriptsquare_pre_get_posts_listings');

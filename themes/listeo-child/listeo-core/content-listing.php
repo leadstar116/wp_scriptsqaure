@@ -1,7 +1,7 @@
 <?php
 $template_loader = new Listeo_Core_Template_Loader;
 
-$drugs = get_option('scriptsquare_drugs_data');
+$drug = get_option('scriptsquare_drug');
 echo count($drugs['content']);
 echo "<br>";
 echo sizeof($drugs['content']);
@@ -10,28 +10,21 @@ $count = 0;
 //vars to avoid errors
 $listing_type = '';
 
-foreach($drugs['content'] as $drug) {
-	if($count==20) break;
 ?>
 <!-- Listing Item -->
 
 	<div class="col-lg-12 col-md-12">
 		<div class="listing-item-container listing-geo-data list-layout">
-			
-			<?php
-				//print_r($drug);
-			    $count++;
-				
-			?>
+
 			<!-- <a href="<?php the_permalink(); ?>" class="listing-item"> -->
-				
+
 				 <div class="listing-small-badges-container">
 		            <?php if($is_featured){ ?>
 		                <div class="listing-small-badge featured-badge"><i class="fa fa-star"></i> <?php esc_html_e('Featured','listeo_core'); ?></div><br>
 		            <?php } ?>
 
 		        </div>
-		        
+
 				<!-- Image -->
 				<div class="listing-item-image">
 					<?php $template_loader->get_template_part( 'content-listing-image');  ?>
@@ -41,7 +34,7 @@ foreach($drugs['content'] as $drug) {
 						foreach ( $terms as $term ) {
 							$categories[] = $term->name;
 						}
-						
+
 						$categories_list = join( ", ", $categories );
 						?>
 						<span class="tag">
@@ -120,15 +113,14 @@ foreach($drugs['content'] as $drug) {
 
 					</div>
 						<div class="button" style="display: inline-block;position: absolute;float: right;bottom: 50%;right: 35px;transform: translateY(50%);">
-							
+
 							<button class="button tooltip left" title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>">Get Coupon</button>
-							
+
 						</div>
-					
+
 
 				</div>
 			<!--</a> -->
 		</div>
 	</div>
-<?php } ?>
 <!-- Listing Item / End -->
