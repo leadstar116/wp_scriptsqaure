@@ -332,7 +332,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         ];
                     }
                 }
-                scriptsquareplugin_sort_drugs($search_result, 'Distance', 1);
+                scriptsquareplugin_sort_drugs($search_result, 'g_price', 1);
             }
 
             update_option('scriptsquare_drugs_data', $search_result);
