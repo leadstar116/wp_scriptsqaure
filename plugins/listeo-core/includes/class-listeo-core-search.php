@@ -32,7 +32,7 @@ class Listeo_Core_Search {
 	        add_action( 'wp_ajax_nopriv_listeo_core_incremental_listing_suggest', array( __CLASS__, 'wp_ajax_listeo_core_incremental_listing_suggest' ) );
 	    }
 
-	    add_action( 'wp_ajax_nopriv_listeo_get_listings', array( $this, 'ajax_get_listings' ) );
+	    // add_action( 'wp_ajax_nopriv_listeo_get_listings', array( $this, 'ajax_get_listings' ) );
 		// add_action( 'wp_ajax_listeo_get_listings', array( $this, 'ajax_get_listings' ) );
 
 		add_action( 'wp_ajax_nopriv_listeo_get_features_from_category', array( $this, 'ajax_get_features_from_category' ) );
