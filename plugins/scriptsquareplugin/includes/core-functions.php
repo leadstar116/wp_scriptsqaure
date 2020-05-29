@@ -87,7 +87,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
         $ncpdp_array = [];
 
         if($zip_code){
-            $request = wp_remote_get($url . "pharmacies?zip=".$zip_code."&radius=10", $args);
+            $request = wp_remote_get($url . "pharmacies?zip=".$zip_code."&radius=5", $args);
 
             if (is_wp_error($request)) {
                 $result['success'] = false;
