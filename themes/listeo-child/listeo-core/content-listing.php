@@ -69,8 +69,10 @@ $is_featured = false;
 						*/?>
 					</div>
 						<div class="button" style="display: inline-block;position: absolute;float: right;bottom: 50%;right: 35px;transform: translateY(50%);">
-							<?php echo round($drug['g_price'], 2) ?>
-							<button class="button tooltip left" title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>">Get Coupon</button>
+							<span style="color: #274060;font-size: 40px;margin: 10px;"><?php echo round($drug['g_price'], 2) ?></span>
+							<a href="https://script.seacabo.com/wp-content/uploads/2020/05/ScriptSquare_Member_Discount_Card_V4.pdf">
+								<button class="button tooltip left" title="<?php esc_html_e('Login To Bookmark Items','listeo_core'); ?>">Get Coupon</button>
+							</a>
 
 						</div>
 

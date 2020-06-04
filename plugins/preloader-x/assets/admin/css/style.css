@@ -1,0 +1,133 @@
+/**
+ * Admin Styles
+ */
+
+
+li#toplevel_page_preloader-settings img {
+    width: 100%;
+    padding: 0 !important;
+}
+
+.post-type-page .wps-field .image-select > label,
+.pb_settings_form .image-select > label {
+    width: 100px;
+    height: 75px;
+}
+
+/**
+* Backend Preloader
+*/
+
+.has-preloader {
+    overflow: hidden;
+}
+
+.preloader-x {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    z-index: 999999;
+}
+
+.preloader-x .preloader-general-inner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 43%;
+    left: 50%;
+}
+
+.preloader-x:not(.preloader-4):not(.preloader-28) .preloader-general-inner {
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.preloader-13 .preloader-general-inner .loader-star {
+    position: absolute;
+    top: -5px;
+    width: 60px;
+    left: -5px;
+    height: 60px;
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-animation: loader-2-star 1s ease alternate infinite;
+    animation: loader-2-star 1s ease alternate infinite;
+}
+
+.preloader-13 .preloader-general-inner .loader-circles {
+    width: 8px;
+    height: 8px;
+    background: #FF9800;
+    border-radius: 50%;
+    position: absolute;
+    left: calc(50% - 4px);
+    top: calc(50% - 4px);
+    transition: all 1s ease;
+    -webkit-animation: loader-2-circles 1s ease-in-out alternate infinite;
+    animation: loader-2-circles 1s ease-in-out alternate infinite;
+}
+
+@-webkit-keyframes loader-2-circles {
+    0% {
+        box-shadow: 0 0 0 #FF9800;
+        opacity: 1;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        box-shadow: 24px -22px #FF9800, 30px -15px 0 -3px #FF9800, 31px 0 #FF9800, 29px 9px 0 -3px #FF9800, 24px 23px #FF9800, 17px 30px 0 -3px #FF9800, 0 33px #FF9800, -10px 28px 0 -3px #FF9800, -24px 22px #FF9800, -29px 14px 0 -3px #FF9800, -31px -3px #FF9800, -30px -11px 0 -3px #FF9800, -20px -25px #FF9800, -12px -30px 0 -3px #FF9800, 5px -29px #FF9800, 13px -25px 0 -3px #FF9800;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        box-shadow: 25px -22px #FF9800, 15px -22px 0 -3px black, 31px 2px #FF9800, 21px 2px 0 -3px black, 23px 25px #FF9800, 13px 25px 0 -3px black, 0 33px #FF9800, -10px 33px 0 -3px black, -26px 24px #FF9800, -19px 17px 0 -3px black, -32px 0 #FF9800, -23px 0 0 -3px black, -25px -23px #FF9800, -16px -23px 0 -3px black, 0 -31px #FF9800, -2px -23px 0 -3px black;
+    }
+}
+
+@keyframes loader-2-circles {
+    0% {
+        box-shadow: 0 0 0 #FF9800;
+        opacity: 1;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        box-shadow: 24px -22px #FF9800, 30px -15px 0 -3px #FF9800, 31px 0 #FF9800, 29px 9px 0 -3px #FF9800, 24px 23px #FF9800, 17px 30px 0 -3px #FF9800, 0 33px #FF9800, -10px 28px 0 -3px #FF9800, -24px 22px #FF9800, -29px 14px 0 -3px #FF9800, -31px -3px #FF9800, -30px -11px 0 -3px #FF9800, -20px -25px #FF9800, -12px -30px 0 -3px #FF9800, 5px -29px #FF9800, 13px -25px 0 -3px #FF9800;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        box-shadow: 25px -22px #FF9800, 15px -22px 0 -3px black, 31px 2px #FF9800, 21px 2px 0 -3px black, 23px 25px #FF9800, 13px 25px 0 -3px black, 0 33px #FF9800, -10px 33px 0 -3px black, -26px 24px #FF9800, -19px 17px 0 -3px black, -32px 0 #FF9800, -23px 0 0 -3px black, -25px -23px #FF9800, -16px -23px 0 -3px black, 0 -31px #FF9800, -2px -23px 0 -3px black;
+    }
+}
+
+@-webkit-keyframes loader-2-star {
+    0% {
+        -webkit-transform: scale(0) rotate(0deg);
+        transform: scale(0) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: scale(0.7) rotate(360deg);
+        transform: scale(0.7) rotate(360deg);
+    }
+}
+
+@keyframes loader-2-star {
+    0% {
+        -webkit-transform: scale(0) rotate(0deg);
+        transform: scale(0) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: scale(0.7) rotate(360deg);
+        transform: scale(0.7) rotate(360deg);
+    }
+}
