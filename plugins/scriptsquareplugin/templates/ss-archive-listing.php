@@ -68,6 +68,8 @@ if($top_layout == 'half') {
 			} ?>
 				<?php
 					$container_class = 'content-layout';
+					$per_page = get_option('scriptsquare_items_per_page');
+					$offset = 0; //page 1
 				 ?>
 
 				<!-- Listings -->
@@ -77,13 +79,23 @@ if($top_layout == 'half') {
 						<div class="row">
 					<?php endif;
 					if ( $drugs['success'] ) :
-						$count = 0;
-						foreach($drugs['content'] as $drug) {
-							$count++;
-							if($count>20) break;
-							update_option('scriptsquare_drug', $drug);
-							$template_loader->get_template_part( 'content-listing' );
+						for($i = $offset; $i < $offset+$per_page; $i++) {
+							if($i >= count($drugs['content'])) {
+								break;
+							}
+							update_option('scriptsquare_drug', $drugs['content'][$i]);
+							$template_loader->get_template_part('content-listing');
 						}
+						?>
+						<div class="clearfix"></div>
+						</div>
+						<div class="col-lg-12 col-md-12 pagination-container  margin-top-0 margin-bottom-60 ajax-search">
+							<?php
+								$pages = get_option('scriptsquare_max_num_pages');
+								echo scriptsquare_ajax_pagination( $pages, 1 );
+							?>
+						</div>
+						<?php
 					else :
 						$ss_template_loader->get_template_part( 'archive/ss-no-found' );
 					endif; ?>

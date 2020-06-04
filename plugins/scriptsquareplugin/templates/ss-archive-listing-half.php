@@ -112,7 +112,7 @@ $sidebar_side = get_option('pp_listings_sidebar_layout');
 						<div class="clearfix"></div>
 					</div>
 					<?php $ajax_browsing = get_option('listeo_ajax_browsing'); ?>
-					<div class="pagination-container margin-top-45 margin-bottom-60 row  <?php if( isset($ajax_browsing) && $ajax_browsing == 'on' ) { echo esc_attr('ajax-search'); } ?>">
+					<div class="pagination-container margin-top-45 margin-bottom-60 row ajax-search">
 						<nav class="pagination col-md-12">
 						<?php
 							if($ajax_browsing == 'on') {

@@ -9,54 +9,54 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function scriptsquareplugin_geocode($address){
+function scriptsquareplugin_geocode($address)
+{
 
     // url encode the address
     $address = urlencode($address);
-    $api_key = get_option( 'listeo_maps_api_server' );
+    $api_key = get_option('listeo_maps_api_server');
     // google map geocode api url
     $url = "https://maps.google.com/maps/api/geocode/json?address={$address}&key={$api_key}";
 
     // get the json response
     $resp_json = wp_remote_get($url);
 
-    $resp = json_decode( wp_remote_retrieve_body( $resp_json ), true );
+    $resp = json_decode(wp_remote_retrieve_body($resp_json), true);
 
     // response status will be 'OK', if able to geocode given address
-    if($resp['status']=='OK'){
+    if ($resp['status'] == 'OK') {
 
         // get the important data
-        foreach($resp['results'][0]['address_components'] as $item) {
-            if($item['types'][0] == 'postal_code') {
+        foreach ($resp['results'][0]['address_components'] as $item) {
+            if ($item['types'][0] == 'postal_code') {
                 $zip_code = $item['long_name'];
             }
         }
         return $zip_code;
-
-    }else{
+    } else {
         return false;
     }
 }
 // Sort drugs
-function scriptsquareplugin_sort_drugs(&$drugs, $sort_by="Distance", $option=1)
+function scriptsquareplugin_sort_drugs(&$drugs, $sort_by = "Distance", $option = 1)
 {
-    if($sort_by == "Distance") {
-        if($option) {
-            usort($drugs, function($a, $b) {
+    if ($sort_by == "Distance") {
+        if ($option) {
+            usort($drugs, function ($a, $b) {
                 return $a['Pharmacy']['Distance'] <=> $b['Pharmacy']['Distance'];
             });
         } else {
-            usort($drugs, function($a, $b) {
+            usort($drugs, function ($a, $b) {
                 return $b['Pharmacy']['Distance'] <=> $a['Pharmacy']['Distance'];
             });
         }
-    } else if($sort_by == 'g_price') {
-        if($option) {
-            usort($drugs, function($a, $b) {
+    } else if ($sort_by == 'g_price') {
+        if ($option) {
+            usort($drugs, function ($a, $b) {
                 return $a['g_price'] <=> $b['g_price'];
             });
         } else {
-            usort($drugs, function($a, $b) {
+            usort($drugs, function ($a, $b) {
                 return $b['g_price'] <=> $a['g_price'];
             });
         }
@@ -86,8 +86,8 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
         $zip_data = [];
         $ncpdp_array = [];
 
-        if($zip_code){
-            $request = wp_remote_get($url . "pharmacies?zip=".$zip_code."&radius=5", $args);
+        if ($zip_code) {
+            $request = wp_remote_get($url . "pharmacies?zip=" . $zip_code . "&radius=5", $args);
 
             if (is_wp_error($request)) {
                 $result['success'] = false;
@@ -99,12 +99,12 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
             $zip_data_array = json_decode($body);
 
-            if(isset($zip_data_array->message)) {
+            if (isset($zip_data_array->message)) {
                 $result['success'] = false;
                 $result['error_message'] = $zip_data_array->message;
                 return $result;
             } else {
-                foreach($zip_data_array as $pharmacy) {
+                foreach ($zip_data_array as $pharmacy) {
                     $zip_data[$pharmacy->NCPDP] = [
                         'NCPDP'             => $pharmacy->NCPDP,
                         'NPI'               => $pharmacy->NPI,
@@ -119,12 +119,12 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         'Zip'               => $pharmacy->Zip,
                         'Phone'             => $pharmacy->Phone,
                     ];
-                    $ncpdp_array[] = "".$pharmacy->NCPDP;
+                    $ncpdp_array[] = "" . $pharmacy->NCPDP;
                 }
             }
         }
 
-        $request = wp_remote_get($url . "drugs?drugname=".$drug_name."&includestrength=true", $args);
+        $request = wp_remote_get($url . "drugs?drugname=" . $drug_name . "&includestrength=true", $args);
 
         if (is_wp_error($request)) {
             $result['success'] = false;
@@ -136,7 +136,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
         $drug_data = json_decode($body);
 
-        if(isset($drug_data->message)) {
+        if (isset($drug_data->message)) {
             $result['success'] = false;
             $result['error_message'] = $drug_data->message;
             return $result;
@@ -144,10 +144,10 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
             $drugs = [];
             $search_result = [];
 
-            if(empty($zip_data) || empty($drug_data)) {
+            if (empty($zip_data) || empty($drug_data)) {
                 $drugs = [];
             } else {
-                foreach($drug_data as $data) {
+                foreach ($drug_data as $data) {
                     $drug = [];
                     $drug['product_name'] = $data->Product_Name;
                     $drug['GPI'] = $data->GPI;
@@ -190,9 +190,9 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                 */
                 //Get NDC from GPI14
                 $ndc_array = [];
-                if(!empty($drugs)) {
-                    foreach($drugs as $drug) {
-                        $request = wp_remote_get($url . "drugs?gpi14=".$drug['GPI']."&DrugType=G&DrugName=SILDENAFIL_TAB_25MG", $args);
+                if (!empty($drugs)) {
+                    foreach ($drugs as $drug) {
+                        $request = wp_remote_get($url . "drugs?gpi14=" . $drug['GPI'] . "&DrugType=G&DrugName=SILDENAFIL_TAB_25MG", $args);
                         if (is_wp_error($request)) {
                             $result['success'] = false;
                             $result['error_message'] = 'There was an error when making api call!';
@@ -202,21 +202,21 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         $body = wp_remote_retrieve_body($request);
                         $gpi14_data_array = json_decode($body);
 
-                        if(isset($gpi14_data_array->message)) {
+                        if (isset($gpi14_data_array->message)) {
                             $result['success'] = false;
                             $result['error_message'] = $gpi14_data_array->message;
                             return $result;
                         } else {
-                            foreach($gpi14_data_array as $gpi14_data) {
-                                if(isset($drugs[$gpi14_data->GPI14])) {
-                                    if(!isset($drugs[$gpi14_data->GPI14]['NDC'])) {
+                            foreach ($gpi14_data_array as $gpi14_data) {
+                                if (isset($drugs[$gpi14_data->GPI14])) {
+                                    if (!isset($drugs[$gpi14_data->GPI14]['NDC'])) {
                                         $drugs[$gpi14_data->GPI14]['NDC'] = [
                                             'G' => [],
                                             'B' => []
                                         ];
                                     }
                                     //if generic
-                                    if($gpi14_data->Multi_Source_Code == 'Y') {
+                                    if ($gpi14_data->Multi_Source_Code == 'Y') {
                                         $drugs[$gpi14_data->GPI14]['NDC']['G'][] = [
                                             'NDC' => $gpi14_data->NDC,
                                             'Drug_Name_Full' => $gpi14_data->Drug_Name_Full
@@ -228,8 +228,8 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                                         ];
                                     }
 
-                                    if(!in_array($gpi14_data->NDC, $ndc_array)) {
-                                        $ndc_array[] = "".$gpi14_data->NDC;
+                                    if (!in_array($gpi14_data->NDC, $ndc_array)) {
+                                        $ndc_array[] = "" . $gpi14_data->NDC;
                                     }
                                 }
                             }
@@ -239,21 +239,22 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
                 //Get Price from NDC and NDCPC
                 //Paramount API has limit for pharmacy and drug sizes.
-                $ncpdp_size = 70; $ndc_size = 40;
+                $ncpdp_size = 70;
+                $ndc_size = 40;
                 $ncpdp_chunk = array_chunk($ncpdp_array, $ncpdp_size);
                 $ndc_chunk = array_chunk($ndc_array, $ndc_size);
 
                 $price_array = [];
 
-                foreach($ncpdp_chunk as $ncpdp) {
-                    foreach($ndc_chunk as $ndc) {
+                foreach ($ncpdp_chunk as $ncpdp) {
+                    foreach ($ndc_chunk as $ndc) {
                         $body = [
                             'NCPDP'  => $ncpdp,
                             'NDC' => $ndc,
                             'Quantity' => 30
                         ];
 
-                        $body = wp_json_encode( $body );
+                        $body = wp_json_encode($body);
                         $args['body'] = $body;
                         $args['data_format'] = 'body';
                         $request = wp_remote_post($url . "drugprices", $args);
@@ -266,7 +267,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         $body = wp_remote_retrieve_body($request);
                         $price_data_array = json_decode($body);
 
-                        if(isset($price_data_array->message)) {
+                        if (isset($price_data_array->message)) {
                             $result['success'] = false;
                             $result['error_message'] = $price_data_array->message;
                             return $result;
@@ -290,24 +291,26 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                 }
                 */
                 $drugs_with_pharmacies = [];
-                foreach($drugs as $drug) {
+                foreach ($drugs as $drug) {
                     $drugs_with_pharmacies[$drug['GPI']] = [
                         'drug' => $drug,
                         'pharmacy' => [],
                     ];
-                    foreach($zip_data as $pharmacy) {
-                        $g_price = 0; $g_count = 0;
-                        $b_price = 0; $b_count = 0;
-                        foreach($price_array as $price) {
-                            foreach($drug['NDC']['G'] as $ndc) {
-                                if($ndc['NDC'] == $price->NDC && $price->NCPDP == $pharmacy['NCPDP']) {
+                    foreach ($zip_data as $pharmacy) {
+                        $g_price = 0;
+                        $g_count = 0;
+                        $b_price = 0;
+                        $b_count = 0;
+                        foreach ($price_array as $price) {
+                            foreach ($drug['NDC']['G'] as $ndc) {
+                                if ($ndc['NDC'] == $price->NDC && $price->NCPDP == $pharmacy['NCPDP']) {
                                     $g_price += $price->Cost;
                                     $g_count++;
                                     break;
                                 }
                             }
-                            foreach($drug['NDC']['B'] as $ndc) {
-                                if($ndc['NDC'] == $price->NDC) {
+                            foreach ($drug['NDC']['B'] as $ndc) {
+                                if ($ndc['NDC'] == $price->NDC) {
                                     $b_price += $price->Cost;
                                     $b_count++;
                                     break;
@@ -316,14 +319,14 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                         }
                         $drugs_with_pharmacies[$drug['GPI']]['pharmacy'][] = [
                             'pharmacy' => $pharmacy,
-                            'g_price' => $g_price/$g_count,
-                            'b_price' => $b_price/$b_count,
+                            'g_price' => ($g_count>0)? $g_price / $g_count:0,
+                            'b_price' => ($b_count>0)? $b_price / $b_count:0,
                         ];
                     }
                 }
 
-                foreach($drugs_with_pharmacies as $drug) {
-                    foreach($drug['pharmacy'] as $pharmacy) {
+                foreach ($drugs_with_pharmacies as $drug) {
+                    foreach ($drug['pharmacy'] as $pharmacy) {
                         $search_result[] = [
                             'b_price'       => $pharmacy['b_price'],
                             'g_price'       => $pharmacy['g_price'],
@@ -337,6 +340,10 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
             update_option('scriptsquare_drugs_data', $search_result);
 
+            $items_per_page = get_option('scriptsquare_items_per_page');
+            $max_num_pages = ceil(count($search_result) / $items_per_page);
+            update_option('scriptsquare_max_num_pages', $max_num_pages);
+
             $result['content'] = $search_result;
         }
     }
@@ -345,36 +352,37 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 }
 
 //replicate pre_get_posts_listings from class-listeo-core-search and remove unnecessary parts.
-function scriptsquare_pre_get_posts_listings( $query ) {
+function scriptsquare_pre_get_posts_listings($query)
+{
 
-    if ( is_admin() || ! $query->is_main_query() ){
+    if (is_admin() || !$query->is_main_query()) {
         return $query;
     }
 
-    if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'listing' ) ) {
-        $per_page = get_option('listeo_listings_per_page',10);
-        $query->set( 'posts_per_page', $per_page );
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('listing')) {
+        $per_page = get_option('listeo_listings_per_page', 10);
+        $query->set('posts_per_page', $per_page);
     }
 
-    if ( is_tax('listing_category') || is_tax('service_category') || is_tax('event_category') || is_tax('rental_category') || is_tax('listing_feature')  || is_tax('region') ) {
+    if (is_tax('listing_category') || is_tax('service_category') || is_tax('event_category') || is_tax('rental_category') || is_tax('listing_feature')  || is_tax('region')) {
 
-        $per_page = get_option('listeo_listings_per_page',10);
-        $query->set( 'posts_per_page', $per_page );
+        $per_page = get_option('listeo_listings_per_page', 10);
+        $query->set('posts_per_page', $per_page);
     }
 
-    if ( is_post_type_archive( 'listing' ) || is_author() || is_tax('listing_category') || is_tax('listing_feature') || is_tax('event_category') || is_tax('service_category') || is_tax('rental_category') || is_tax('region')) {
+    if (is_post_type_archive('listing') || is_author() || is_tax('listing_category') || is_tax('listing_feature') || is_tax('event_category') || is_tax('service_category') || is_tax('rental_category') || is_tax('region')) {
 
-        $ordering_args = Listeo_Core_Listing::get_listings_ordering_args( );
+        $ordering_args = Listeo_Core_Listing::get_listings_ordering_args();
 
-        if(isset($ordering_args['meta_key']) && $ordering_args['meta_key'] != '_featured' ){
+        if (isset($ordering_args['meta_key']) && $ordering_args['meta_key'] != '_featured') {
             $query->set('meta_key', $ordering_args['meta_key']);
         }
 
         $query->set('orderby', $ordering_args['orderby']);
-        $query->set('order', $ordering_args['order'] );
+        $query->set('order', $ordering_args['order']);
 
-        $keyword = get_query_var( 'keyword_search' );
-        $address = get_query_var( 'location_search' );
+        $keyword = get_query_var('keyword_search');
+        $address = get_query_var('location_search');
 
         $zip_code = scriptsquareplugin_geocode($address);
 
@@ -383,39 +391,39 @@ function scriptsquare_pre_get_posts_listings( $query ) {
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
-
     }
 
     return $query;
 }
 
 /* handles single listing and archive listing view */
-function scriptsquare_listing_templates( $template ) {
+function scriptsquare_listing_templates($template)
+{
     $post_type = get_post_type();
-    $custom_post_types = array( 'listing' );
+    $custom_post_types = array('listing');
 
     $ss_template_loader = new ScriptSquare_Template_Loader;
     $template_loader = new Listeo_Core_Template_Loader;
-    if ( in_array( $post_type, $custom_post_types ) ) {
+    if (in_array($post_type, $custom_post_types)) {
 
-        if ( is_archive() && !is_author() ) {
+        if (is_archive() && !is_author()) {
 
             $template = $ss_template_loader->locate_template('ss-archive-' . $post_type . '.php');
 
             return $template;
         }
 
-        if ( is_single() ) {
+        if (is_single()) {
             $template = $template_loader->locate_template('single-' . $post_type . '.php');
             return $template;
         }
     }
 
-    if( is_tax( 'listing_category' ) ){
+    if (is_tax('listing_category')) {
         $template = $ss_template_loader->locate_template('ss-archive-listing.php');
     }
 
-    if( is_post_type_archive( 'listing' ) ){
+    if (is_post_type_archive('listing')) {
         $template = $ss_template_loader->locate_template('ss-archive-listing.php');
     }
 
@@ -423,49 +431,101 @@ function scriptsquare_listing_templates( $template ) {
 }
 
 //function for phone number
-function format_phone($country, $phone) {
-	$function = 'format_phone_' . $country;
-	if(function_exists($function)) {
-		return $function($phone);
-	}
-	return $phone;
+function format_phone($country, $phone)
+{
+    $function = 'format_phone_' . $country;
+    if (function_exists($function)) {
+        return $function($phone);
+    }
+    return $phone;
 }
 
-function format_phone_us($phone) {
-	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
-	// note: strip out everything but numbers
-	$phone = preg_replace("/[^0-9]/", "", $phone);
-	$length = strlen($phone);
-	switch($length) {
-		case 7:
-			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
-			break;
-		case 10:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
-			break;
-		case 11:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
-			break;
-		default:
-			return $phone;
-			break;
-	}
+function format_phone_us($phone)
+{
+    // note: making sure we have something
+    if (!isset($phone{
+    3})) {
+        return '';
+    }
+    // note: strip out everything but numbers
+    $phone = preg_replace("/[^0-9]/", "", $phone);
+    $length = strlen($phone);
+    switch ($length) {
+        case 7:
+            return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+            break;
+        case 10:
+            return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+            break;
+        case 11:
+            return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
+            break;
+        default:
+            return $phone;
+            break;
+    }
 }
 // end of function
 
+function scriptsquare_ajax_pagination($pages = '', $current = false, $range = 2)
+{
+    if (!empty($current)) {
+        $paged = $current;
+    } else {
+        global $paged;
+    }
+
+    $output = false;
+    if (empty($paged)) $paged = 1;
+
+    $prev = $paged - 1;
+    $next = $paged + 1;
+    $showitems = ($range * 2) + 1;
+    $range = 2; // change it to show more links
+
+    $max_num_pages = get_option('scriptsquare_max_num_pages');
+
+    if ($pages == '') {
+        $pages = $max_num_pages;
+        if (!$pages) {
+            $pages = 1;
+        }
+    }
+
+    if (1 != $pages) {
+
+        $output .= '<nav class="pagination margin-top-30"><ul class="pagination">';
+        $output .= ($paged > 2 && $paged > $range + 1 && $showitems < $pages) ? '<li data-paged="prev"><a href="#"><i class="sl sl-icon-arrow-left"></i></a></li>' : '';
+        //$output .=  ( $paged > 1 ) ? '<li><a class="previouspostslink" href="#"">'.__('Previous','listeo_core').'</a></li>' : '';
+        for ($i = 1; $i <= $pages; $i++) {
+            if (1 != $pages && (!($i >= $paged + $range + 1 || $i <= $paged - $range - 1) || $pages <= $showitems)) {
+                if ($paged == $i) {
+                    $output .=  '<li class="current" data-paged="' . $i . '"><a href="#">' . $i . ' </a></li>';
+                } else {
+                    $output .=  '<li data-paged="' . $i . '"><a href="#">' . $i . '</a></li>';
+                }
+            }
+        }
+        // $output .=  ( $paged < $pages ) ? '<li><a class="nextpostslink" href="#">'.__('Next','listeo_core').'</a></li>' : '';
+        $output .= ($paged < $pages - 1 &&  $paged + $range - 1 < $pages && $showitems < $pages) ? '<li data-paged="next"><a  href="#"><i class="sl sl-icon-arrow-right"></i></a></li>' : '';
+        $output .=  '</ul></nav>';
+    }
+    return $output;
+}
+
 //replace ajax call
-function scriptsquare_ajax_get_listings() {
+function scriptsquare_ajax_get_listings()
+{
     $template_loader = new Listeo_Core_Template_Loader;
     $ss_template_loader = new ScriptSquare_Template_Loader;
-/*
+    /*
     $location  	= (isset($_REQUEST['location_search'])) ? sanitize_text_field( stripslashes( $_REQUEST['location_search'] ) ) : '';
     $keyword   	= (isset($_REQUEST['keyword_search'])) ? sanitize_text_field( stripslashes( $_REQUEST['keyword_search'] ) ) : '';
     $radius   	= (isset($_REQUEST['search_radius'])) ?  sanitize_text_field( stripslashes( $_REQUEST['search_radius'] ) ) : '';
 */
 
-    $orderby   	= (isset($_REQUEST['listeo_core_order'])) ?  sanitize_text_field( stripslashes( $_REQUEST['listeo_core_order'] ) ) : '';
-/*
+    $orderby       = (isset($_REQUEST['listeo_core_order'])) ?  sanitize_text_field(stripslashes($_REQUEST['listeo_core_order'])) : '';
+    /*
     $style   	= sanitize_text_field( stripslashes( $_REQUEST['style'] ) );
     $grid_columns  = sanitize_text_field( stripslashes( $_REQUEST['grid_columns'] ) );
     $per_page   = sanitize_text_field( stripslashes( $_REQUEST['per_page'] ) );
@@ -548,47 +608,57 @@ function scriptsquare_ajax_get_listings() {
 
     $order = 'Distance';
     $direction = 1;
-    if($orderby == 'distance-asc') {
+    if ($orderby == 'distance-asc') {
         $order = 'Distance';
         $direction = 1;
-    } else if($orderby == 'distance-desc') {
+    } else if ($orderby == 'distance-desc') {
         $order = 'Distance';
         $direction = 0;
-    } else if($orderby == 'price-asc') {
+    } else if ($orderby == 'price-asc') {
         $order = 'g_price';
         $direction = 1;
-    } else if($orderby == 'price-desc') {
+    } else if ($orderby == 'price-desc') {
         $order = 'g_price';
         $direction = 0;
     }
     scriptsquareplugin_sort_drugs($drugs['content'], $order, $direction);
     update_option('scriptsquare_drugs_data', $drugs);
 
+    $page = absint( $_REQUEST['page'] );
+    $per_page = get_option('scriptsquare_items_per_page');
+    $offset = ($page - 1) * $per_page;
+
     ob_start();
     ?>
-        <div class="loader-ajax-container" style=""> <div class="loader-ajax"></div> </div>
-            <?php
-                if ( $drugs['success'] ) :
-                    $count = 0;
-                    foreach($drugs['content'] as $drug) {
-                        $count++;
-                        if($count>20) break;
-                        update_option('scriptsquare_drug', $drug);
-                        $template_loader->get_template_part( 'content-listing' );
+        <div class="loader-ajax-container" style="">
+            <div class="loader-ajax"></div>
+        </div>
+        <?php
+            if ($drugs['success']) :
+                for($i = $offset; $i < $offset+$per_page; $i++) {
+                    if($i >= count($drugs['content'])) {
+                        break;
                     }
-                else :
-                    $ss_template_loader->get_template_part( 'archive/ss-no-found' );
-                endif;
+                    update_option('scriptsquare_drug', $drugs['content'][$i]);
+                    $template_loader->get_template_part('content-listing');
+                }
+            else :
+                $ss_template_loader->get_template_part('archive/ss-no-found');
+            endif;
             ?>
-            <div class="clearfix"></div>
+        <div class="clearfix"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 pagination-container  margin-top-0 margin-bottom-60 ajax-search">
+
         </div>
     <?php
-
     $result['html'] = ob_get_clean();
-    $result['pagination'] = [];//listeo_core_ajax_pagination( $listings->max_num_pages, absint( $_REQUEST['page'] ) );
+    $max_num_pages = get_option('scriptsquare_max_num_pages');
+    $result['pagination'] = scriptsquare_ajax_pagination( $max_num_pages, absint( $_REQUEST['page'] ) );
+    $result['max_num_pages'] = $max_num_pages;
+    $result['found_listings'] = true;
 
     wp_send_json($result);
-
 }
 
 // add custom option for drugs data
@@ -598,22 +668,26 @@ add_option('scriptsquare_drugs_data', $scriptsquare_drugs_data);
 $scriptsquare_drug = array();
 add_option('scriptsquare_drug', $scriptsquare_drug);
 
+add_option('scriptsquare_max_num_pages', -1);
+add_option('scriptsquare_items_per_page', 20);
+
 // remove listeo core
 remove_action('pre_get_posts', 'pre_get_posts_listings');
 add_action('pre_get_posts', 'scriptsquare_pre_get_posts_listings');
 
-remove_filter( 'template_include', 'listing_templates' );
-add_filter( 'template_include', 'scriptsquare_listing_templates' );
+remove_filter('template_include', 'listing_templates');
+add_filter('template_include', 'scriptsquare_listing_templates');
 
 // remove listeo core ajax action
-remove_all_actions( 'wp_ajax_listeo_get_listings');
-add_action( 'wp_ajax_nopriv_listeo_get_listings', 'scriptsquare_ajax_get_listings' );
-add_action( 'wp_ajax_listeo_get_listings', 'scriptsquare_ajax_get_listings' );
+remove_all_actions('wp_ajax_listeo_get_listings');
+add_action('wp_ajax_nopriv_listeo_get_listings', 'scriptsquare_ajax_get_listings');
+add_action('wp_ajax_listeo_get_listings', 'scriptsquare_ajax_get_listings');
 
 
 // custom plugin styles
-function scriptsquareplugin_custom_styles() {
-    wp_enqueue_style( 'scriptsquareplugin', plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/scriptsquareplugin_style.css', array(), null, 'screen' );
-    wp_enqueue_script( 'scriptsquareplugin', plugin_dir_url( dirname( __FILE__ ) ) . 'public/js/scriptsquareplugin_ajax.js', array('jquery') );
+function scriptsquareplugin_custom_styles()
+{
+    wp_enqueue_style('scriptsquareplugin', plugin_dir_url(dirname(__FILE__)) . 'public/css/scriptsquareplugin_style.css', array(), null, 'screen');
+    wp_enqueue_script('scriptsquareplugin', plugin_dir_url(dirname(__FILE__)) . 'public/js/scriptsquareplugin_ajax.js', array('jquery'));
 }
-add_action( 'wp_enqueue_scripts', 'scriptsquareplugin_custom_styles' );
+add_action('wp_enqueue_scripts', 'scriptsquareplugin_custom_styles');
