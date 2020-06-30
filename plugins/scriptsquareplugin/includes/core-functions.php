@@ -384,7 +384,7 @@ function scriptsquare_pre_get_posts_listings($query)
         $zip_code = scriptsquareplugin_geocode($address);
 
         $result = scriptsquareplugin_get_drug_by_name($keyword, $zip_code);
-        echo $result['success'];
+
         update_option('scriptsquare_drugs_data', $result);
 
         $query->set('post_type', 'listing');
