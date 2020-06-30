@@ -1,8 +1,5 @@
 <?php // ScriptSquare - Core Functionality
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // disable direct file access
 if (!defined('ABSPATH')) {
 
@@ -11,7 +8,6 @@ if (!defined('ABSPATH')) {
 
 function scriptsquareplugin_geocode($address)
 {
-
     // url encode the address
     $address = urlencode($address);
     $api_key = get_option('listeo_maps_api_server');
@@ -25,7 +21,7 @@ function scriptsquareplugin_geocode($address)
 
     // response status will be 'OK', if able to geocode given address
     if ($resp['status'] == 'OK') {
-
+        $zip_code = 0;
         // get the important data
         foreach ($resp['results'][0]['address_components'] as $item) {
             if ($item['types'][0] == 'postal_code') {
@@ -129,6 +125,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
         if (is_wp_error($request)) {
             $result['success'] = false;
             $result['error_message'] = 'There was an error when making api call!';
+            echo '1';
             return $result;
         }
 
@@ -190,6 +187,7 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                 */
                 //Get NDC from GPI14
                 $ndc_array = [];
+                $quantity = 30;
                 if (!empty($drugs)) {
                     foreach ($drugs as $drug) {
                         $request = wp_remote_get($url . "drugs?gpi14=" . $drug['GPI'] . "&DrugType=G&DrugName=SILDENAFIL_TAB_25MG", $args);
@@ -218,18 +216,21 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                                     //if generic
                                     if ($gpi14_data->Multi_Source_Code == 'Y') {
                                         $drugs[$gpi14_data->GPI14]['NDC']['G'][] = [
-                                            'NDC' => $gpi14_data->NDC,
-                                            'Drug_Name_Full' => $gpi14_data->Drug_Name_Full
+                                            'NDC'               => $gpi14_data->NDC,
+                                            'Drug_Name_Full'    => $gpi14_data->Drug_Name_Full
                                         ];
                                     } else {
                                         $drugs[$gpi14_data->GPI14]['NDC']['B'][] = [
-                                            'NDC' => $gpi14_data->NDC,
-                                            'Drug_Name_Full' => $gpi14_data->Drug_Name_Full
+                                            'NDC'               => $gpi14_data->NDC,
+                                            'Drug_Name_Full'    => $gpi14_data->Drug_Name_Full
                                         ];
                                     }
 
                                     if (!in_array($gpi14_data->NDC, $ndc_array)) {
-                                        $ndc_array[] = "" . $gpi14_data->NDC;
+                                        $ndc_array[] = [
+                                            'NDC'       => "" . $gpi14_data->NDC,
+                                            'Quantity'  => $quantity
+                                        ];
                                     }
                                 }
                             }
@@ -239,32 +240,37 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
 
                 //Get Price from NDC and NDCPC
                 //Paramount API has limit for pharmacy and drug sizes.
-                $ncpdp_size = 70;
-                $ndc_size = 40;
+                $ncpdp_size = 50;
+                $ndc_size = 50;
                 $ncpdp_chunk = array_chunk($ncpdp_array, $ncpdp_size);
                 $ndc_chunk = array_chunk($ndc_array, $ndc_size);
 
                 $price_array = [];
+                $count = 0;
 
                 foreach ($ncpdp_chunk as $ncpdp) {
                     foreach ($ndc_chunk as $ndc) {
                         $body = [
-                            'NCPDP'  => $ncpdp,
-                            'NDC' => $ndc,
-                            'Quantity' => 30
+                            'NCPDPS'  => $ncpdp,
+                            'Drugs' => $ndc
                         ];
 
                         $body = wp_json_encode($body);
                         $args['body'] = $body;
                         $args['data_format'] = 'body';
+
                         $request = wp_remote_post($url . "drugprices", $args);
+
                         if (is_wp_error($request)) {
                             $result['success'] = false;
+                            echo $count;
+                            print_r($request);
                             $result['error_message'] = 'There was an error when making api call!';
                             return $result;
                         }
-
+                        $count++;
                         $body = wp_remote_retrieve_body($request);
+
                         $price_data_array = json_decode($body);
 
                         if (isset($price_data_array->message)) {
@@ -277,19 +283,6 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                     }
                 }
 
-                //Get Result. Rearrange array with Pharmacy, Drug Info and Price
-                /*
-                foreach($price_array as $price) {
-                    if($price->BrandGeneric == 'G') {
-                        $search_result[] = [
-                            'Cost'          => $price->Cost,
-                            'Pharmacy'      => $zip_data[$price->NCPDP],
-                            'Drug'          => $drugs[$price->NDC],
-                            'BrandGeneric'  => $price->BrandGeneric
-                        ];
-                    }
-                }
-                */
                 $drugs_with_pharmacies = [];
                 foreach ($drugs as $drug) {
                     $drugs_with_pharmacies[$drug['GPI']] = [
@@ -298,29 +291,33 @@ function scriptsquareplugin_get_drug_by_name($drug_name, $zip_code)
                     ];
                     foreach ($zip_data as $pharmacy) {
                         $g_price = 0;
-                        $g_count = 0;
                         $b_price = 0;
-                        $b_count = 0;
+                        if(!empty($price_array)) {
+                            $g_price = $price_array[0]->Cost;
+                            $b_price = $price_array[0]->Cost;
+                        }
                         foreach ($price_array as $price) {
                             foreach ($drug['NDC']['G'] as $ndc) {
                                 if ($ndc['NDC'] == $price->NDC && $price->NCPDP == $pharmacy['NCPDP']) {
-                                    $g_price += $price->Cost;
-                                    $g_count++;
+                                    if($g_price > $price->Cost) {
+                                        $g_price = $price->Cost;
+                                    }
                                     break;
                                 }
                             }
                             foreach ($drug['NDC']['B'] as $ndc) {
                                 if ($ndc['NDC'] == $price->NDC) {
-                                    $b_price += $price->Cost;
-                                    $b_count++;
+                                    if($b_price > $price->Cost) {
+                                        $b_price = $price->Cost;
+                                    }
                                     break;
                                 }
                             }
                         }
                         $drugs_with_pharmacies[$drug['GPI']]['pharmacy'][] = [
                             'pharmacy' => $pharmacy,
-                            'g_price' => ($g_count>0)? $g_price / $g_count:0,
-                            'b_price' => ($b_count>0)? $b_price / $b_count:0,
+                            'g_price' => $g_price,
+                            'b_price' => $b_price,
                         ];
                     }
                 }
@@ -659,6 +656,13 @@ function scriptsquare_ajax_get_listings()
     $result['found_listings'] = true;
 
     wp_send_json($result);
+}
+
+// Setting a custom timeout value for cURL. Using a high value for priority to ensure the function runs after any other added to the same action hook.
+add_action('http_api_curl', 'scriptsquare_custom_curl_timeout', 9999, 1);
+function scriptsquare_custom_curl_timeout( $handle ){
+	curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 ); // 30 seconds. Too much for production, only for testing.
+	curl_setopt( $handle, CURLOPT_TIMEOUT, 30 ); // 30 seconds. Too much for production, only for testing.
 }
 
 // add custom option for drugs data
