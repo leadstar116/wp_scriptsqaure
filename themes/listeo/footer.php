@@ -88,8 +88,8 @@ $sticky = apply_filters('listeo_sticky_footer_filter',$sticky);
 		<div class="row">
 			<div class="col-md-12">
 				<div class="copyrights"> <?php $copyrights = get_option( 'pp_copyrights' , '&copy; Theme by Purethemes.net. All Rights Reserved.' ); 
-		
-		            echo wp_kses($copyrights,array( 'a' => array('href' => array(),'title' => array()),'br' => array(),'em' => array(),'strong' => array(),));
+						echo 'Made with <img class="" src="/wp-content/uploads/2020/07/ScriptSquare_Favicon.png" alt="TEST" width="32" height="32" /> in Chicago'
+		            //echo wp_kses($copyrights,array( 'a' => array('href' => array(),'title' => array()),'br' => array(),'em' => array(),'strong' => array(),));
 		         ?></div>
 			</div>
 		</div>
