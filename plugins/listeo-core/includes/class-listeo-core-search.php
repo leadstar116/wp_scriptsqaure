@@ -1459,7 +1459,7 @@ public function ajax_get_listings() {
 			<?php } ?>
 
 			<?php if(in_array($source, array('home','homebox')) ) { ?>
-				<button class="button"><?php esc_html_e('Search', 'listeo_core') ?></button>
+				<button class="search-button button"><?php esc_html_e('Search', 'listeo_core') ?></button>
 			</div>
 			<?php } ?>
 		<?php if($wrap_with_form == 'yes') { ?>

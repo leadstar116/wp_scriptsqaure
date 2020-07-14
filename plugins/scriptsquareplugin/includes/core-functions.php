@@ -440,8 +440,7 @@ function format_phone($country, $phone)
 function format_phone_us($phone)
 {
     // note: making sure we have something
-    if (!isset($phone{
-    3})) {
+    if (!isset($phone{3})) {
         return '';
     }
     // note: strip out everything but numbers
@@ -627,7 +626,7 @@ function scriptsquare_ajax_get_listings()
 
     ob_start();
     ?>
-        <div class="loader-ajax-container" style="">
+        <div class="loader-ajax-container">
             <div class="loader-ajax"></div>
         </div>
         <?php

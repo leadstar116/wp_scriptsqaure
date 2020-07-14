@@ -10,10 +10,10 @@
  * @package Listeo
  */
 
-get_header(); 
+get_header();
 
 if(get_option('listeo_home_background_type')=='video'){
-	$video = get_option('listeo_search_video_mp4'); 	
+	$video = get_option('listeo_search_video_mp4');
 } else {
 	$video = false;
 }
@@ -37,29 +37,31 @@ if($form_type == 'wide') : ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					
+
 					<h2><?php echo get_option('listeo_home_title','Find Nearby Attractions'); ?> <span class="typed-words"></span></h2>
 					<h4><?php echo get_option('listeo_home_subtitle', 'Explore top-rated attractions, activities and more!'); ?></h4>
-					
-					<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="main-search-form"]') ?>
-					
 
-					
+					<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="main-search-form"]') ?>
+
 				</div>
+			</div>
+
+			<div id="listeo-listings-container" style="z-index: 9999;">
+				<div class="loader-ajax-container"> <div class="loader-ajax"></div> </div>
 			</div>
 
 			<?php
 			if(get_option('listeo_home_featured_categories_status')=='enable') :
 				$terms = get_theme_mod('listeo_home_featured_categories');
-				
+
 				if(!empty($terms)) : ?>
 				<div class="row">
 					<div class="col-md-12">
 						<h5 class="highlighted-categories-headline"><?php esc_html_e('Or browse featured categories:','listeo') ?></h5>
-						
-							  
+
+
 						<div class="highlighted-categories">
-							
+
 							<?php
 
 							foreach ($terms as $key => $value) {
@@ -70,26 +72,26 @@ if($form_type == 'wide') : ?>
 									<a href="<?php echo get_term_link($term->slug, 'listing_category'); ?>" class="highlighted-category">
 								    	<?php if($icon && $icon != 'empty')  : ?><i class="<?php echo esc_attr($icon); ?>"></i><?php endif; ?>
 										<h4><?php echo esc_html($term->name) ?></h4>
-									</a>	
+									</a>
 
 							<?php }
 							} ?>
-					
+
 						</div>
-						
+
 					</div>
 				</div>
 			<?php endif;
 			endif; ?>
 
-			
+
 		</div>
 	<?php if($video) { ?>
 	<!-- Video -->
 	<div class="video-container">
 		<video poster="<?php echo get_option('listeo_search_video_poster'); ?>" loop autoplay muted>
 			<source src="<?php echo get_option('listeo_search_video_mp4'); ?>" type="video/mp4">
-			
+
 		</video>
 	</div>
 	<?php } ?>
@@ -109,23 +111,23 @@ if($form_type == 'wide') : ?>
 						<div class="main-search-input-headline">
 							<h2><?php echo get_option('listeo_home_title','Find Nearby Attractions'); ?> <?php if(( is_page_template('template-home-search.php') || is_page_template('template-home-search-video.php') || is_page_template('template-home-search-splash.php')) && get_option('listeo_home_typed_status','enable') == 'enable') {  ?><span class="typed-words"></span><?php } ?></h2>
 							<h4><?php echo get_option('listeo_home_subtitle', 'Explore top-rated attractions, activities and more!'); ?></h4>
-					
+
 						</div>
-						
+
 						<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="homebox" custom_class="main-search-form"]') ?>
 
-						
+
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	<?php if($video) { ?>
 	<!-- Video -->
 	<div class="video-container">
 		<video poster="<?php echo get_option('listeo_search_video_poster'); ?>" loop autoplay muted>
 			<source src="<?php echo get_option('listeo_search_video_mp4'); ?>" type="video/mp4">
-			
+
 		</video>
 	</div>
 	<?php } ?>
@@ -136,7 +138,7 @@ if($form_type == 'wide') : ?>
 
 
 <?php while ( have_posts() ) : the_post(); ?>
-	
+
 	<!-- 960 Container -->
 	<div class="container page-container home-page-container">
 	    <article <?php post_class(); ?>>
