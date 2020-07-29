@@ -108,10 +108,10 @@ $segments = explode('|',$buttons);
 		<div class="sort-by-select">
 			<?php $default = isset( $_GET['listeo_core_order'] ) ? (string) $_GET['listeo_core_order']  :  get_option( 'listeo_sort_by','date' );  ?>
 			<select form="listeo_core-search-form" name="listeo_core_order" data-placeholder="<?php esc_attr_e('Sort by Distance', 'listeo_core'); ?>" class="chosen-select-no-single orderby" >
-                <option <?php selected($default,'distance-asc'); ?> value="distance-asc"><?php esc_html_e( 'Price : Low to High' , 'listeo_core' ); ?></option>
-				<option <?php selected($default,'distance-desc'); ?> value="distance-desc"><?php esc_html_e( 'Price: High to Low' , 'listeo_core' ); ?></option>
-                <option <?php selected($default,'price-asc'); ?> value="price-asc"><?php esc_html_e( 'Distance: Closest' , 'listeo_core' ); ?></option>
-				<option <?php selected($default,'price-desc'); ?> value="price-desc"><?php esc_html_e( 'Distance: Farthest' , 'listeo_core' ); ?></option>
+                <option <?php selected($default,'price-asc'); ?> value="price-asc"><?php esc_html_e( 'Price : Low to High' , 'listeo_core' ); ?></option>
+				<option <?php selected($default,'price-desc'); ?> value="price-desc"><?php esc_html_e( 'Price: High to Low' , 'listeo_core' ); ?></option>
+                <option <?php selected($default,'distance-asc'); ?> value="distance-asc"><?php esc_html_e( 'Distance: Closest' , 'listeo_core' ); ?></option>
+				<option <?php selected($default,'distance-desc'); ?> value="distance-desc"><?php esc_html_e( 'Distance: Farthest' , 'listeo_core' ); ?></option>
 			</select>
 		</div>
 	</div>

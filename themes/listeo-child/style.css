@@ -13,3 +13,30 @@ Tags: light, responsive-layout, post-formats, theme-options, translation-ready, 
 Template:  listeo
 */
 
+
+@font-face {
+    font-family: 'breeregular';
+    src: url('https://script.seacabo.com/wp-content/themes/listeo-child/fonts/bree_regular-webfont.woff2') format('woff2'),
+    url('https://script.seacabo.com/wp-content/themes/listeo-child/fonts/bree_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body, h1, h2, h3, h4, h5, h6, input[type="text"], input[type="password"], input[type="email"], textarea, select, input[type="button"], input[type="submit"], button, #tiptip_content, .map-box p, .map-box div, .numerical-rating .rating-counter, body .menu-responsive i.menu-trigger:after {
+    font-family: "breeregular", Arial, sans-serif;
+    text-transform: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "breeregular", Arial, sans-serif;
+    color: #0c2851;
+}
+
+#navigation ul > li > a {
+    font-family: "breeregular", Arial, sans-serif;
+}
+
+button {
+	font-family: "breeregular", Arial, sans-serif;
+}

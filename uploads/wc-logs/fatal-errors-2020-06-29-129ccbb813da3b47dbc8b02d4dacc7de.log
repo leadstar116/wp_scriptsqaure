@@ -1,4 +1,0 @@
-2020-06-29T12:37:50+00:00 CRITICAL require_once(): Failed opening required '/home/seacabo/public_html/script/wp-content/plugins/js_composer/include/classes/vendors/plugins/woocommerce/grid-item-filters.php' (include_path='.:/usr/local/php73/pear') in /home/seacabo/public_html/script/wp-content/plugins/js_composer/include/autoload/vendors/woocommerce.php on line 32
-
-2020-06-29T12:38:08+00:00 CRITICAL syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) in /home/seacabo/public_html/script/wp-content/plugins/js_composer/include/classes/core/shared-templates/importer/class-vc-wp-import.php on line 172
-

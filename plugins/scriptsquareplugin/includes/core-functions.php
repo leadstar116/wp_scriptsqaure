@@ -629,6 +629,7 @@ function scriptsquare_ajax_get_listings()
         <div class="loader-ajax-container">
             <div class="loader-ajax"></div>
         </div>
+        <div class="row">
         <?php
             if ($drugs['success']) :
                 for($i = $offset; $i < $offset+$per_page; $i++) {
@@ -642,6 +643,7 @@ function scriptsquare_ajax_get_listings()
                 $ss_template_loader->get_template_part('archive/ss-no-found');
             endif;
             ?>
+        </div>
         <div class="clearfix"></div>
         </div>
         <div class="col-lg-12 col-md-12 pagination-container  margin-top-0 margin-bottom-60 ajax-search">

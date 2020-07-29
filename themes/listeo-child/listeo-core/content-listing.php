@@ -24,7 +24,8 @@ $is_featured = false;
 					<?php
 					$image_url = get_listeo_core_placeholder_image()
 					?>
-					<img src="<?php echo esc_attr($image_url); ?>" alt="">
+					<!--<img src="<?php echo esc_attr($image_url); ?>" alt=""> -->
+					<img src="/wp-content/uploads/2020/07/scriptsquare_placeholder.png" alt="">
 				</div>
 
 				<!-- Content -->
@@ -50,6 +51,8 @@ $is_featured = false;
 						</span>
 
 						<?php
+						setlocale(LC_MONETARY, 'en_US.UTF-8');
+						
 						/*
 						if(!get_option('listeo_disable_reviews')){
 							$rating = get_post_meta($post->ID, 'listeo-avg-rating', true);
@@ -68,18 +71,55 @@ $is_featured = false;
 						}
 						*/?>
 					</div>
-						<div class="button" style="display: inline-block;position: absolute;float: right;bottom: 50%;right: 35px;transform: translateY(50%);">
-							<div class="row">
-								<div class="col-md-10 col-md-offset-1" style="text-align: right;padding: 10px 0;">
-									<span id="drug-info">Dosage: <?php echo $drug['Drug']['strength'] ?> Quantity: 30</span>
+					
+					
+					<div>
+						<ul class="flex-container">
+							<li class="flex-item brand">
+								<div class="" style="">
+									<span id="drug-info"><?php echo $drug['Drug']['full_name'] ?></span><br>
+									<span id="drug-info"><strong>Brand Price:</strong> <?php echo money_format('%.2n', $drug['b_price']); ?></span><br>
+									<span id="drug-info"><strong>Quantity:</strong> 30</span>
+									
 								</div>
-							</div>
-							<span style="color: #274060;font-size: 40px;margin: 10px;">$<?php echo round($drug['g_price'], 2) ?></span>
-							<a href="https://script.seacabo.com/wp-content/uploads/2020/05/ScriptSquare_Member_Discount_Card_V4.pdf">
-								<button class="button tooltip left" title="<?php esc_html_e('Save Now!','listeo_core'); ?>">Get Coupon</button>
-							</a>
-
+							</li>
+							
+							<li class="flex-item price">
+								<div class="" style="">
+									<span style="color: #274060;font-size: 40px;margin: 10px;"><?php echo money_format('%.2n', $drug['g_price']); ?></span><br>
+									<span style="font-size: small;color: #274060;">save with coupon!</span>
+								</div>
+							</li>
+							<li class="flex-item button">
+								<div class="" style="">
+									<a href="https://script.seacabo.com/wp-content/uploads/2020/05/ScriptSquare_Member_Discount_Card_V4.pdf">
+										<button class="button tooltip left" title="<?php esc_html_e('Save Now!','listeo_core'); ?>">Get Coupon</button>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					
+					
+					
+					<div class="listing-flex" style="display: flex;">
+						<div class="row">
+						
 						</div>
+						<div class="row">
+						
+						</div>
+						<div class="row">
+						
+						</div>
+						
+					</div>
+					<div class="button" style="">
+					
+					
+
+					</div>
 
 
 				</div>

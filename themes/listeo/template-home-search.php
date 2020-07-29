@@ -41,7 +41,7 @@ if($form_type == 'wide') : ?>
 					<h2><?php echo get_option('listeo_home_title','Find Nearby Attractions'); ?> <span class="typed-words"></span></h2>
 					<h4><?php echo get_option('listeo_home_subtitle', 'Explore top-rated attractions, activities and more!'); ?></h4>
 
-					<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="main-search-form"]') ?>
+					<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="home" custom_class="main-search-form" ajax_browsing="off"]') ?>
 
 				</div>
 			</div>
@@ -114,7 +114,7 @@ if($form_type == 'wide') : ?>
 
 						</div>
 
-						<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="homebox" custom_class="main-search-form"]') ?>
+						<?php echo do_shortcode('[listeo_search_form action='.get_post_type_archive_link( 'listing' ).' source="homebox" custom_class="main-search-form" ajax_browsing="off"]') ?>
 
 
 					</div>
